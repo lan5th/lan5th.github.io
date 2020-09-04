@@ -1,206 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/09/02/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>HTML5总结</title>
-    <url>/2020/09/03/html5/</url>
-    <content><![CDATA[<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>指向另一个地址<code>&lt;a href=&quot;地址&quot; traget=&quot;&quot;&gt;名称&lt;/a&gt;</code></p>
-<table>
-<thead>
-<tr>
-<th>target</th>
-<th>内涵</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>_blank</code></td>
-<td>另开页面</td>
-</tr>
-<tr>
-<td><code>_self</code></td>
-<td>自身页面</td>
-</tr>
-<tr>
-<td><code>_parent</code></td>
-<td>上级页面</td>
-</tr>
-<tr>
-<td><code>_top</code></td>
-<td>顶级页面</td>
-</tr>
-</tbody></table>
-<p>创建文档内链接<code>&lt;a name=&quot;tips&quot;&gt;&lt;/a&gt;</code><br>另一个超链接可以跳转至该位置<br><code>&lt;a href=&quot;#tips&quot;&gt;跳转&lt;/a&gt;</code></p>
-<p>图片<code>&lt;img src=&quot;图片地址&quot;&gt;</code></p>
-<h2 id="三种样式表插入方法"><a href="#三种样式表插入方法" class="headerlink" title="三种样式表插入方法"></a>三种样式表插入方法</h2><p><strong>外部样式表</strong>:</p>
-<p>其他文件中插入</p>
-<p><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=“mystyle.css&quot;&gt;</code><br><strong>内部样式表</strong>:</p>
-<p>head中插入</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">“text/css</span>&quot;&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-tag">body</span> &#123;<span class="attribute">background-color</span>: red&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-tag">p</span> &#123;<span class="attribute">margin-left</span>: <span class="number">20px</span>&#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>内联样式表</strong>:</p>
-<p>body中插入</p>
-<p><code>&lt;p style=&quot;color: red&gt;</code></p>
-<h2 id="表格-amp-列表"><a href="#表格-amp-列表" class="headerlink" title="表格&amp;列表"></a>表格&amp;列表</h2><table>
-<thead>
-<tr>
-<th>标签</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>&lt;table&gt; </code></td>
-<td>定义表格</td>
-</tr>
-<tr>
-<td><code>&lt;caption&gt; </code></td>
-<td>定义表格标题</td>
-</tr>
-<tr>
-<td><code>&lt;th&gt;</code></td>
-<td>定义表格的表头</td>
-</tr>
-<tr>
-<td><code>&lt;tr&gt;</code></td>
-<td>定义表格的行</td>
-</tr>
-<tr>
-<td><code>&lt;td&gt;</code></td>
-<td>定义表格的单元</td>
-</tr>
-<tr>
-<td><code>&lt;thead&gt;</code></td>
-<td>定义表格的页眉</td>
-</tr>
-<tr>
-<td><code>&lt;tbody&gt;</code></td>
-<td>定义表格的主体</td>
-</tr>
-<tr>
-<td><code>&lt;tfoot&gt;</code></td>
-<td>定义表格的页脚</td>
-</tr>
-<tr>
-<td><code>&lt;Col&gt;</code></td>
-<td>定义表格的列属性</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>标签</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>&lt;ol&gt;</code></td>
-<td>有序列表</td>
-</tr>
-<tr>
-<td><code>&lt;ul&gt;</code></td>
-<td>无序列表</td>
-</tr>
-<tr>
-<td><code>&lt;li&gt;</code></td>
-<td>列表项</td>
-</tr>
-<tr>
-<td><code>&lt;dl&gt;</code></td>
-<td>列表</td>
-</tr>
-<tr>
-<td><code>&lt;dt&gt;</code></td>
-<td>列表项</td>
-</tr>
-<tr>
-<td><code>&lt;dd&gt;</code></td>
-<td>描述</td>
-</tr>
-</tbody></table>
-<h2 id="HTML块"><a href="#HTML块" class="headerlink" title="HTML块"></a>HTML块</h2><p>1、HTML块元素<br>块元素在显示时，通常会以新行开始<br>如: <code>&lt;h1&gt;、&lt;p&gt;、&lt;ul&gt;</code><br>2、HTML内联元素<br>内联元素通常不会以新行开始<br>如:<code>&lt;b&gt;、&lt;a&gt;、&lt;img&gt;</code><br>3、HTML<code>&lt;div&gt;</code>元素</p>
-<p><code>&lt;div&gt;</code>元素也被称为块元素，其主要是组合HTML元素的容器</p>
-<p>4、HTML<code>&lt;span&gt;</code>元素<br><span>`元素是内联元素，可作为文本的容器</p>
-<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p><strong>div布局</strong>(单元前<code>#div</code>可删除)</p>
-<p>在head中插入 实例：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">body</span>&#123;</span></span><br><span class="line">		margin: 0px;</span><br><span class="line">	&#125;</span><br><span class="line">	#div container&#123;.</span><br><span class="line">		width: 100%</span><br><span class="line">		height: 950px;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">heading</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">width</span><span class="selector-pseudo">:100</span>%;</span></span><br><span class="line">		height: 10%;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">menu</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">width</span><span class="selector-pseudo">:30</span>%;</span></span><br><span class="line">		height: 90%;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">body</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">width</span><span class="selector-pseudo">:70</span>%;</span></span><br><span class="line">		height: 90%;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>table布局</strong></p>
-<p>在body中插入 实例：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">width</span>=<span class="string">&quot;100%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;950px&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: darkgray&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">&quot;2&quot;</span> <span class="attr">width</span>=<span class="string">&quot;100%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;10%&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: aqua&quot;</span>&gt;</span>头部<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">width</span>=<span class="string">&quot;30%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;90%&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: blue&quot;</span>&gt;</span>左菜单<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">width</span>=<span class="string">&quot;70%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;90%&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: blue&quot;</span>&gt;</span>主体<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p>使用实例</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line">	用户名;</span><br><span class="line">	&lt;input type&#x3D;&quot;text&quot;&quot;&gt;</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	密码:</span><br><span class="line">	&lt;input type&#x3D;&quot;password&quot;&gt;</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	你喜欢的水果有?</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	苹果&lt;input type&#x3D;&quot;checkbox&quot;&gt;</span><br><span class="line">	西红柿&lt;input type&#x3D;&quot;checkbox&quot;&gt;</span><br><span class="line">	香蕉&lt;input type&#x3D;&quot;checkbox&quot;&gt;</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	请选择您的性别;</span><br><span class="line">	男&lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;sex&quot;&gt;</span><br><span class="line">	女&lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;sex&quot;&gt;</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	&lt;select&gt;</span><br><span class="line">		&lt;option&gt;网址1&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option&gt;网址1&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option&gt;网址3&lt;&#x2F;option&gt;</span><br><span class="line">	&lt;&#x2F;select&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;内容&quot;&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;submit&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;textarea cols&#x3D;&quot;30&quot; rows&#x3D;&quot;30&quot;&gt;默认信息&lt;&#x2F;textarea&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="表单与PHP交互"><a href="#表单与PHP交互" class="headerlink" title="表单与PHP交互"></a>表单与PHP交互</h2><p>PHP环境搭建暂略</p>
-<h5 id="method"><a href="#method" class="headerlink" title="method:"></a><strong>method</strong>:</h5><p>get会将表单内容与地址结合</p>
-<p>post则不会且更安全</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;php地址&quot;</span> <span class="attr">method</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">	表单</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="框架与背景"><a href="#框架与背景" class="headerlink" title="框架与背景"></a>框架与背景</h2><p>常用框架<code>&lt;iframe&gt;</code></p>
-<p>背景图片:<code>&lt;background&gt;</code></p>
-<p>背景颜色:<code>&lt;bgcolor&gt;</code></p>
-<h3 id="字符转实体"><a href="#字符转实体" class="headerlink" title="字符转实体"></a>字符转实体</h3><p>有些字符无法直接显示在网页上，如<code>&lt; &gt; &amp;</code>等</p>
-<p>当需要特定字符时上网搜索</p>
-<h2 id="XHTML书写规范"><a href="#XHTML书写规范" class="headerlink" title="XHTML书写规范"></a>XHTML书写规范</h2><ol>
-<li>元素语法<ul>
-<li>正确嵌套</li>
-<li>始终关闭</li>
-<li>必须小写</li>
-<li>文档必须有根元素</li>
-</ul>
-</li>
-<li>属性语法<ul>
-<li>必须小写</li>
-<li>必须引号包围</li>
-<li>禁止最小化</li>
-</ul>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>Markdown learning</title>
-    <url>/2020/09/02/markdown/</url>
-    <content><![CDATA[<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>行内式两头加上反引号`</p>
-<p>多行代码上下行加三重反引```</p>
-<p>段落前加大于号(可分级)<br><code>&gt;段落1</code> <code>&gt;&gt;段落2</code></p>
-<p>三种分割线<code>***或---或___</code></p>
-<p>换行可用<code>&lt;br\&gt;</code></p>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p><strong>无序列表</strong> *-+(加号空格)<br><code>+ sad</code><br>多级列表(前面加tab)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ 一层</span><br><span class="line">  + 二层</span><br><span class="line">    + 三层</span><br></pre></td></tr></table></figure>
-<p><strong>有序列表</strong>(数字.空格)<br><code>1. first</code></p>
-<p><strong>表格</strong><br>加空格使对齐（非必要）冒号设置对其方向</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|Tables       |Are          |Cool |</span><br><span class="line">|------       |:----:       |----:|</span><br><span class="line">|col 3 is     |right-aligned|$1600|</span><br><span class="line">|col 2 is     |centered     |$12  |</span><br><span class="line">|zebra stripes|are neat     |$1   |</span><br></pre></td></tr></table></figure>
-<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>小标题前加#(space)<br>斜前后*<br>粗前后**<br>粗斜前后***<br>删除字前后~~<br>缩进<code>&amp;emsp;</code>（一个中文字符）<br>半个<code>&amp;ensp;</code><br>四分之一个<code>&amp;nbsp;</code><br>居中（html标签）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div align&#x3D;center&gt;(内容)</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><strong>超链接</strong><br><code>[显示名称](http://www.bilibili.com &quot;注释名称&quot;)</code><br>直接显示<code>&lt;http://www.bilibili.com&gt;</code><br>后方注释<code>[名称1][wangzhi1]</code></p>
-<p><strong>图片链接</strong><br><code>![名称](..\images\test.png)</code><br>后方注释<code>![名称1][image1]</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[wangzhi1]:http:&#x2F;&#x2F;www.bilibili.com</span><br><span class="line">[image1]:..\images\test.png</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>详细语法</strong>：<br><a href="https://blog.csdn.net/u014061630/article/details/81359144?biz_id=102&utm_term=markdown%E8%AF%AD%E6%B3%95&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-81359144&spm=1018.2118.3001.4187#25-%E4%BB%A3%E7%A0%81%E5%9D%97">csdn教程</a></p>
-<p><strong>博客搭建参考</strong><br><a href="https://koorye.github.io/2020/07/11/%E5%88%A9%E7%94%A8GitHub+Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">koorye的博客</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>CSS总结</title>
     <url>/2020/09/04/CSS/</url>
     <content><![CDATA[<h2 id="选择器基础"><a href="#选择器基础" class="headerlink" title="选择器基础"></a>选择器基础</h2><ol>
@@ -423,6 +223,212 @@
 <td>轮廓宽度</td>
 </tr>
 </tbody></table>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>HTML5总结</title>
+    <url>/2020/09/03/html5/</url>
+    <content><![CDATA[<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>指向另一个地址<code>&lt;a href=&quot;地址&quot; traget=&quot;&quot;&gt;名称&lt;/a&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>target</th>
+<th>内涵</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>_blank</code></td>
+<td>另开页面</td>
+</tr>
+<tr>
+<td><code>_self</code></td>
+<td>自身页面</td>
+</tr>
+<tr>
+<td><code>_parent</code></td>
+<td>上级页面</td>
+</tr>
+<tr>
+<td><code>_top</code></td>
+<td>顶级页面</td>
+</tr>
+</tbody></table>
+<p>创建文档内链接<code>&lt;a name=&quot;tips&quot;&gt;&lt;/a&gt;</code><br>另一个超链接可以跳转至该位置<br><code>&lt;a href=&quot;#tips&quot;&gt;跳转&lt;/a&gt;</code></p>
+<p>图片<code>&lt;img src=&quot;图片地址&quot;&gt;</code></p>
+<h2 id="三种样式表插入方法"><a href="#三种样式表插入方法" class="headerlink" title="三种样式表插入方法"></a>三种样式表插入方法</h2><p><strong>外部样式表</strong>:</p>
+<p>其他文件中插入</p>
+<p><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=“mystyle.css&quot;&gt;</code><br><strong>内部样式表</strong>:</p>
+<p>head中插入</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">“text/css</span>&quot;&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-tag">body</span> &#123;<span class="attribute">background-color</span>: red&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-tag">p</span> &#123;<span class="attribute">margin-left</span>: <span class="number">20px</span>&#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>内联样式表</strong>:</p>
+<p>body中插入</p>
+<p><code>&lt;p style=&quot;color: red&gt;</code></p>
+<h2 id="表格-amp-列表"><a href="#表格-amp-列表" class="headerlink" title="表格&amp;列表"></a>表格&amp;列表</h2><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;table&gt; </code></td>
+<td>定义表格</td>
+</tr>
+<tr>
+<td><code>&lt;caption&gt; </code></td>
+<td>定义表格标题</td>
+</tr>
+<tr>
+<td><code>&lt;th&gt;</code></td>
+<td>定义表格的表头</td>
+</tr>
+<tr>
+<td><code>&lt;tr&gt;</code></td>
+<td>定义表格的行</td>
+</tr>
+<tr>
+<td><code>&lt;td&gt;</code></td>
+<td>定义表格的单元</td>
+</tr>
+<tr>
+<td><code>&lt;thead&gt;</code></td>
+<td>定义表格的页眉</td>
+</tr>
+<tr>
+<td><code>&lt;tbody&gt;</code></td>
+<td>定义表格的主体</td>
+</tr>
+<tr>
+<td><code>&lt;tfoot&gt;</code></td>
+<td>定义表格的页脚</td>
+</tr>
+<tr>
+<td><code>&lt;Col&gt;</code></td>
+<td>定义表格的列属性</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;ol&gt;</code></td>
+<td>有序列表</td>
+</tr>
+<tr>
+<td><code>&lt;ul&gt;</code></td>
+<td>无序列表</td>
+</tr>
+<tr>
+<td><code>&lt;li&gt;</code></td>
+<td>列表项</td>
+</tr>
+<tr>
+<td><code>&lt;dl&gt;</code></td>
+<td>列表</td>
+</tr>
+<tr>
+<td><code>&lt;dt&gt;</code></td>
+<td>列表项</td>
+</tr>
+<tr>
+<td><code>&lt;dd&gt;</code></td>
+<td>描述</td>
+</tr>
+</tbody></table>
+<h2 id="HTML块"><a href="#HTML块" class="headerlink" title="HTML块"></a>HTML块</h2><p>1、HTML块元素<br>块元素在显示时，通常会以新行开始<br>如: <code>&lt;h1&gt;、&lt;p&gt;、&lt;ul&gt;</code><br>2、HTML内联元素<br>内联元素通常不会以新行开始<br>如:<code>&lt;b&gt;、&lt;a&gt;、&lt;img&gt;</code><br>3、HTML<code>&lt;div&gt;</code>元素</p>
+<p><code>&lt;div&gt;</code>元素也被称为块元素，其主要是组合HTML元素的容器</p>
+<p>4、HTML<code>&lt;span&gt;</code>元素<br><span>`元素是内联元素，可作为文本的容器</p>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p><strong>div布局</strong>(单元前<code>#div</code>可删除)</p>
+<p>在head中插入 实例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">body</span>&#123;</span></span><br><span class="line">		margin: 0px;</span><br><span class="line">	&#125;</span><br><span class="line">	#div container&#123;.</span><br><span class="line">		width: 100%</span><br><span class="line">		height: 950px;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">heading</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">width</span><span class="selector-pseudo">:100</span>%;</span></span><br><span class="line">		height: 10%;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">menu</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">width</span><span class="selector-pseudo">:30</span>%;</span></span><br><span class="line">		height: 90%;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">body</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">width</span><span class="selector-pseudo">:70</span>%;</span></span><br><span class="line">		height: 90%;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>table布局</strong></p>
+<p>在body中插入 实例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">width</span>=<span class="string">&quot;100%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;950px&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: darkgray&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">&quot;2&quot;</span> <span class="attr">width</span>=<span class="string">&quot;100%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;10%&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: aqua&quot;</span>&gt;</span>头部<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">width</span>=<span class="string">&quot;30%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;90%&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: blue&quot;</span>&gt;</span>左菜单<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">width</span>=<span class="string">&quot;70%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;90%&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: blue&quot;</span>&gt;</span>主体<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p>使用实例</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line">	用户名;</span><br><span class="line">	&lt;input type&#x3D;&quot;text&quot;&quot;&gt;</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	密码:</span><br><span class="line">	&lt;input type&#x3D;&quot;password&quot;&gt;</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	你喜欢的水果有?</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	苹果&lt;input type&#x3D;&quot;checkbox&quot;&gt;</span><br><span class="line">	西红柿&lt;input type&#x3D;&quot;checkbox&quot;&gt;</span><br><span class="line">	香蕉&lt;input type&#x3D;&quot;checkbox&quot;&gt;</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	请选择您的性别;</span><br><span class="line">	男&lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;sex&quot;&gt;</span><br><span class="line">	女&lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;sex&quot;&gt;</span><br><span class="line">	&lt;br&#x2F;&gt;</span><br><span class="line">	&lt;select&gt;</span><br><span class="line">		&lt;option&gt;网址1&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option&gt;网址1&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option&gt;网址3&lt;&#x2F;option&gt;</span><br><span class="line">	&lt;&#x2F;select&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;内容&quot;&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;submit&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;textarea cols&#x3D;&quot;30&quot; rows&#x3D;&quot;30&quot;&gt;默认信息&lt;&#x2F;textarea&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="表单与PHP交互"><a href="#表单与PHP交互" class="headerlink" title="表单与PHP交互"></a>表单与PHP交互</h2><p>PHP环境搭建暂略</p>
+<h5 id="method"><a href="#method" class="headerlink" title="method:"></a><strong>method</strong>:</h5><p>get会将表单内容与地址结合</p>
+<p>post则不会且更安全</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;php地址&quot;</span> <span class="attr">method</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">	表单</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="框架与背景"><a href="#框架与背景" class="headerlink" title="框架与背景"></a>框架与背景</h2><p>常用框架<code>&lt;iframe&gt;</code></p>
+<p>背景图片:<code>&lt;background&gt;</code></p>
+<p>背景颜色:<code>&lt;bgcolor&gt;</code></p>
+<h3 id="字符转实体"><a href="#字符转实体" class="headerlink" title="字符转实体"></a>字符转实体</h3><p>有些字符无法直接显示在网页上，如<code>&lt; &gt; &amp;</code>等</p>
+<p>当需要特定字符时上网搜索</p>
+<h2 id="XHTML书写规范"><a href="#XHTML书写规范" class="headerlink" title="XHTML书写规范"></a>XHTML书写规范</h2><ol>
+<li>元素语法<ul>
+<li>正确嵌套</li>
+<li>始终关闭</li>
+<li>必须小写</li>
+<li>文档必须有根元素</li>
+</ul>
+</li>
+<li>属性语法<ul>
+<li>必须小写</li>
+<li>必须引号包围</li>
+<li>禁止最小化</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Markdown learning</title>
+    <url>/2020/09/02/markdown/</url>
+    <content><![CDATA[<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>行内式两头加上反引号`</p>
+<p>多行代码上下行加三重反引```</p>
+<p>段落前加大于号(可分级)<br><code>&gt;段落1</code> <code>&gt;&gt;段落2</code></p>
+<p>三种分割线<code>***或---或___</code></p>
+<p>换行可用<code>&lt;br\&gt;</code></p>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p><strong>无序列表</strong> *-+(加号空格)<br><code>+ sad</code><br>多级列表(前面加tab)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ 一层</span><br><span class="line">  + 二层</span><br><span class="line">    + 三层</span><br></pre></td></tr></table></figure>
+<p><strong>有序列表</strong>(数字.空格)<br><code>1. first</code></p>
+<p><strong>表格</strong><br>加空格使对齐（非必要）冒号设置对其方向</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|Tables       |Are          |Cool |</span><br><span class="line">|------       |:----:       |----:|</span><br><span class="line">|col 3 is     |right-aligned|$1600|</span><br><span class="line">|col 2 is     |centered     |$12  |</span><br><span class="line">|zebra stripes|are neat     |$1   |</span><br></pre></td></tr></table></figure>
+<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>小标题前加#(space)<br>斜前后*<br>粗前后**<br>粗斜前后***<br>删除字前后~~<br>缩进<code>&amp;emsp;</code>（一个中文字符）<br>半个<code>&amp;ensp;</code><br>四分之一个<code>&amp;nbsp;</code><br>居中（html标签）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div align&#x3D;center&gt;(内容)</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><strong>超链接</strong><br><code>[显示名称](http://www.bilibili.com &quot;注释名称&quot;)</code><br>直接显示<code>&lt;http://www.bilibili.com&gt;</code><br>后方注释<code>[名称1][wangzhi1]</code></p>
+<p><strong>图片链接</strong><br><code>![名称](..\images\test.png)</code><br>后方注释<code>![名称1][image1]</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[wangzhi1]:http:&#x2F;&#x2F;www.bilibili.com</span><br><span class="line">[image1]:..\images\test.png</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>详细语法</strong>：<br><a href="https://blog.csdn.net/u014061630/article/details/81359144?biz_id=102&utm_term=markdown%E8%AF%AD%E6%B3%95&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-81359144&spm=1018.2118.3001.4187#25-%E4%BB%A3%E7%A0%81%E5%9D%97">csdn教程</a></p>
+<p><strong>博客搭建参考</strong><br><a href="https://koorye.github.io/2020/07/11/%E5%88%A9%E7%94%A8GitHub+Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">koorye的博客</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/02/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
 </search>
