@@ -3,15 +3,50 @@
   <entry>
     <title>CSS总结</title>
     <url>/2020/09/04/CSS/</url>
-    <content><![CDATA[<h2 id="选择器基础"><a href="#选择器基础" class="headerlink" title="选择器基础"></a>选择器基础</h2><ol>
-<li>选择器分组<code>元素1,元素2,元素3&#123;属性;&#125;</code></li>
-<li>派生选择器<code>元素1 分级1&#123;属性;&#125; </code></li>
-<li>id选择器<code>#id&#123;属性;&#125;</code></li>
-<li>类选择器<code>.class&#123;属性&#125;</code></li>
-<li>属性（和值）选择器（在head中加入）</li>
-</ol>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">	[元素属性]&#123;属性1&#125;</span><br><span class="line">	[元素属性=特定值]&#123;属性2&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><ol>
+<li><p>选择器分组 <code>元素1,元素2,元素3&#123;属性;&#125;</code></p>
+</li>
+<li><ul>
+<li><p>派生（后代）选择器 <code>元素1 分级n&#123;属性;&#125;</code>（选择可以跨级）</p>
+</li>
+<li><p>子元素选择器 <code>元素1&gt;分级1&#123;属性;&#125;</code>（只能选择到下一级）</p>
+</li>
+<li><p>相邻兄弟选择器 (了解) <code>元素1+元素2&#123;属性;&#125;</code></p>
+<p>（被选择的元素必须具有前者元素）</p>
+</li>
+</ul>
+</li>
+<li><p>id选择器 <code>#id&#123;属性;&#125;</code></p>
+</li>
+<li><p>类选择器 <code>.class&#123;属性;&#125;</code></p>
+</li>
+<li><p>属性（和值）选择器（在head中加入）</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">[元素属性]&#123;属性1;&#125;/*含有目标属性*/</span><br><span class="line">[元素属性=特定值]&#123;属性2;&#125;/*目标属性为特定值*/</span><br><span class="line">[元素属性~=特定值]&#123;属性3;&#125;/*目标属性的值中包含有特定值*/</span><br></pre></td></tr></table></figure>
 
+
+
+</li>
+</ol>
+<ol start="6">
+<li><p>通用配置符 <code>*&#123;属性;&#125;</code></p>
+</li>
+<li><p>多类选择器</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*css文件*/</span></span><br><span class="line">.p1&#123;属性1;&#125;</span><br><span class="line">.p2&#123;属性2;&#125;</span><br><span class="line">.p2.p3&#123;属性3;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*html文件*/</span></span><br><span class="line">&lt;p class=&quot;p1&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class=&quot;p2&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class=&quot;p1 p2&quot;&gt;&lt;/p&gt;</span><br><span class="line"><span class="comment">/*第三个段落属性为&quot;属性1+属性2+属性3&quot;*/</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>附:</p>
+<ol>
+<li><p>元素选择器可与类选择器结合使用<code>a.class&#123;属性&#125;</code>即a元素中class类的属性</p>
+</li>
+<li><p>ID选择器与类选择器区别：</p>
+<p>ID选择器只能在文档中使用一次，而类可以使用多次</p>
+<p>ID选择器不能结合使用</p>
+<p>当使用JS时需要用到ID</p>
+</li>
+</ol>
 <h2 id="CSS样式"><a href="#CSS样式" class="headerlink" title="CSS样式"></a>CSS样式</h2><h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><table>
 <thead>
 <tr>
@@ -223,15 +258,231 @@
 <td>轮廓宽度</td>
 </tr>
 </tbody></table>
+<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><p><img src="https://i.loli.net/2020/09/05/PArs37gTpldyUEH.png" alt="img"></p>
+<ul>
+<li>padding-(): 设置边距</li>
+<li>border-()-style: 可设置具体方向边框<ul>
+<li>border-()-width: 设置(单边)宽度</li>
+<li>border-()-color: 设置(单边)颜色</li>
+<li>border-radius: 圆角边框大小</li>
+<li>box-shadow: 阴影效果(属性格式同文字阴影)</li>
+<li>border-image: 边框图片</li>
+</ul>
+</li>
+<li>margin-():设置边距</li>
+</ul>
+<p>两个盒子模型的外边框会合并</p>
+<h5 id="盒子模型实际应用"><a href="#盒子模型实际应用" class="headerlink" title="盒子模型实际应用"></a>盒子模型实际应用</h5><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">*<span class="comment">/*通用配置符*/</span>&#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0px</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">0px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.top</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">100%</span>;</span><br><span class="line">	<span class="attribute">height</span>:<span class="number">50px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: black;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.top_content</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">75%</span>;</span><br><span class="line">	height; 50px;</span><br><span class="line">	<span class="selector-tag">margin</span>: <span class="selector-tag">Opx</span> <span class="selector-tag">auto</span>;<span class="comment">/*左右自适应*/</span></span><br><span class="line">	<span class="selector-tag">background-color</span>: <span class="selector-tag">blue</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.body</span>&#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">20px</span> auto;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">75%</span>;</span><br><span class="line">	<span class="attribute">height</span>:<span class="number">1500px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: blanchedalmond;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.body_img</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">100%</span>;<span class="comment">/*占body75%中的100%*/</span></span><br><span class="line">	<span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">	<span class="attribute">background-coior</span>: darkorange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="定位-amp-浮动"><a href="#定位-amp-浮动" class="headerlink" title="定位&amp;浮动"></a>定位&amp;浮动</h2><h5 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h5><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>position</td>
+<td>元素位置形式</td>
+</tr>
+<tr>
+<td>top</td>
+<td>向上偏移量</td>
+</tr>
+<tr>
+<td>left</td>
+<td>向左偏移量</td>
+</tr>
+<tr>
+<td>right</td>
+<td>向右偏移量</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>向下偏移量</td>
+</tr>
+<tr>
+<td>overflow</td>
+<td>元素溢出区</td>
+</tr>
+<tr>
+<td>clip</td>
+<td>显示形状</td>
+</tr>
+<tr>
+<td>vertical-align</td>
+<td>对齐方式</td>
+</tr>
+<tr>
+<td>z-index</td>
+<td>堆叠顺序</td>
+</tr>
+</tbody></table>
+<h5 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h5><p>float属性可用值：left right none inherit（从父级继承）</p>
+<p>clear属性（清除浮动属性）：left right both inherit</p>
+<p>附: 通过浮动可作瀑布流效果</p>
+<h2 id="CSS常用操作"><a href="#CSS常用操作" class="headerlink" title="CSS常用操作"></a>CSS常用操作</h2><ol>
+<li><p>应用margin position float操作对齐边框</p>
+</li>
+<li><p>行高 <code>line-height</code></p>
+<p>最大最小高宽度 <code>max-width</code></p>
+</li>
+<li><p>分类</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clear</td>
+<td>设置侧面是否允许其他浮动元素</td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>指向某元素上是的鼠标指针类型</td>
+</tr>
+<tr>
+<td>display</td>
+<td>设置是否及如何显示元素</td>
+</tr>
+<tr>
+<td>float</td>
+<td>定义元素在哪个方向浮动</td>
+</tr>
+<tr>
+<td>position</td>
+<td>设置元素位置</td>
+</tr>
+<tr>
+<td>visibility</td>
+<td>设置元素是否可见</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>导航栏展示</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ul</span>&#123;</span><br><span class="line">	<span class="attribute">list-style-type</span>: none;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0px</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">0px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span>, <span class="selector-tag">a</span><span class="selector-pseudo">:visited</span><span class="comment">/*a链接的状态*/</span>&#123;</span><br><span class="line">	<span class="attribute">text-decoration</span>: none;</span><br><span class="line">	<span class="attribute">display</span>: block;</span><br><span class="line">	<span class="attribute">background-color</span>: burlywood;</span><br><span class="line">	<span class="attribute">color</span>: aliceblue;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">	<span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span>, <span class="selector-tag">a</span>: <span class="selector-tag">hover</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: crimson;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片展示</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">margin</span>:_10px auto;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">70%</span>;</span><br><span class="line">	<span class="attribute">height</span>: auto;</span><br><span class="line">	<span class="attribute">background-color</span>: burlywood;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.image</span>&#123;</span><br><span class="line">	border; 1px solid darkgray;</span><br><span class="line">	<span class="selector-tag">width</span>: <span class="selector-tag">auto</span>;</span><br><span class="line">	<span class="selector-tag">height</span><span class="selector-pseudo">:_auto</span>;</span><br><span class="line">	<span class="selector-tag">float</span>: <span class="selector-tag">left</span>;</span><br><span class="line">	<span class="selector-tag">text-align</span>: <span class="selector-tag">center</span>;</span><br><span class="line">	<span class="selector-tag">margin</span>: 5<span class="selector-tag">px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">img</span>&#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">5px</span>;</span><br><span class="line">	<span class="attribute">opacity</span>: <span class="number">1</span>; <span class="comment">/*透明度：0为完全透明，1为完全不透明*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.text</span>&#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">12px</span></span><br><span class="line">	margin-bottom: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="CSS动画"><a href="#CSS动画" class="headerlink" title="CSS动画"></a>CSS动画</h2><h5 id="2D、3D转换"><a href="#2D、3D转换" class="headerlink" title="2D、3D转换"></a>2D、3D转换</h5><p>转换格式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>:转换方法;</span><br><span class="line"><span class="selector-tag">-webkit-transform</span>:转换方法;<span class="comment">/*safari chrome*/</span></span><br><span class="line"><span class="selector-tag">-ms-transform</span>:转换方法;<span class="comment">/*IE 360*/</span></span><br><span class="line"><span class="selector-tag">-o-transform</span>:转换方法;<span class="comment">/*opera*/</span></span><br><span class="line"><span class="selector-tag">-moz-transform</span>:转换方法;<span class="comment">/*firefox*/</span></span><br></pre></td></tr></table></figure>
+
+<p>2D转换方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>translate()</td>
+<td>移动</td>
+</tr>
+<tr>
+<td>rotate()</td>
+<td>旋转</td>
+</tr>
+<tr>
+<td>scale()</td>
+<td>缩放</td>
+</tr>
+<tr>
+<td>skew()</td>
+<td>倾斜</td>
+</tr>
+<tr>
+<td>matrix()</td>
+<td>矩阵</td>
+</tr>
+</tbody></table>
+<p>3D转换方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rotateX()</td>
+<td>X轴旋转</td>
+</tr>
+<tr>
+<td>rotateY()</td>
+<td>Y轴旋转</td>
+</tr>
+</tbody></table>
+<h5 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h5><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>transition</td>
+<td>设置四个过渡属性</td>
+</tr>
+<tr>
+<td>transition-property</td>
+<td>过渡名称</td>
+</tr>
+<tr>
+<td>transition-duration</td>
+<td>过渡花费时间</td>
+</tr>
+<tr>
+<td>transition-timing-function</td>
+<td>过渡时间曲线</td>
+</tr>
+<tr>
+<td>transition-delay</td>
+<td>过渡开始时间</td>
+</tr>
+</tbody></table>
+<p>代码展示</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">108px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: blue;</span><br><span class="line">	<span class="attribute">-webkit-transition</span>: width <span class="number">2s</span>,height_2s,-webkit-transform <span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">transition </span>: width <span class="number">2s</span>,height <span class="number">2s</span>,transform <span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">-webkit-transition-delay</span>:<span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">transition-delay</span>: <span class="number">2s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span>: <span class="selector-tag">hover</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">208px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>);</span><br><span class="line">	<span class="attribute">webkit-transform</span>: <span class="built_in">rotate</span>( <span class="number">360deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h5><p>代码展示</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: red;</span><br><span class="line">	<span class="attribute">position</span>: relative;</span><br><span class="line">	<span class="attribute">animation</span>:anim <span class="number">5s</span> <span class="comment">/*infinite alternate添加回溯及重复动画*/</span>;</span><br><span class="line">	<span class="attribute">-webkit-animation</span>:anim <span class="number">5s</span><span class="comment">/*同加*/</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> anim&#123;</span><br><span class="line">	0%&#123;<span class="attribute">background</span>: red;<span class="attribute">left</span>: <span class="number">0px</span>; <span class="attribute">top</span>: <span class="number">0px</span>&#125;</span><br><span class="line">	25%&#123;<span class="attribute">background</span>: blue;<span class="attribute">left</span>: <span class="number">200</span>;<span class="attribute">top</span>:<span class="number">0px</span>&#125;</span><br><span class="line">	50%&#123;<span class="attribute">background</span>:<span class="number">#ccffcc</span>;<span class="attribute">left</span>: <span class="number">200px</span>; <span class="attribute">top</span>: <span class="number">200px</span>&#125;</span><br><span class="line">	75%&#123;<span class="attribute">background</span>: <span class="number">#B0ffff</span>;<span class="attribute">left</span>: <span class="number">0px</span>;<span class="attribute">top</span>: <span class="number">200px</span>&#125;</span><br><span class="line">	100%&#123;<span class="attribute">background</span>:red;<span class="attribute">left</span>: <span class="number">0px</span>;<span class="attribute">top</span>: <span class="number">0px</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">-webkit-</span><span class="keyword">@keyframes</span> anim&#123;</span><br><span class="line">	0%&#123;<span class="attribute">background</span>: red;<span class="attribute">left</span>: <span class="number">0px</span>; <span class="attribute">top</span>: <span class="number">0px</span>&#125;</span><br><span class="line">	25%&#123;<span class="attribute">background</span>: blue;<span class="attribute">left</span>: <span class="number">200</span>;<span class="attribute">top</span>:<span class="number">0px</span>&#125;</span><br><span class="line">	50%&#123;<span class="attribute">background</span>:<span class="number">#ccffcc</span>;<span class="attribute">left</span>: <span class="number">200px</span>; <span class="attribute">top</span>: <span class="number">200px</span>&#125;</span><br><span class="line">	75%&#123;<span class="attribute">background</span>: <span class="number">#B0ffff</span>;<span class="attribute">left</span>: <span class="number">0px</span>;<span class="attribute">top</span>: <span class="number">200px</span>&#125;</span><br><span class="line">	100%&#123;<span class="attribute">background</span>:red;<span class="attribute">left</span>: <span class="number">0px</span>;<span class="attribute">top</span>: <span class="number">0px</span>&#125;</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="多列"><a href="#多列" class="headerlink" title="多列"></a>多列</h5><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.div1</span>&#123;</span><br><span class="line">    <span class="attribute">column-count</span>: <span class="number">4</span>:<span class="comment">/*四列*/</span></span><br><span class="line">    column-gap: <span class="number">30px</span>;<span class="comment">/*内边距*/</span></span><br><span class="line">    <span class="attribute">column-rule</span>: <span class="number">5px</span> outset red;<span class="comment">/*边界线*/</span></span><br><span class="line">    <span class="attribute">-webkit-column-count</span>: <span class="number">4</span>;</span><br><span class="line">    <span class="attribute">-webkit-column-gap</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">-webkit-column-rule</span>: <span class="number">5px</span> outset red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="多列实现瀑布流-图片宽度一致"><a href="#多列实现瀑布流-图片宽度一致" class="headerlink" title="多列实现瀑布流(图片宽度一致)"></a>多列实现瀑布流(图片宽度一致)</h5><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="attribute">column-width</span>: <span class="number">250px</span>;</span><br><span class="line">    <span class="attribute">column-gap</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">-webkit-column-width</span>: <span class="number">250px</span>;</span><br><span class="line">    <span class="attribute">-webkit-column-gap</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">250px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>web前端</category>
       </categories>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/09/02/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>HTML5总结</title>
     <url>/2020/09/03/html5/</url>
-    <content><![CDATA[<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>指向另一个地址<code>&lt;a href=&quot;地址&quot; traget=&quot;&quot;&gt;名称&lt;/a&gt;</code></p>
+    <content><![CDATA[<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>指向另一个地址<code>&lt;a href=&quot;地址&quot; traget=&quot;&quot;&gt;名称&lt;/a&gt;</code>地址<code>#</code>可以跳转自身</p>
 <table>
 <thead>
 <tr>
@@ -411,24 +662,6 @@
 <hr>
 <p><strong>详细语法</strong>：<br><a href="https://blog.csdn.net/u014061630/article/details/81359144?biz_id=102&utm_term=markdown%E8%AF%AD%E6%B3%95&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-81359144&spm=1018.2118.3001.4187#25-%E4%BB%A3%E7%A0%81%E5%9D%97">csdn教程</a></p>
 <p><strong>博客搭建参考</strong><br><a href="https://koorye.github.io/2020/07/11/%E5%88%A9%E7%94%A8GitHub+Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">koorye的博客</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/09/02/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
 </search>
