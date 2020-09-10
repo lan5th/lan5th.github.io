@@ -28,7 +28,7 @@
 <meta property="og:description" content="JS基础引入js文件&lt;script src&#x3D;&quot;地址&quot;&gt;&lt;&#x2F;script&gt; 输出document.write(&quot;&lt;h1&gt;内容&lt;&#x2F;h1&gt;&quot;) 改变html中内容document.getElementById(&quot;ID&quot;).innerHTML&#x3D;&quot;新内容&quot; 注释单行注释&#x2F;&#x2F;注释 多">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-06T06:46:27.738Z">
-<meta property="article:modified_time" content="2020-09-07T14:52:55.591Z">
+<meta property="article:modified_time" content="2020-09-10T09:44:46.168Z">
 <meta property="article:author" content="lan5th">
 <meta name="twitter:card" content="summary">
 
@@ -222,7 +222,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-07 22:52:55" itemprop="dateModified" datetime="2020-09-07T22:52:55+08:00">2020-09-07</time>
+                <time title="修改时间：2020-09-10 17:44:46" itemprop="dateModified" datetime="2020-09-10T17:44:46+08:00">2020-09-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,14 +240,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>445</span>
+              <span>4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -267,6 +267,8 @@
 <h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><p>通过<code>var</code>声明各种类型</p>
 <p>数组声明<code>var arr=[1,2,3,4];</code></p>
 <p>动态数组<code>var arr=new Array();</code></p>
+<p>不加前缀直接声明全局变量<code>m = 1</code></p>
+<p>严格作用域用<code>let</code></p>
 <p>可以通过赋值为空的方法清除变量<code>a=null</code></p>
 <h5 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h5><p>字符串拼接可直接用<code>+</code></p>
 <p>任何类型与字符串作运算会被强制转换成字符串类型</p>
@@ -274,7 +276,104 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;						双等（其他类型与字符串比较会自动转换）</span><br><span class="line">&#x3D;&#x3D;&#x3D;						三等（完全判等）</span><br><span class="line">!&#x3D;						不等（同双等）</span><br><span class="line">!&#x3D;&#x3D;						不等（同三等）</span><br></pre></td></tr></table></figure>
 
 <p>另外还有&lt; &gt; &lt;= &gt;=比较运算符</p>
+<h5 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h5><p><code>if else,switch,for,while,do while</code>同C语言</p>
+<p><code>for(j in i)</code>结构将j遍历i[]中的所有元素</p>
+<p>跳转语句同C语言</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">常用函数</span><br><span class="line">alert()					弹出对话框</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p><strong>定义函数</strong><code>function 函数名()&#123;函数体&#125;</code></p>
+<p>函数可以在<code>&lt;script&gt;</code>标签中使用或在HTML文件中使用</p>
+<p>函数加<code>this</code>指向本元素,如</p>
+<p><code>&lt;div onmouseout=&quot;function(this)&quot;&gt;&lt;/div&gt;</code>this指向本<code>div</code></p>
+<h5 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	异常代码块</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">	<span class="comment">//错误信息处理</span></span><br><span class="line">	alert(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">onClick				    单击事件</span><br><span class="line">onMouseOver				鼠标经过事件</span><br><span class="line">onMouseOut				鼠标移出事件</span><br><span class="line">onChange				文本内容改变事件</span><br><span class="line">onSelect				文本框选中事件</span><br><span class="line">onFocus					光标聚集事件</span><br><span class="line">onBlur					移开光标事件</span><br><span class="line">onLoad					网页加载事件</span><br><span class="line">onUnload				关闭网页事件</span><br></pre></td></tr></table></figure>
+
+<p><code>onload onunload</code>在<code>body</code>中调用</p>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><h5 id="DOM操作HTML"><a href="#DOM操作HTML" class="headerlink" title="DOM操作HTML"></a>DOM操作HTML</h5><ol>
+<li><p>改变HTML输出流</p>
+<p>不要再文档加载完成后再使用<code>document.write()</code>会覆盖文档</p>
+</li>
+<li><p>寻找元素</p>
+<p>通过id(ById)或标签名(ByTagName)找到HTML元素</p>
+<p>ByTagName和ByName寻找到的多个元素会通过数组存储</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>改变HTML内容</p>
+<p>属性<code>innerHTML</code></p>
+</li>
+<li><p>得到HTML属性</p>
+<p><code>getAttribute(&quot;&quot;)</code></p>
+</li>
+<li><p>改变HTML属性</p>
+<p><code>setAttribute(&quot;属性&quot;,&quot;值&quot;)</code></p>
+</li>
+<li><p>其他方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">childNodes()				访问子节点</span><br><span class="line">parentNode()				访问父节点</span><br><span class="line">createElement()				创建元素节点</span><br><span class="line">createTextNode				创建文本节点</span><br><span class="line">insertBefore(,)				插入节点（选择位置）</span><br><span class="line">appendChild()				添加节点（末尾）</span><br><span class="line">removeChild()				删除节点</span><br><span class="line">offsetHeight				网页尺寸（不包含滚动条）</span><br><span class="line">scrollHeight				网页尺寸（包含滚动条）</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h5 id="DOM-EventListener-句柄"><a href="#DOM-EventListener-句柄" class="headerlink" title="DOM EventListener(句柄)"></a>DOM EventListener(句柄)</h5><p><code>addEventListener(&quot;事件&quot;，函数)</code>: 添加句柄</p>
+<p><code>removeEventListener(&quot;事件&quot;，函数)</code>:移除句柄</p>
+<h2 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h2><p>描述页面中接受事件的顺序</p>
+<p>事件冒泡：由最具体的元素（最内层）接受，然后逐级向上传播至最不具体的结点（最外层）</p>
+<p>事件捕获：最不具体的结点（最外层）先接收事件，最具体的结点（最内层）最后接收事件</p>
+<h5 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h5><ol>
+<li><p>HTML事件处理：直接添加到HTML结构中</p>
+</li>
+<li><p>DOM0级事件处理：把一个函数赋值给一个事件处理程序</p>
+</li>
+<li><p>DOM2级事件处理</p>
+<p>addEventListener(“事件名”,事件处理函数，布尔值（可略）)；</p>
+<p>removeEventListener();</p>
+<p>true:事件捕获 false:事件冒泡</p>
+</li>
+<li><p>IE事件处理</p>
+<p>attachment(“事件名”,事件处理函数，布尔值（可略）)；</p>
+<p>detachment();</p>
+</li>
+</ol>
+<h5 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h5><p>在触发DOM事件时会产生一个对象</p>
+<p>DOM事件发生属于事件冒泡</p>
+<p>事件对象event:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type					获取事件类型</span><br><span class="line">target					获取事件目标</span><br><span class="line">stopPropagation()		 阻止事件冒泡</span><br><span class="line">preventDefault()		 组织事件默认行为</span><br></pre></td></tr></table></figure>
+
+<p>实例</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">&quot;btn1&quot;</span>).addEventListener(<span class="string">&quot;click&quot;</span> , showType)；											                     <span class="built_in">document</span>.getElementById(<span class="string">&quot;div&quot;</span>).addEventListener(<span class="string">&quot;click&quot;</span>,showDiv);</span></span><br><span class="line"><span class="javascript">	<span class="built_in">document</span>.getElementById(<span class="string">&quot;aid&quot;</span> ).addEventListener(<span class="string">&quot;click&quot;</span>,showA);</span></span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showType</span>(<span class="params">event</span>)</span>&#123;</span></span><br><span class="line">		alert(event.type);</span><br><span class="line">		alert(event.target);</span><br><span class="line"><span class="javascript">		event.stopPropagation();<span class="comment">//阻止事件冒泡</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showDiv</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		alert( <span class="string">&quot;div&quot;</span> );</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showA</span>(<span class="params">event</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		event.stopropaaation():<span class="comment">//阻止事件冒泡</span></span></span><br><span class="line"><span class="javascript">		event.preventDefault();<span class="comment">//阻止本事件发生</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="JS内置对象"><a href="#JS内置对象" class="headerlink" title="JS内置对象"></a>JS内置对象</h2><h5 id="自定义对象"><a href="#自定义对象" class="headerlink" title="自定义对象"></a>自定义对象</h5><p>定义并创建对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">people = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">people.name = <span class="string">&quot;&quot;</span>; people.age = <span class="string">&quot;&quot;</span>;</span><br><span class="line">或people = &#123;<span class="attr">name</span>:<span class="string">&quot;&quot;</span>,<span class="attr">age</span>:<span class="string">&quot;&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用函数来定义对象，然后创建新的对象实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">people</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = ;</span><br><span class="line">	<span class="built_in">this</span>.age = ;</span><br><span class="line">&#125;</span><br><span class="line">son = <span class="keyword">new</span> people(<span class="string">&quot;&quot;</span>,);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="字符串对象"><a href="#字符串对象" class="headerlink" title="字符串对象"></a>字符串对象</h5><p>字符串位置：<code>indexOf(&quot;&quot;)</code>存在返回所在位置，不存在返回-1</p>
+<p>匹配字符串：<code>match(&quot;&quot;)</code>存在打印字符串，不存在返回null</p>
+<p>替换字符串：<code>replace(&quot;&quot;,&quot;新字符串&quot;)</code></p>
+<p>大小写转换：<code>toUpperCase()/toLowerCase()</code>全部转大/小写</p>
+<p>字符串转数组：<code>split(&quot;,&quot;)</code>通过<code>,</code>分割数组</p>
+<h5 id="Date日期对象"><a href="#Date日期对象" class="headerlink" title="Date日期对象"></a>Date日期对象</h5><p>当日日期<code>var date = new Date();</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">获取具体信息</span><br><span class="line">getFullYear()				获取年份</span><br><span class="line">getTime()					获取毫秒</span><br><span class="line">setFullYear(y,m,d)			 设置事件</span><br><span class="line">getDay()					获取星期</span><br><span class="line">toLocaleDateString()		获取标准日期格式</span><br><span class="line">toLocaleTimeString()		获取标准时间格式</span><br></pre></td></tr></table></figure>
+
+<p>时钟实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startTime</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">	<span class="keyword">var</span> h = today.getHours();</span><br><span class="line">	<span class="keyword">var</span> m = today.getMinutes();</span><br><span class="line">	<span class="keyword">var</span> s = today.getSeconds();</span><br><span class="line">	m= checkTime(m);<span class="comment">//对齐格式</span></span><br><span class="line">	s = checkTime(s);</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">&quot;timetxt&quot;</span>).innerHTML = h+<span class="string">&quot;:&quot;</span>+m+<span class="string">&quot;:&quot;</span>+s;</span><br><span class="line">	t= <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span></span>&#123;</span><br><span class="line">		startTime();</span><br><span class="line">	&#125;,<span class="number">1000</span>);<span class="comment">//setTimeout函数将startTime函数1000毫秒调用一次</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkTime</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">10</span>)&#123;</span><br><span class="line">		i = “<span class="number">0</span><span class="string">&quot;&quot;</span>+i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;timetxt&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="数组对象"><a href="#数组对象" class="headerlink" title="数组对象"></a>数组对象</h5><p>两数组a,b</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a.concat(b)					合并数组</span><br><span class="line">a.sort()					排序</span><br><span class="line">a.push(&quot;&quot;)					末尾追加元素</span><br><span class="line">a.reverse()					数组元素反转</span><br></pre></td></tr></table></figure>
+
+<h5 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">round()						四舍五入</span><br><span class="line">random()					返回0~1之间随机数</span><br><span class="line">max()						返回最高值</span><br><span class="line">min()						返回最低值</span><br><span class="line">abs()						返回绝对值</span><br></pre></td></tr></table></figure>
+
+<p><code>parseInt()</code>可以将数据转为int类型</p>
+<h2 id="JS浏览器对象"><a href="#JS浏览器对象" class="headerlink" title="JS浏览器对象"></a>JS浏览器对象</h2><h5 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">window.innerHeight					窗口内部高度</span><br><span class="line">window.innerWidth					窗口内部宽度</span><br><span class="line">window.open(&quot;地址&quot;,&quot;名称&quot;,其他属性)		打开新窗口</span><br><span class="line">window.close()						关闭当前窗口</span><br></pre></td></tr></table></figure>
+
+<h5 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setInterval()				间隔指定毫秒数不停执行指定代码</span><br><span class="line">clearInterval()				清除上述代码</span><br><span class="line">setTimeout()				暂停指定毫秒数后执行指定代码</span><br><span class="line">clearTimeout()				停止上述代码</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -351,7 +450,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">JS基础</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">运算符</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">JS基础</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">条件语句</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">异常捕获</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM"><span class="nav-number">4.</span> <span class="nav-text">DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM%E6%93%8D%E4%BD%9CHTML"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">DOM操作HTML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM-EventListener-%E5%8F%A5%E6%9F%84"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">DOM EventListener(句柄)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="nav-number">5.</span> <span class="nav-text">事件流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">事件处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">事件对象</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.</span> <span class="nav-text">JS内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">自定义对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.0.0.2.</span> <span class="nav-text">字符串对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Date%E6%97%A5%E6%9C%9F%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.0.0.3.</span> <span class="nav-text">Date日期对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.0.0.4.</span> <span class="nav-text">数组对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Math%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.0.0.5.</span> <span class="nav-text">Math对象</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.</span> <span class="nav-text">JS浏览器对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#window%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.0.0.1.</span> <span class="nav-text">window对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%A1%E6%97%B6%E5%99%A8"><span class="nav-number">7.0.0.2.</span> <span class="nav-text">计时器</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -429,12 +528,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">10k</span>
+    <span title="站点总字数">13k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9 分钟</span>
+    <span title="站点阅读时长">12 分钟</span>
 </div>
 
         
