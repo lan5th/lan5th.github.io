@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"lan5th.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="格式代码块行内式两头加上反引号&#96; 多行代码上下行加三重反引&#96;&#96;&#96; 段落前加大于号(可分级)&gt;段落1 &gt;&gt;段落2 三种分割线***或---或___ 换行可用&lt;br\&gt; 表格无序列表 *-+(加号空格)+ sad多级列表(前面加tab) 123+ 一层  + 二层    + 三层 有序列表(数字.空格)1. first 表格加空格使对齐（非必要）冒号设置对其方向 1234">
+  <meta name="description" content="终端操作主要操作命令结尾跟; 12345678910mysql -u root -p				登录show databases&#x2F;tables			查看数据库&#x2F;数据表create database xxx				创建数据库create table xxx (值)			创建数据表use xxx							转到数据库insert into xxx values()		插入值desc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown learning">
-<meta property="og:url" content="http://lan5th.github.io/2020/09/02/markdown/index.html">
+<meta property="og:title" content="MySql">
+<meta property="og:url" content="http://lan5th.github.io/2020/10/20/MySQL/index.html">
 <meta property="og:site_name" content="Lzone">
-<meta property="og:description" content="格式代码块行内式两头加上反引号&#96; 多行代码上下行加三重反引&#96;&#96;&#96; 段落前加大于号(可分级)&gt;段落1 &gt;&gt;段落2 三种分割线***或---或___ 换行可用&lt;br\&gt; 表格无序列表 *-+(加号空格)+ sad多级列表(前面加tab) 123+ 一层  + 二层    + 三层 有序列表(数字.空格)1. first 表格加空格使对齐（非必要）冒号设置对其方向 1234">
+<meta property="og:description" content="终端操作主要操作命令结尾跟; 12345678910mysql -u root -p				登录show databases&#x2F;tables			查看数据库&#x2F;数据表create database xxx				创建数据库create table xxx (值)			创建数据表use xxx							转到数据库insert into xxx values()		插入值desc">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-02T07:41:47.191Z">
-<meta property="article:modified_time" content="2020-09-03T03:02:02.362Z">
+<meta property="article:published_time" content="2020-10-20T06:12:19.761Z">
+<meta property="article:modified_time" content="2020-11-17T15:18:01.710Z">
 <meta property="article:author" content="lan5th">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://lan5th.github.io/2020/09/02/markdown/">
+<link rel="canonical" href="http://lan5th.github.io/2020/10/20/MySQL/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>Markdown learning | Lzone</title>
+  <title>MySql | Lzone</title>
   
 
 
@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://lan5th.github.io/2020/09/02/markdown/">
+    <link itemprop="mainEntityOfPage" href="http://lan5th.github.io/2020/10/20/MySQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -205,7 +205,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Markdown learning
+          MySql
         </h1>
 
         <div class="post-meta">
@@ -215,15 +215,24 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-02 15:41:47" itemprop="dateCreated datePublished" datetime="2020-09-02T15:41:47+08:00">2020-09-02</time>
+              <time title="创建时间：2020-10-20 14:12:19" itemprop="dateCreated datePublished" datetime="2020-10-20T14:12:19+08:00">2020-10-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-03 11:02:02" itemprop="dateModified" datetime="2020-09-03T11:02:02+08:00">2020-09-03</time>
+                <time title="修改时间：2020-11-17 23:18:01" itemprop="dateModified" datetime="2020-11-17T23:18:01+08:00">2020-11-17</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -231,14 +240,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>689</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -250,25 +259,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>行内式两头加上反引号`</p>
-<p>多行代码上下行加三重反引```</p>
-<p>段落前加大于号(可分级)<br><code>&gt;段落1</code> <code>&gt;&gt;段落2</code></p>
-<p>三种分割线<code>***或---或___</code></p>
-<p>换行可用<code>&lt;br\&gt;</code></p>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p><strong>无序列表</strong> *-+(加号空格)<br><code>+ sad</code><br>多级列表(前面加tab)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ 一层</span><br><span class="line">  + 二层</span><br><span class="line">    + 三层</span><br></pre></td></tr></table></figure>
-<p><strong>有序列表</strong>(数字.空格)<br><code>1. first</code></p>
-<p><strong>表格</strong><br>加空格使对齐（非必要）冒号设置对其方向</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|Tables       |Are          |Cool |</span><br><span class="line">|------       |:----:       |----:|</span><br><span class="line">|col 3 is     |right-aligned|$1600|</span><br><span class="line">|col 2 is     |centered     |$12  |</span><br><span class="line">|zebra stripes|are neat     |$1   |</span><br></pre></td></tr></table></figure>
-<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>小标题前加#(space)<br>斜前后*<br>粗前后**<br>粗斜前后***<br>删除字前后~~<br>缩进<code>&amp;emsp;</code>（一个中文字符）<br>半个<code>&amp;ensp;</code><br>四分之一个<code>&amp;nbsp;</code><br>居中（html标签）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div align&#x3D;center&gt;(内容)</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><strong>超链接</strong><br><code>[显示名称](http://www.bilibili.com &quot;注释名称&quot;)</code><br>直接显示<code>&lt;http://www.bilibili.com&gt;</code><br>后方注释<code>[名称1][wangzhi1]</code></p>
-<p><strong>图片链接</strong><br><code>![名称](..\images\test.png)</code><br>后方注释<code>![名称1][image1]</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[wangzhi1]:http:&#x2F;&#x2F;www.bilibili.com</span><br><span class="line">[image1]:..\images\test.png</span><br></pre></td></tr></table></figure>
+        <h2 id="终端操作"><a href="#终端操作" class="headerlink" title="终端操作"></a>终端操作</h2><h3 id="主要操作"><a href="#主要操作" class="headerlink" title="主要操作"></a>主要操作</h3><p>命令结尾跟<code>;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p				登录</span><br><span class="line">show databases&#x2F;tables			查看数据库&#x2F;数据表</span><br><span class="line">create database xxx				创建数据库</span><br><span class="line">create table xxx (值)			创建数据表</span><br><span class="line">use xxx							转到数据库</span><br><span class="line">insert into xxx values()		插入值</span><br><span class="line">desc xxx						查看数据表的数据类型</span><br><span class="line">delete from xxx					删除数据记录</span><br><span class="line">update xxx set name&#x3D;&#39;&#39;			将表中name修改为&#39;&#39;</span><br><span class="line">select * from xxx				查看表中(全部)类型的记录</span><br></pre></td></tr></table></figure>
 
-<hr>
-<p><strong>详细语法</strong>：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014061630/article/details/81359144?biz_id=102&utm_term=markdown%E8%AF%AD%E6%B3%95&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-81359144&spm=1018.2118.3001.4187#25-%E4%BB%A3%E7%A0%81%E5%9D%97">csdn教程</a></p>
-<p><strong>博客搭建参考</strong><br><a target="_blank" rel="noopener" href="https://koorye.github.io/2020/07/11/%E5%88%A9%E7%94%A8GitHub+Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">koorye的博客</a></p>
+<h3 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">primary key()					非空唯一</span><br><span class="line">primary key(,)					多项数据都非空，之和唯一</span><br><span class="line">auto_increment					自增</span><br><span class="line">unique							唯一</span><br><span class="line">not_null						非空</span><br><span class="line">default							默认（一般不用声明）</span><br><span class="line">foreign_key						外键约束</span><br></pre></td></tr></table></figure>
+
+<p>创建外键约束：在副表末尾跟<code>foreign (id) reference xxx(id)</code>，即创建与主表class之间的链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">建表完成后添加约束：</span><br><span class="line">alter table xxx add primary key(id)</span><br><span class="line">alter table xxx modify id int primary key</span><br><span class="line">删除约束：</span><br><span class="line">alter table xxx drop primary key</span><br></pre></td></tr></table></figure>
+
+<h3 id="选择约束"><a href="#选择约束" class="headerlink" title="选择约束"></a>选择约束</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">where							添加约束</span><br><span class="line">group by xxx					分组查询</span><br><span class="line">having							分组后过滤</span><br><span class="line">like &#39;3%&#39;						模糊查询（以3开头）</span><br></pre></td></tr></table></figure>
+
+<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">select sname,cnum,degree from student,score</span><br><span class="line">where student.snum&#x3D;score.snum;</span><br><span class="line">即从student和score表中选取sname,cnum,degree项共同显示</span><br></pre></td></tr></table></figure>
+
+<h5 id="其他注解"><a href="#其他注解" class="headerlink" title="其他注解"></a>其他注解</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xxx union xxx					联合输出</span><br><span class="line">order by xxx desc&#x2F;arc			排序逆序&#x2F;顺序</span><br><span class="line">any&#x2F;all							至少&#x2F;全部</span><br><span class="line">as xxx							取别名</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">书写格式：select * from person right join card on person.cardid&#x3D;card.id;</span><br><span class="line">inner join						内联查询</span><br><span class="line">left(outer) join				左连接(完全显示左边条目)</span><br><span class="line">right(outer) join				右连接(完全显示右边条目)</span><br><span class="line">full join						全外连接(mysql不支持)</span><br></pre></td></tr></table></figure>
+
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>查看mysql自动提交<code>select @@autocommit;</code></p>
+<p>关闭自动提交<code>set autocommit=0;</code></p>
+<p>关闭自动提交后可以<code>roll back;</code>回滚;手动提交<code>commit;</code></p>
+<p>手动开启一段事务在开始前加<code>begin;</code>或<code>start transaction;</code></p>
+<p>完成修改后再手动<code>commit</code>也表示当前事务结束</p>
+<h5 id="事务的四大特征ACID"><a href="#事务的四大特征ACID" class="headerlink" title="事务的四大特征ACID"></a>事务的四大特征ACID</h5><p>A 原子性：事务是最小的单位，不可再分割；</p>
+<p>C 一致性：事务要求，同一事物中的sql语句必须保证同时成功或同时失败；</p>
+<p>I 隔离性：事务1和事务2之间是有隔离性的；</p>
+<p>D 持久性：事务一旦结束(commit,roll back)就不可以返回；</p>
+<p>查看隔离性<code>select @@global.tx_isolation</code>和<code>select @@tx_isolation</code></p>
+<p>修改隔离级别<code>set (gloabal)transaction isolation level read uncommited</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">read uncommited					可读未提交的</span><br><span class="line">read committed					可读已提交的</span><br><span class="line">repeatable						可重复读</span><br><span class="line">serializable					串行化</span><br></pre></td></tr></table></figure>
+
+<p>其他概念</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">脏读：一个事务读到了另一个事务没有提交的数据(read uncommited状态下)实际开发下是不允许存在的</span><br><span class="line">不可重复读：读取同一个表的数据前后不一致</span><br><span class="line">幻读：两个不同的终端分别访问数据库并开启事务一个终端插入数据另一端不可见但也不可插入相同数据</span><br><span class="line">串行化：一个终端开启事务操作数据时另一个终端进行操作会进入等待状态（卡死），一旦终端commit后另一终端再解除等待</span><br><span class="line">串行化问题是性能最差，即隔离级别越高性能越差</span><br><span class="line">mysql默认隔离级别是repeatable-read</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -284,12 +306,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/09/02/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
+    <a href="/2020/10/12/Java%E7%BA%BF%E7%A8%8B/" rel="prev" title="Java多线程">
+      <i class="fa fa-chevron-left"></i> Java多线程
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/09/03/html5/" rel="next" title="HTML5总结">
-      HTML5总结 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/10/25/Ubuntu%E7%BB%88%E7%AB%AF/" rel="next" title="Unbuntu终端操作">
+      Unbuntu终端操作 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -349,7 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">1.1.</span> <span class="nav-text">代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.2.</span> <span class="nav-text">表格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E4%BD%93"><span class="nav-number">2.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">3.</span> <span class="nav-text">链接</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">终端操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">主要操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.2.</span> <span class="nav-text">主键约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.3.</span> <span class="nav-text">选择约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.</span> <span class="nav-text">多表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">其他注解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.5.</span> <span class="nav-text">连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E5%BE%81ACID"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">事务的四大特征ACID</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

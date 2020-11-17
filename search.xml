@@ -847,6 +847,7 @@
 <h2 id="引入Vue"><a href="#引入Vue" class="headerlink" title="引入Vue"></a>引入Vue</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">开发环境版本</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">生产环境版本</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
 
 <h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><p>插值表达式<code>&#123;&#123;&#125;&#125;</code>可直接获取Vue实例中的数据或函数</p>
+<p>同时可以插入任何合法的JS表达式</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  &#123;&#123; message &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message: <span class="string">&#x27;Hello Vue!&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//methods: &#123;&#125;挂载方法可选</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
@@ -882,9 +883,379 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">axios.get(地址?key1&#x3D;value1&amp;key2&#x3D;value2).them(function(response)&#123;&#125;,function(err)&#123;&#125;)</span><br><span class="line">axios.post(地址,&#123;key1:value1,key2:value2&#125;).then(function(response)&#123;&#125;,function(err)&#123;&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>key由接口文档提供，value为提供的数据</p>
+<h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.stop					阻止事件冒泡</span><br><span class="line">.prevent				阻止事件行为</span><br><span class="line">.capture				事件捕获执行</span><br><span class="line">.self					阻止自身的冒泡</span><br><span class="line">.once					仅执行一次</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>web前端</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Java多线程</title>
+    <url>/2020/10/12/Java%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>线程分为执行时间与等待事件，在一个线程的等待事件中可以执行其他线程</p>
+<p><img src="https://i.loli.net/2020/10/12/3KTGNOI9QVbX5JE.png" alt="img"></p>
+<p><img src="https://i.loli.net/2020/10/12/ZObc9fhugFURzx1.png" alt="img"></p>
+<p><img src="https://i.loli.net/2020/10/12/Qg3lEnVezFq56jL.png" alt="img"></p>
+<p>线程继承于线程类Thread并重写run方法，当线程启动时自动执行run方法</p>
+<p>多线程的运行顺序时随机的</p>
+<p>线程分为用户线程与守护线程，守护线程为其他线程提供服务，如垃圾回收器（GC），且不能单独运行，当JVM中没有其他用户线程只有守护线程时，守护线程自动销毁，JVM会退出。</p>
+<h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><ol>
+<li><p>声明类继承Thread类并创建一个该类对象</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MyThread thread&#x3D;new MyThread();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>声明类实现Runnable接口并创建一个该类对象，声明一个Thread类对象(传入Runnable对象)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MyRunnable runnable&#x3D;new MyRunnable();</span><br><span class="line">Thread thread&#x3D;new Thread(runnable);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>声明类实现Callable接口并创建一个该类对象，创建一个FutureTask对象并调用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MyThread thread &#x3D; new MyThread();</span><br><span class="line">FutureTask&lt;Integer&gt; futureTask &#x3D; new FutureTask&lt;&gt;(thread);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h2 id="线程的一些常用方法"><a href="#线程的一些常用方法" class="headerlink" title="线程的一些常用方法"></a>线程的一些常用方法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">currentThread()				当前运行的线程</span><br><span class="line">isAlive()					获取线程是否运行</span><br><span class="line">sleep(num)					让线程休眠一段时间</span><br><span class="line">getid()						获取线程ID</span><br><span class="line">yield()						线程让步，放弃CPU资源</span><br><span class="line">setPriority(num)			设置线程优先级（1~10）</span><br><span class="line">interrupt()					线程中断标志</span><br><span class="line">setDaemon()					设置为守护线程</span><br></pre></td></tr></table></figure>
+
+<p>附:</p>
+<ol>
+<li>当前线程表示运行该代码时运行的代码所在线程，如在main线程中使用MyThread类构造方法时处于main线程中</li>
+<li>某线程结束运行后其ID可能被后续线程使用</li>
+<li>优先级越高的线程获得的CPU资源越多，不能保证优先级越高的线程先运行，优先级设置不当可能会导致某些线程永远无法得到运行，即线程饥饿，一般编写代码不进行线程优先级设置</li>
+<li>线程标志中断后该线程需要自己检测是否中断并执行</li>
+<li>设置守护线程应该在线程运行之前就设置完毕</li>
+</ol>
+<h2 id="线程生命周期"><a href="#线程生命周期" class="headerlink" title="线程生命周期"></a>线程生命周期</h2><p>线程生命周期可以通过<code>getState()</code>方法获得，线程状态有：</p>
+<ul>
+<li>NEW，新建状态，即<code>start()</code>启动之前</li>
+<li>RUNNABLE，可运行状态，是一个复合状态，包括READY和RUNNING，READY状态可以被线程调度器调度使之处于RUNNING状态，RUNNING状态可通过<code>Thread.yield()</code>方法转换为READY状态</li>
+<li>BLOCKED，阻塞状态，线程发起阻塞的I/O操作，或申请由其他线程的独占资源，线程会转换为BLOCKED，不会占用CPU资源，当发起阻塞的I/O操作结束或获得申请的资源，线程可以转为RUNNABLE</li>
+<li>WAITING，等待状态，线程执行了<code>Object.wait(),Thread.join()</code>方法转换为WAITING状态，执行<code>Object.notify()</code>方法，或加入线程完毕转换为RUNNABLE状态</li>
+<li>TIMED_WAITING，类似于WAITING，但线程如果没有在指定时间范围完成期望操作，该线程会自动转换为RUNNABLE</li>
+<li>TERMINATED，终止状态，线程结束</li>
+</ul>
+<h2 id="其他性质"><a href="#其他性质" class="headerlink" title="其他性质"></a>其他性质</h2><h5 id="线程原子性"><a href="#线程原子性" class="headerlink" title="线程原子性"></a>线程原子性</h5><p>线程对数据操作的不可分割性</p>
+<p>使一个数同一时间只能被一个线程调用定义<code>AtomicInteger</code>变量</p>
+<h5 id="线程可见性"><a href="#线程可见性" class="headerlink" title="线程可见性"></a>线程可见性</h5><p>一个线程对数据的更新结果可以被其他线程读取则称为可见</p>
+<h5 id="重排序"><a href="#重排序" class="headerlink" title="重排序"></a>重排序</h5><p>不同处理器上执行的的多个操作顺序可能不同，可能导致线程安全问题</p>
+]]></content>
+      <categories>
+        <category>语言学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>MySql</title>
+    <url>/2020/10/20/MySQL/</url>
+    <content><![CDATA[<h2 id="终端操作"><a href="#终端操作" class="headerlink" title="终端操作"></a>终端操作</h2><h3 id="主要操作"><a href="#主要操作" class="headerlink" title="主要操作"></a>主要操作</h3><p>命令结尾跟<code>;</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -u root -p				登录</span><br><span class="line">show databases&#x2F;tables			查看数据库&#x2F;数据表</span><br><span class="line">create database xxx				创建数据库</span><br><span class="line">create table xxx (值)			创建数据表</span><br><span class="line">use xxx							转到数据库</span><br><span class="line">insert into xxx values()		插入值</span><br><span class="line">desc xxx						查看数据表的数据类型</span><br><span class="line">delete from xxx					删除数据记录</span><br><span class="line">update xxx set name&#x3D;&#39;&#39;			将表中name修改为&#39;&#39;</span><br><span class="line">select * from xxx				查看表中(全部)类型的记录</span><br></pre></td></tr></table></figure>
+
+<h3 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">primary key()					非空唯一</span><br><span class="line">primary key(,)					多项数据都非空，之和唯一</span><br><span class="line">auto_increment					自增</span><br><span class="line">unique							唯一</span><br><span class="line">not_null						非空</span><br><span class="line">default							默认（一般不用声明）</span><br><span class="line">foreign_key						外键约束</span><br></pre></td></tr></table></figure>
+
+<p>创建外键约束：在副表末尾跟<code>foreign (id) reference xxx(id)</code>，即创建与主表class之间的链接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">建表完成后添加约束：</span><br><span class="line">alter table xxx add primary key(id)</span><br><span class="line">alter table xxx modify id int primary key</span><br><span class="line">删除约束：</span><br><span class="line">alter table xxx drop primary key</span><br></pre></td></tr></table></figure>
+
+<h3 id="选择约束"><a href="#选择约束" class="headerlink" title="选择约束"></a>选择约束</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">where							添加约束</span><br><span class="line">group by xxx					分组查询</span><br><span class="line">having							分组后过滤</span><br><span class="line">like &#39;3%&#39;						模糊查询（以3开头）</span><br></pre></td></tr></table></figure>
+
+<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">示例:</span><br><span class="line">select sname,cnum,degree from student,score</span><br><span class="line">where student.snum&#x3D;score.snum;</span><br><span class="line">即从student和score表中选取sname,cnum,degree项共同显示</span><br></pre></td></tr></table></figure>
+
+<h5 id="其他注解"><a href="#其他注解" class="headerlink" title="其他注解"></a>其他注解</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xxx union xxx					联合输出</span><br><span class="line">order by xxx desc&#x2F;arc			排序逆序&#x2F;顺序</span><br><span class="line">any&#x2F;all							至少&#x2F;全部</span><br><span class="line">as xxx							取别名</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">书写格式：select * from person right join card on person.cardid&#x3D;card.id;</span><br><span class="line">inner join						内联查询</span><br><span class="line">left(outer) join				左连接(完全显示左边条目)</span><br><span class="line">right(outer) join				右连接(完全显示右边条目)</span><br><span class="line">full join						全外连接(mysql不支持)</span><br></pre></td></tr></table></figure>
+
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>查看mysql自动提交<code>select @@autocommit;</code></p>
+<p>关闭自动提交<code>set autocommit=0;</code></p>
+<p>关闭自动提交后可以<code>roll back;</code>回滚;手动提交<code>commit;</code></p>
+<p>手动开启一段事务在开始前加<code>begin;</code>或<code>start transaction;</code></p>
+<p>完成修改后再手动<code>commit</code>也表示当前事务结束</p>
+<h5 id="事务的四大特征ACID"><a href="#事务的四大特征ACID" class="headerlink" title="事务的四大特征ACID"></a>事务的四大特征ACID</h5><p>A 原子性：事务是最小的单位，不可再分割；</p>
+<p>C 一致性：事务要求，同一事物中的sql语句必须保证同时成功或同时失败；</p>
+<p>I 隔离性：事务1和事务2之间是有隔离性的；</p>
+<p>D 持久性：事务一旦结束(commit,roll back)就不可以返回；</p>
+<p>查看隔离性<code>select @@global.tx_isolation</code>和<code>select @@tx_isolation</code></p>
+<p>修改隔离级别<code>set (gloabal)transaction isolation level read uncommited</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">read uncommited					可读未提交的</span><br><span class="line">read committed					可读已提交的</span><br><span class="line">repeatable						可重复读</span><br><span class="line">serializable					串行化</span><br></pre></td></tr></table></figure>
+
+<p>其他概念</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">脏读：一个事务读到了另一个事务没有提交的数据(read uncommited状态下)实际开发下是不允许存在的</span><br><span class="line">不可重复读：读取同一个表的数据前后不一致</span><br><span class="line">幻读：两个不同的终端分别访问数据库并开启事务一个终端插入数据另一端不可见但也不可插入相同数据</span><br><span class="line">串行化：一个终端开启事务操作数据时另一个终端进行操作会进入等待状态（卡死），一旦终端commit后另一终端再解除等待</span><br><span class="line">串行化问题是性能最差，即隔离级别越高性能越差</span><br><span class="line">mysql默认隔离级别是repeatable-read</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Unbuntu终端操作</title>
+    <url>/2020/10/25/Ubuntu%E7%BB%88%E7%AB%AF/</url>
+    <content><![CDATA[<p>通用指令格式<code>comman [-option] [parameter]</code></p>
+<h2 id="通用指令"><a href="#通用指令" class="headerlink" title="通用指令"></a>通用指令</h2><ul>
+<li><p><code>ls</code>显示目录内容(类似dir)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-a						显示所有内容(包括隐藏文件)</span><br><span class="line">-l						列表显示</span><br><span class="line">-h						配合-l人性化显示(显示单位？)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>touch</code>创建文件(更新修改日期)</p>
+</li>
+<li><p><code>mkdir</code>创建文件夹</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-p						创建多级目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>rm</code>删除文件/目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-f						强制删除(忽略不存在的文件)</span><br><span class="line">-r						多级删除内容(删除文件夹必需)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>tree</code>树状显示</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-d						只显示目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>cp 源文件 目标文件</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-f						强制复制(直接覆盖)</span><br><span class="line">-i						覆盖文件提示</span><br><span class="line">-r						多级复制(复制文件夹必须)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>mv  源文件 目标文件</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-i						覆盖文件提示</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>cat</code>查看文件内容/创建文件/文件合并/追加文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-b						非空行输出行号</span><br><span class="line">-n						所有行输出行号</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>more</code>分屏显示文件内容</p>
+</li>
+<li><p><code>grep</code>查找文件内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-n						显示匹配及行号</span><br><span class="line">-v						显示不包含匹配的所有行</span><br><span class="line">-i						忽略大小写</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>echo</code>重定向及管道<code>|</code></p>
+<p><code>echo</code>能将导向的内容显示出来，管道<code>|</code>能将前一个指令的结果转为后一个指令的参数，可以递归使用</p>
+</li>
+</ul>
+<h2 id="远程管理指令"><a href="#远程管理指令" class="headerlink" title="远程管理指令"></a>远程管理指令</h2><ul>
+<li><p><code>shutdown</code>关机</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-r						重启</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>ifconfig</code>查看网卡信息ip</p>
+</li>
+<li><p><code>ping ip地址</code>测试与目标地址网络连接</p>
+</li>
+<li><p>ssh基础</p>
+<ul>
+<li><p><code>ssh [-p 端口号(默认22)] user@ip地址</code>远程连接目标服务器</p>
+</li>
+<li><p><code>scp [-P 端口号(默认22)]</code>远程拷贝(两种格式)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">user@ip地址:远端目录 本机目录				将服务器文件拷贝到本地</span><br><span class="line">本机目录 user@ip地址:远端目录				将本地文件拷贝到服务器</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>免密登录设置方法：1.执行<code>ssh-keygen</code>生成ssh密钥；2.将pub文件复制到服务器:user/.ssh并重命名为authorized_keys；</p>
+</li>
+<li><p>配置远程计算机别名：本机user/.ssh文件夹中创建config文件并添加以下内容(Host之后的为别名)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host mylinux</span><br><span class="line">	HostName 192.168.123.133</span><br><span class="line">	User lan5th</span><br><span class="line">	Port 22</span><br></pre></td></tr></table></figure>
+
+<p>之后登录远端服务器只需要<code>ssh mylinux</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="高级指令"><a href="#高级指令" class="headerlink" title="高级指令"></a>高级指令</h2><h5 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">r(read)						可读</span><br><span class="line">w(write)					可写</span><br><span class="line">x(excute)					可执行</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>chmod</code>修改用户/组对文件权限，格式<code>chmod +/-rwx 文件/目录名</code></p>
+</li>
+<li><p><code>sudo</code>使用另一用户身份(默认root)</p>
+</li>
+<li><p>组管理</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">groupadd 组名					添加组</span><br><span class="line">groupdel 组名					删除组</span><br><span class="line">cat &#x2F;etc&#x2F;group				  确认组信息</span><br><span class="line">chgrp -R 组名 文件&#x2F;目录名		 修改文件&#x2F;目录所属组</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用户管理</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>useradd -m -g 组名 用户名</td>
+<td>添加新用户</td>
+<td>-m自动建立用户家目录；-g指定用户所在组，否则创建一个同名组</td>
+</tr>
+<tr>
+<td>passwd 用户名</td>
+<td>设置用户密码</td>
+<td>普通用户直接passwd修改自己账户密码</td>
+</tr>
+<tr>
+<td>userdel -r 用户名</td>
+<td>删除用户</td>
+<td>-r自动删除用户家目录</td>
+</tr>
+<tr>
+<td>cat etc/passwd|grep 用户名</td>
+<td>确认用户信息</td>
+<td>新建用户后，用户信息保存在/etv/passwd文件中</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>查看用户信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">id [username]			查看UID和GID</span><br><span class="line">who						查看所有用户列表</span><br><span class="line">whoami					查看当前登录用户账户名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>组权限</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">usermod -g 组 用户名		修改用户主组</span><br><span class="line">usermod -G 组 用户名		修改用户附加组(附加权限)</span><br><span class="line">usermod -s &#x2F;bin&#x2F;bash		修改用户登录shell(bash&#x2F;dash)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>which 指令</code>查看指令所在目录</p>
+</li>
+<li><p><code>su [-] username</code>切换用户(不跟任何参数则默认root)</p>
+</li>
+<li><p><code>exit</code>退出shell</p>
+</li>
+<li><p><code>chown username 文件/目录名</code>修改所有者</p>
+<p><code>chmod -R 755 文件/目录名</code>修改权限(常用)</p>
+<p><code>chmod +/-rwx 文件/目录名</code>(简单用法)</p>
+<p><img src="https://i.loli.net/2020/10/27/SVbqePGLv7BnOYi.png" alt="img"></p>
+</li>
+</ul>
+<h2 id="系统信息相关"><a href="#系统信息相关" class="headerlink" title="系统信息相关"></a>系统信息相关</h2><ul>
+<li><pre><code>date                    查询系统时间
+cal [-y]                查询日历(显示一年)
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">+ &#96;&#96;&#96;</span><br><span class="line">  df -h					disk free查看磁盘剩余空间(-h人性化显示)</span><br><span class="line">  du -h [目录名]			   disk usage显示目录下文件大小</span><br></pre></td></tr></table></figure></code></pre>
+</li>
+<li><p>进程相关</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ps aux					process status产看进程</span><br><span class="line">top						动态显示运行中的进程并排序(q退出)</span><br><span class="line">kill [-9] 进程号		   终止进程[-9]表示强行终止</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a					显示所有进程，包括其他用户</span><br><span class="line">u					显示进程详细状态</span><br><span class="line">x					显示没有控制终端的进程</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>find [路径] -name &quot;*.py&quot;</code>查找指定路径下扩展名为py的文件</p>
+</li>
+<li><p><code>ln -s 被链接的源文件 链接文件</code>建立软链接，类似快捷方式(绝对路径)</p>
+<p>去掉<code>-s</code>创建硬链接</p>
+</li>
+<li><p>打包压缩</p>
+<p>linux常用格式tar.gz</p>
+<ul>
+<li><p>tar打包</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -cvf 文件.tar 被压缩文件		打包文件</span><br><span class="line">tar -xvf 文件.tar	-C [解压路径]	 解包文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>gzip压缩</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zcvf 文件.tar 被压缩文件		添加-z进行压缩</span><br><span class="line">tar -zxvf 文件.tar -C [解压路径]	 上</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bzip2压缩:将<code>-z</code>换为<code>-j</code></p>
+</li>
+</ul>
+</li>
+<li><p>apt安装软件(软件包管理工具)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install 软件名		安装</span><br><span class="line">sudo apt remove 软件名			卸载</span><br><span class="line">sudo apt upgrade			 更新已安装的包</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>系统操作</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>数据分析</title>
+    <url>/2020/11/15/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<p>过程：提出问题-&gt;准备数据-&gt;分析数据-&gt;获得结论-&gt;(成果可视化)</p>
+<p>注：变量前带#表示可选项</p>
+<h2 id="1-matplotlib"><a href="#1-matplotlib" class="headerlink" title="1.matplotlib"></a>1.matplotlib</h2><h3 id="1-1数据可视化"><a href="#1-1数据可视化" class="headerlink" title="1.1数据可视化"></a>1.1数据可视化</h3><h4 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from matplotlib import pyplot as plt		  导入pyplot</span><br><span class="line">plt.plot(x,y)								绘制折线图</span><br><span class="line">plt.show()									展示图形</span><br><span class="line">.plot()其他属性：label,color,linestyle,linewidth,alpha</span><br></pre></td></tr></table></figure>
+
+<p>多次调用<code>.plot()</code>函数可以在一个图形上绘制多个图形</p>
+<h6 id="设置展示细节"><a href="#设置展示细节" class="headerlink" title="设置展示细节"></a>设置展示细节</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">plt.figure(figsize&#x3D;(20,8),dpi&#x3D;80)			  figsize传入宽高,dpi传入清晰度</span><br><span class="line">plt.savefig(&quot;&quot;)								传入地址保存图片</span><br><span class="line">plt.xticks(x)								将x全部标注在x轴上(y轴同理)</span><br><span class="line">plt.xticks(x，x_list)						以x_list一一对应替换x</span><br><span class="line">plt.xticks(x，x_list,rotation&#x3D;90)			 rotation旋转角度</span><br><span class="line">plt.xlabel(&quot;content&quot;)						x轴标注(y轴同理)</span><br><span class="line">plt.title(&quot;title&quot;)							表格标题							</span><br><span class="line">plt.grid(#alpha&#x3D;0.4)						绘制网格 alpha表示透明度</span><br><span class="line">plt.legend()								添加图例(需要在.plot(label&#x3D;&quot;lab1&quot;)设置标签)</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他图形"><a href="#其他图形" class="headerlink" title="其他图形"></a>其他图形</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">plt.scatter(x,y)							绘制散点图</span><br><span class="line">plt.bar(x,y)								绘制条形图</span><br><span class="line">plt.barh(x,y)								绘制横状条形图</span><br><span class="line">plt.hist(a, num_bins)						绘制直方图 num_bins:分成的组数</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2其他绘图工具"><a href="#1-2其他绘图工具" class="headerlink" title="1.2其他绘图工具"></a>1.2其他绘图工具</h3><p>ploty，百度echarts等</p>
+<h2 id="2-numpy"><a href="#2-numpy" class="headerlink" title="2.numpy"></a>2.numpy</h2><h3 id="2-1创建数组"><a href="#2-1创建数组" class="headerlink" title="2.1创建数组"></a>2.1创建数组</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import numpy as np							导入numpy</span><br><span class="line">np.array(X，#dtype&#x3D;)							X为列表，将其转换为数组，dtype指定类型</span><br><span class="line">np.arrage(a,b)								生成从a到b的整数数组</span><br><span class="line">np.reshape(X）								传入一个元组，重新定义矩阵形状，返回新矩阵</span><br><span class="line">np.flatten()								将矩阵转为一维数组</span><br><span class="line">np.transpose() 或 np.T()						矩阵转置</span><br><span class="line">np.swapaxes(,)								转换轴(可用于转置)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2读取数据"><a href="#2-2读取数据" class="headerlink" title="2.2读取数据"></a>2.2读取数据</h3><p>csv：逗号分割型数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">np.loadtxt(frame, dtype&#x3D;np.float, delimiter&#x3D;None, skiprows&#x3D;0, usecols&#x3D;None, unpack&#x3D;False)</span><br><span class="line">读取文本文件 frame:文件路径 delimiter:分割方法 unpack:转置</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3其他操作"><a href="#2-3其他操作" class="headerlink" title="2.3其他操作"></a>2.3其他操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">np.where(条件,操作1,操作2)					numpy的三元运算符</span><br><span class="line">np.clip(10,8)								裁剪(小于10替换为10，大于18替换为18)</span><br><span class="line">np.vstack((t1,t2))							竖直拼接矩阵</span><br><span class="line">np.hstack((t1,t2))							水平拼接矩阵</span><br><span class="line">t[[1,2],:]									交换1，2行</span><br><span class="line">t[:,[1,2]]									交换1，2列</span><br><span class="line">np.ones((3,4))								生成一个全1的3*4矩阵</span><br><span class="line">np.zeros((3,4))								生成一个全0的3*4矩阵</span><br><span class="line">np.eye(10)									生成一个宽高为10的对角矩阵</span><br><span class="line">np.argmax(t,axis&#x3D;0)							取0号坐标轴(x轴)每项最大值</span><br><span class="line">np.argmax(t,axis&#x3D;1)							取1号坐标轴(y轴)每项最小值</span><br></pre></td></tr></table></figure>
+
+<p>随机数</p>
+<p><img src="https://i.loli.net/2020/11/17/1DFgnzsaPCo6VRU.png" alt="img"></p>
+<h3 id="2-4常用统计函数"><a href="#2-4常用统计函数" class="headerlink" title="2.4常用统计函数"></a>2.4常用统计函数</h3><p><img src="https://i.loli.net/2020/11/17/YjdXTt53G7akcuR.png" alt="img"></p>
+<h3 id="2-5注意点"><a href="#2-5注意点" class="headerlink" title="2.5注意点"></a>2.5注意点</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a&#x3D;b										浅拷贝</span><br><span class="line">a&#x3D;b[:]									切片方法(同浅拷贝)</span><br><span class="line">a&#x3D;b.copy()								深拷贝</span><br></pre></td></tr></table></figure>
+
+<p>特殊数据类型</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">np.nan									not a number(非数字，或计算错误)</span><br><span class="line">np.inf									infinity(无穷，有正负)</span><br><span class="line">np.isnan(t1)							返回是否nan的布尔矩阵</span><br><span class="line">注：np.nan!&#x3D;np.nan</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-pandas"><a href="#3-pandas" class="headerlink" title="3.pandas"></a>3.pandas</h2><h3 id="3-1Series"><a href="#3-1Series" class="headerlink" title="3.1Series"></a>3.1Series</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import pandas as pd								导入pandas</span><br><span class="line">pd.Series([],#index&#x3D;)							创建带标签数组(字典？),index指定索引</span><br><span class="line">pd.Series(&#123;&#125;)									直接传入字典创建</span><br><span class="line">series.index&#x2F;series.value						调用索引&#x2F;值</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2读取外部数据"><a href="#3-2读取外部数据" class="headerlink" title="3.2读取外部数据"></a>3.2读取外部数据</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pd.read_csv(&quot;&quot;)									读取文件</span><br><span class="line">pd.read_sql(sql_sentence.connection)			  读取数据库</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3DatFrame"><a href="#3-3DatFrame" class="headerlink" title="3.3DatFrame"></a>3.3DatFrame</h3><p>矩阵型series,有行索引和类索引</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pd.DataFrame([],#index&#x3D;,#columxs&#x3D;)					创建DataFrame,index行索引，colums列索引</span><br><span class="line">pd.DataFrame(&#123;&#125;,&#123;&#125;,&#123;&#125;)								传入字典行索引自动从0排序</span><br><span class="line">df.dead(2)											显示前2行</span><br><span class="line">df.tail(3)											显示后3行</span><br><span class="line">df.info()											显示信息</span><br><span class="line">df.describe()										统计信息</span><br><span class="line">df.sort_values(by&#x3D;&quot;&quot;,ascending&#x3D;True)				  排序 by按某标签排序，scending正序排序</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>机器学习入门</title>
+    <url>/2020/11/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>注：未特殊声明时*表示必填</p>
+<p>数据集：特征值+目标值</p>
+<h3 id="1-1按目标值分类"><a href="#1-1按目标值分类" class="headerlink" title="1.1按目标值分类"></a>1.1按目标值分类</h3><p>监督学习：有目标值类型</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">类别						  分类问题</span><br><span class="line">连续型数据					回归问题</span><br></pre></td></tr></table></figure>
+
+<p>​    分类：k-近邻算法、贝叶斯分类、决策树与随机森林、逻辑回归</p>
+<p>​    回归：线性回归、岭回归</p>
+<p>无监督学习：没有目标值</p>
+<p>​    聚类：k-means</p>
+<h3 id="1-2机器学习开发流程"><a href="#1-2机器学习开发流程" class="headerlink" title="1.2机器学习开发流程"></a>1.2机器学习开发流程</h3><p>获取数据-&gt;数据处理-&gt;特征工程-&gt;机器学习算法训练 模型-&gt;模型评估-&gt;应用</p>
+<h3 id="1-3数据集"><a href="#1-3数据集" class="headerlink" title="1.3数据集"></a>1.3数据集</h3><p>内部数据、数据接口</p>
+<p>目前可用：1.sklearn 2.kaggle 3.UCI</p>
+<h3 id="1-4Sklearn"><a href="#1-4Sklearn" class="headerlink" title="1.4Sklearn"></a>1.4Sklearn</h3><h4 id="1-4-1数据集api"><a href="#1-4-1数据集api" class="headerlink" title="1.4.1数据集api"></a>1.4.1数据集api</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.datasets.datasets.load_*()						小规模数据集</span><br><span class="line">sklearn.datasets.datasets.fetch_*(data_home&#x3D;None)		 大规模数据集，需要下载</span><br></pre></td></tr></table></figure>
+
+<p>数据集返回值<code>datasets.base.Bunch</code>字典类型</p>
+<p>通过<code>dict[&quot;key&quot;]</code>或<code>bunch.key</code>来获得数据</p>
+<h4 id="1-4-2数据集划分"><a href="#1-4-2数据集划分" class="headerlink" title="1.4.2数据集划分"></a>1.4.2数据集划分</h4><p>训练数据：用于训练，构建模型</p>
+<p>测试数据：模型检验时使用，用于评估模型(20%~30%)</p>
+<h4 id="1-4-3数据划分api"><a href="#1-4-3数据划分api" class="headerlink" title="1.4.3数据划分api"></a>1.4.3数据划分api</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.model_selection.train_test_split(data,[target],*options)</span><br></pre></td></tr></table></figure>
+
+<p>参数：<code>test_size</code>测试集大小，float型，<code>random_state</code>随机数种子</p>
+<p>返回四个值：训练集特征值，测试集特征值，训练集目标值，测试集目标值</p>
+<h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h2><p>——决定机器学习上限</p>
+<h3 id="2-1特征抽取-提取"><a href="#2-1特征抽取-提取" class="headerlink" title="2.1特征抽取/提取"></a>2.1特征抽取/提取</h3><p>文本、类型-&gt;数值</p>
+<h4 id="2-1-1特征提取api"><a href="#2-1-1特征提取api" class="headerlink" title="2.1.1特征提取api"></a>2.1.1特征提取api</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-2字典特征提取"><a href="#2-1-2字典特征提取" class="headerlink" title="2.1.2字典特征提取"></a>2.1.2字典特征提取</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction.DictVectorizer(sparse&#x3D;True,...)		(sparse默认稀疏矩阵)</span><br><span class="line">DictVectorizer.fit_transfer(data)							  返回sparse矩阵</span><br><span class="line">DictVectorizer.inverse_transform(marix)						  返回原先数据</span><br><span class="line">DictVectorizer.get_feature_names()							  返回类别名称</span><br></pre></td></tr></table></figure>
+
+<p>one-hot编码：一个类占矩阵的一列</p>
+<h4 id="2-1-3文本特征提取"><a href="#2-1-3文本特征提取" class="headerlink" title="2.1.3文本特征提取"></a>2.1.3文本特征提取</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction.text.CountVectorizer(stop_words&#x3D;[])	可设置停用词，即不统计文本</span><br><span class="line">DictVectorizer.fit_transfer(data)                             	返回sparse矩阵DictVectorizer.inverse_transform(marix)                       	返回原先数据格DictVectorizer.get_feature_names()                            	返回单词列表</span><br><span class="line">sklearn.feature_extraction.text.TfidfVectorizer					找出重要词</span><br></pre></td></tr></table></figure>
+
+<p>#中文需要手动分割词句或使用jieba库</p>
+<h5 id="jieba使用"><a href="#jieba使用" class="headerlink" title="jieba使用"></a>jieba使用</h5><p><code>jieba.cut(&quot;&quot;)</code>分割单个字符串，对多个字符串的列表进行分割时使用<code>for in</code>进行遍历</p>
+<h4 id="2-1-4TF-IDF"><a href="#2-1-4TF-IDF" class="headerlink" title="2.1.4TF-IDF"></a>2.1.4TF-IDF</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction.text.TfidfVectorizer(stop_words&#x3D;None,...)</span><br><span class="line">TfidfVectorizer.fit_transform(X)								X为文本或字符串，返回sparse矩阵</span><br></pre></td></tr></table></figure>
+
+<p>TF：词频：一个词出现次数/总词数</p>
+<p>IDF：逆向文档频率：lg(文章数/包含该词文章数)</p>
+<p>TF-IDF：重要程度：TF*IDF</p>
+<h3 id="2-2特征预处理"><a href="#2-2特征预处理" class="headerlink" title="2.2特征预处理"></a>2.2特征预处理</h3><h4 id="2-2-1特征预处理api"><a href="#2-2-1特征预处理api" class="headerlink" title="2.2.1特征预处理api"></a>2.2.1特征预处理api</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.preprocessing</span><br></pre></td></tr></table></figure>
+
+<p>特征单位或大小相差的程度不同，某特征方差比其他特征大出几个数量级，容易影响目标结果，使一些算法无法学习到其他特征</p>
+<h4 id="2-2-2归一化"><a href="#2-2-2归一化" class="headerlink" title="2.2.2归一化"></a>2.2.2归一化</h4><p>对原始数据进行变换把数据映射到(默认[0,1])之间，适合精确小数据场景(受异常值影响较大，稳定性较差)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">X&#39;&#x3D;(x-min)&#x2F;(max-min)							maa,min为数据中的最大最小值</span><br><span class="line">X&#39;&#39;&#x3D;X&#39;*(mx-mi)+mi								mx,mi为指定区间范围的最大值最小值</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.preprocessing.MinMaxScaler(feature_range&#x3D;(0,1)...)</span><br><span class="line">MinMaxScaler.fit_transform(X)				X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-3标准化"><a href="#2-2-3标准化" class="headerlink" title="2.2.3标准化"></a>2.2.3标准化</h4><p>对原始数据进行变换把数据变换到均值为0，标准差为1的范围内,适合嘈杂的大数据场景</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">X&#39;&#x3D;(x-mean)&#x2F;std									mean平均值，std标准差</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.preprocessing.StanderdScaler()</span><br><span class="line">StanderdScaler.fit_transform(X)				X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3降维"><a href="#2-3降维" class="headerlink" title="2.3降维"></a>2.3降维</h3><p>ndarray：维数：嵌套的层数</p>
+<p>降低特征个数，效果：特征之间不相关</p>
+<h4 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h4><h5 id="2-3-1Filter过滤式"><a href="#2-3-1Filter过滤式" class="headerlink" title="2.3.1Filter过滤式"></a>2.3.1Filter过滤式</h5><h6 id="方差选择法"><a href="#方差选择法" class="headerlink" title="方差选择法"></a>方差选择法</h6><p>低方差值特征过滤API</p>
+<p>删除小于设定方差的特征值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_selection.VarianceThreshold(threshold &#x3D; 0.0)</span><br><span class="line">VarianceThreshold.fit_transform(X)			X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+
+<h6 id="相关系数"><a href="#相关系数" class="headerlink" title="相关系数"></a>相关系数</h6><p>特征之间相关程度</p>
+<p>皮尔逊相关系数api</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from scipy.stats import pearsonr</span><br><span class="line">pearsonr(data[&quot;var1&quot;], data[&quot;var2&quot;])		计算相关系数,返回(r,p) r:相关系数;p:p越小表示相关系数月显著</span><br></pre></td></tr></table></figure>
+
+<p>相关性很高时：选取一个/加权求和</p>
+<h5 id="2-3-2主成分分析"><a href="#2-3-2主成分分析" class="headerlink" title="2.3.2主成分分析"></a>2.3.2主成分分析</h5><p>高维转低维特征，可能舍弃原有数据，创造新的变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.decomposition.PCA(n_components&#x3D;None)	n-components:小数:表示保留%的信息;整数:减少到几个特征值</span><br><span class="line">PCA.fit_transform(X)					X为numpy array数据[n_samples, n_features],返回同指定维度array</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h6><h6 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h6><h6 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h6>]]></content>
+      <categories>
+        <category>机器学习</category>
       </categories>
   </entry>
 </search>
