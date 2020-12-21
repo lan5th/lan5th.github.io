@@ -20,26 +20,40 @@
     var CONFIG = {"hostname":"lan5th.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1import tensorflow as tf								导入tensorflow  Tensor数据123listnp.array										科学计算库tf.Tensor										支持连续求导  tensor：rank&gt;2,包括向量和矩阵 创建tensor注：传入[]表示标量 123456789tf.convert_to_tensor(np。ones([2,3]))">
+  <meta name="description" content="1import tensorflow as tf								导入tensorflow  Tensor数据123listnp.array科学计算库tf.Tensor支持连续求导   创建tensortf.constant([1,5], dtype&#x3D;tf.int64)创建一个tensor tf.convert_to_tensor(np, dtype&#x3D;tf.int64)可以将numpy数据转换为te">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensorflow2.0">
 <meta property="og:url" content="http://lan5th.github.io/2020/11/19/Tensorflow/index.html">
 <meta property="og:site_name" content="Lzone">
-<meta property="og:description" content="1import tensorflow as tf								导入tensorflow  Tensor数据123listnp.array										科学计算库tf.Tensor										支持连续求导  tensor：rank&gt;2,包括向量和矩阵 创建tensor注：传入[]表示标量 123456789tf.convert_to_tensor(np。ones([2,3]))">
+<meta property="og:description" content="1import tensorflow as tf								导入tensorflow  Tensor数据123listnp.array科学计算库tf.Tensor支持连续求导   创建tensortf.constant([1,5], dtype&#x3D;tf.int64)创建一个tensor tf.convert_to_tensor(np, dtype&#x3D;tf.int64)可以将numpy数据转换为te">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2020/11/19/uzK6oORArPFn14s.png">
+<meta property="og:image" content="c:/Users/57624/AppData/Roaming/Typora/typora-user-images/image-20201221104752364.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/Nxp5XbZOtnaql9W.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/DIXJaLF2lEcWH1R.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/YAXDR6zK9JVFswZ.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/RCuek7PGmlYi9dt.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/hIBvDdnt72wNL3W.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/DdpIyYWfaXA5xh1.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/LyxnkhZBW5zN7JD.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/19/6snpNe8GCmvj7I9.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/ScVf1xabOjqnoXF.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/19/AbBgPzp32NdOSkW.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/qxAvKV3mgzO8tbH.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/19/ZrLTUHJi6PFQtB7.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/pf2iakB6LUATunb.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/20/VgTpCzkEPYJKGIn.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/24/aTQpnXdNKO71bcU.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/24/qU9okJVuxW8MOjD.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/24/vFfPJqhYrRgXC2m.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/hixnQZJ365IbyFK.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/whT9eGHlLZqRkEC.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/O8Re3jfX2nC7kQq.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/3esCl2RQxMFTpNq.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/ybqoa5lWQA9vghF.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/HBxnvPEhOjg4aRF.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/21/tjugIfeDqPkO7sV.png">
 <meta property="article:published_time" content="2020-11-18T16:19:14.401Z">
-<meta property="article:modified_time" content="2020-12-10T09:12:43.044Z">
+<meta property="article:modified_time" content="2020-12-21T09:03:53.730Z">
 <meta property="article:author" content="lan5th">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/11/19/uzK6oORArPFn14s.png">
+<meta name="twitter:image" content="c:/Users/57624/AppData/Roaming/Typora/typora-user-images/image-20201221104752364.png">
 
 <link rel="canonical" href="http://lan5th.github.io/2020/11/19/Tensorflow/">
 
@@ -231,7 +245,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-10 17:12:43" itemprop="dateModified" datetime="2020-12-10T17:12:43+08:00">2020-12-10</time>
+                <time title="修改时间：2020-12-21 17:03:53" itemprop="dateModified" datetime="2020-12-21T17:03:53+08:00">2020-12-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,14 +263,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -270,37 +284,64 @@
       
         <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf								导入tensorflow</span><br></pre></td></tr></table></figure>
 
-<h2 id="Tensor数据"><a href="#Tensor数据" class="headerlink" title="Tensor数据"></a>Tensor数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list</span><br><span class="line">np.array										科学计算库</span><br><span class="line">tf.Tensor										支持连续求导</span><br></pre></td></tr></table></figure>
+<h2 id="Tensor数据"><a href="#Tensor数据" class="headerlink" title="Tensor数据"></a>Tensor数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list</span><br><span class="line">np.array科学计算库</span><br><span class="line">tf.Tensor支持连续求导</span><br></pre></td></tr></table></figure>
 
-<p>tensor：rank&gt;2,包括向量和矩阵</p>
-<h3 id="创建tensor"><a href="#创建tensor" class="headerlink" title="创建tensor"></a>创建tensor</h3><p>注：传入[]表示标量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(np。ones([2,3]))				传入np.series类型</span><br><span class="line">tf.zeros([])										传入shape</span><br><span class="line">tf.zeros_like(a)									传入tensor</span><br><span class="line">tf.ones()&#x2F;ones_like()								同上</span><br><span class="line">tf.fill([],num)										传入shape,将内容全部填充为num</span><br><span class="line">tf.random.normal([],mean,stddev)					创建正态分布，mean均值，stddev方差</span><br><span class="line">tf.random.truncated_normal([],mean,stddev)			截断分布(防止梯度消失)</span><br><span class="line">tf.random.uniform([],minval,maxval)					均匀分布</span><br><span class="line">tf.constant()										创建常量</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\57624\AppData\Roaming\Typora\typora-user-images\image-20201221104752364.png" alt="image-20201221104752364"></p>
+<h3 id="创建tensor"><a href="#创建tensor" class="headerlink" title="创建tensor"></a>创建tensor</h3><p><code>tf.constant([1,5], dtype=tf.int64)</code>创建一个tensor</p>
+<p><code>tf.convert_to_tensor(np, dtype=tf.int64)</code>可以将numpy数据转换为tensor</p>
+<p><img src="https://i.loli.net/2020/12/21/Nxp5XbZOtnaql9W.png" alt="image-20201221110137328"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tf.constant([1,5], dtype&#x3D;tf.int64)创建一个张量</span><br><span class="line">tf.convert_to_tensor(np, dtype&#x3D;tf.int64)将numpy数据转换为tensor</span><br><span class="line">tf.zeros(维度)创建全为0的tensor</span><br><span class="line">tf.ones(维度)创建全为0的tensor</span><br><span class="line">tf.fill(维度, 指定值)创建全为指定值的tensor</span><br><span class="line">tf.random.normal(维度, mean&#x3D;, stddev&#x3D;)创建指定维度的正态分布随机数</span><br><span class="line">tf.random.truncated_normal(维度, mean&#x3D;, stddev&#x3D;)创建指定维度的正态分布随机数,其中所有数值都在(μ-2σ,μ+2σ)范围内</span><br><span class="line">tf.uniform(维度,minval&#x3D;,maxval)生成指定维度均匀分布的随机数</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.random.shuffle([])								随机打散</span><br></pre></td></tr></table></figure>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tf.cast(tf, dtype&#x3D;)强制转换tensor中的数据类型</span><br><span class="line">tf.reduce_min(tf)计算最小值</span><br><span class="line">tf.reduce_max(tf)计算最大值</span><br><span class="line">tf.reduce_mean(tf, axis&#x3D;)计算指定经度的平均值(不指定axis则对所有数据进行操作)</span><br><span class="line">tf.reduce_sum(tf, axis&#x3D;)计算指定经度的和(不指定axis则对所有数据进行操作)</span><br><span class="line">tf.Variable(tf)将变量标记为可训练，变量在反向传播中记录梯度信息</span><br><span class="line">其他数学运算如下图</span><br></pre></td></tr></table></figure>
 
-<h3 id="多维Tensor"><a href="#多维Tensor" class="headerlink" title="多维Tensor"></a>多维Tensor</h3><p>二维矩阵：[w,h]：用于描述数据</p>
-<p>三维tensor：[b,w,h]：w、h用于描述单个数据，b表示数据数</p>
-<p>四维tensor：[b,w,h,c]：w、h、c用于描述单个数据，b表示数据数（bach,width(row),height(column),channel）</p>
-<p>五维tensir：[task_b,b,h,w,c]：task_b表示任务数，每个任务有b个数据，w、h、c用于描述单个数据</p>
-<h3 id="Tensor切片"><a href="#Tensor切片" class="headerlink" title="Tensor切片"></a>Tensor切片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tf.gather(ts, axis, indices&#x3D;[2,1,3,0])			</span><br><span class="line">ts为传入tensor，axis指单个维度，indices表示按2130顺序,可以自定顺序</span><br><span class="line">tf.gather_nd(ts, [0,1])&#x2F;tf.gather_nd(ts, [[0,1,2], [0,2,2]])</span><br><span class="line">ts为传入tensor，单括号表示索引所指维度的所有数据，双括号指定单一数据</span><br><span class="line">tf.boolean_mask(ts, mask&#x3D;&#x3D;[True,True,False,False], axis&#x3D;2)</span><br><span class="line">ts为传入tensor,maks表示涂层，axis维度</span><br><span class="line">tf.boolean_mask(ts, mask&#x3D;&#x3D;[[True,False],[False,True]])</span><br><span class="line">ts为传入tensor,maks表示涂层多层mask表示前两个维度以2*2数组排列</span><br></pre></td></tr></table></figure>
+<p>维度相同的tensor才能进行数学运算</p>
+<p><img src="https://i.loli.net/2020/12/21/DIXJaLF2lEcWH1R.png" alt="image-20201221111649506"></p>
+<h6 id="axis"><a href="#axis" class="headerlink" title="axis"></a>axis</h6><p><img src="https://i.loli.net/2020/12/21/YAXDR6zK9JVFswZ.png" alt="image-20201221111145138"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tf.data.Dataset.from_tensor_slices((features, labels))将数据与标签配对</span><br><span class="line">tf.GradientTape()实现loss对参数w的求导计算，如图(需要variable类型)</span><br><span class="line">enumerate(列表&#x2F;元组&#x2F;字符串)枚举每一个元素并组合为索引元素(为python自带函数)</span><br><span class="line">tf.one_hot(tf, depth&#x3D;几分类)</span><br><span class="line">tf.nn.softmax(tf)将数据转换为总和为一且每一项大于0的数据，常用于逻辑回归</span><br><span class="line">tf.assign_sub(w自减内容)，赋值操作，更新参数并返回(需要variable类型)</span><br><span class="line">tf.argmax(tf,axis&#x3D;)返回指定轴最大值索引</span><br><span class="line">tf.where(条件语句, a, b)若为真返回a对应位置元素，若为假返回b对应位置元素</span><br><span class="line">np.random.RandomState.rand(维度)</span><br></pre></td></tr></table></figure>
 
-<h3 id="维度变换"><a href="#维度变换" class="headerlink" title="维度变换"></a>维度变换</h3><h2 id="tf-keras"><a href="#tf-keras" class="headerlink" title="tf.keras"></a>tf.keras</h2><h3 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h3><p>随机初始化：寻找梯度下降最快的方向寻找参数最小值</p>
-<h3 id="多层感知器-神经网络"><a href="#多层感知器-神经网络" class="headerlink" title="多层感知器(神经网络)"></a>多层感知器(神经网络)</h3><p>单层神经元只能拟合线性可分的模型</p>
-<p>多层感知器可以拟合非线性可分的模型<img src="https://i.loli.net/2020/11/19/uzK6oORArPFn14s.png" alt="img"></p>
-<h4 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h4><h5 id="relu函数"><a href="#relu函数" class="headerlink" title="relu函数"></a>relu函数</h5><p><img src="https://i.loli.net/2020/11/19/6snpNe8GCmvj7I9.png" alt="img"></p>
-<h5 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h5><p><img src="https://i.loli.net/2020/11/19/AbBgPzp32NdOSkW.png" alt="img"></p>
-<h5 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h5><p><img src="https://i.loli.net/2020/11/19/ZrLTUHJi6PFQtB7.png" alt="img"></p>
-<h5 id="leak-relu函数"><a href="#leak-relu函数" class="headerlink" title="leak relu函数"></a>leak relu函数</h5><p>负值影响较小</p>
+<p><img src="https://i.loli.net/2020/12/21/RCuek7PGmlYi9dt.png" alt="image-20201221121900348"></p>
+<p>独热码one-hot</p>
+<p><img src="https://i.loli.net/2020/12/21/hIBvDdnt72wNL3W.png" alt="image-20201221123854796"></p>
+<h3 id="获取数据集"><a href="#获取数据集" class="headerlink" title="获取数据集"></a>获取数据集</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.datasets import load_iris</span><br><span class="line">x_data&#x3D;datasets.load_iris().data获取特征值</span><br><span class="line">y_data&#x3D;datasets.load_iris().target获取标签</span><br></pre></td></tr></table></figure>
+
+<h2 id="numpy常用函数"><a href="#numpy常用函数" class="headerlink" title="numpy常用函数"></a>numpy常用函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.random.RandomState.rand(维度)</span><br><span class="line">np.vstack(数组1, 数组2)两个数组垂直方向叠加</span><br></pre></td></tr></table></figure>
+
+<p>随机数种子</p>
+<p><img src="https://i.loli.net/2020/12/21/DdpIyYWfaXA5xh1.png" alt="image-20201221153210793"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">np.mgrid[]		&#125;</span><br><span class="line">np.ravel()		&#125;联合使用可以创建网格坐标点，如下图</span><br><span class="line">np.c_[]			&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/12/21/LyxnkhZBW5zN7JD.png" alt="image-20201221154627787"></p>
+<h2 id="神经网络实现"><a href="#神经网络实现" class="headerlink" title="神经网络实现"></a>神经网络实现</h2><h3 id="指数衰减学习率"><a href="#指数衰减学习率" class="headerlink" title="指数衰减学习率"></a>指数衰减学习率</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">w = tf.Variable(tf.constant(<span class="number">5</span>, dtype=tf.float32))</span><br><span class="line"></span><br><span class="line">epoch = <span class="number">40</span></span><br><span class="line">LR_BASE = <span class="number">0.2</span>  <span class="comment"># 最初学习率</span></span><br><span class="line">LR_DECAY = <span class="number">0.99</span>  <span class="comment"># 学习率衰减率</span></span><br><span class="line">LR_STEP = <span class="number">1</span>  <span class="comment"># 喂入多少轮BATCH_SIZE后，更新一次学习率</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(epoch):  <span class="comment"># for epoch 定义顶层循环，表示对数据集循环epoch次，此例数据集数据仅有1个w,初始化时候constant赋值为5，循环100次迭代。</span></span><br><span class="line">    lr = LR_BASE * LR_DECAY ** (epoch / LR_STEP)</span><br><span class="line">    <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> tape:  <span class="comment"># with结构到grads框起了梯度的计算过程。</span></span><br><span class="line">        loss = tf.square(w + <span class="number">1</span>)</span><br><span class="line">    grads = tape.gradient(loss, w)  <span class="comment"># .gradient函数告知谁对谁求导</span></span><br><span class="line"></span><br><span class="line">    w.assign_sub(lr * grads)  <span class="comment"># .assign_sub 对变量做自减 即：w -= lr*grads 即 w = w - lr*grads</span></span><br><span class="line">    print(<span class="string">&quot;After %s epoch,w is %f,loss is %f,lr is %f&quot;</span> % (epoch, w.numpy(), loss, lr))</span><br></pre></td></tr></table></figure>
+
+<h3 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h3><h4 id="relu函数"><a href="#relu函数" class="headerlink" title="relu函数"></a>relu函数</h4><p>初学者首选</p>
+<p><img src="https://i.loli.net/2020/11/19/6snpNe8GCmvj7I9.png" alt="img"></p>
+<p><img src="https://i.loli.net/2020/12/21/ScVf1xabOjqnoXF.png" alt="image-20201221155858186"></p>
+<p>均值非0导致收敛变慢，同时可能存在dead_relu问题，即激活函数输出为0，反向传播得到梯度为0，参数无法更新，神经元死亡</p>
+<p>改进方法：随机初始化，减小学习率</p>
+<h4 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h4><p><img src="https://i.loli.net/2020/11/19/AbBgPzp32NdOSkW.png" alt="img"></p>
+<p><img src="https://i.loli.net/2020/12/21/qxAvKV3mgzO8tbH.png" alt="image-20201221155530105"></p>
+<p>反向传播需要多个导数项相乘，sigmoid函数导数都在0~0.25之间，导致梯度消失，参数无法继续更新；同时，存在幂运算导致计算量偏大</p>
+<h4 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h4><p><img src="https://i.loli.net/2020/11/19/ZrLTUHJi6PFQtB7.png" alt="img"></p>
+<p><img src="https://i.loli.net/2020/12/21/pf2iakB6LUATunb.png" alt="image-20201221155725328"></p>
+<p>与sigmoid函数相同，具有梯度消失和幂运算问题</p>
+<h4 id="leak-relu函数"><a href="#leak-relu函数" class="headerlink" title="leak relu函数"></a>leak relu函数</h4><p>负值影响较小</p>
 <p><img src="https://i.loli.net/2020/11/20/VgTpCzkEPYJKGIn.png" alt="img"></p>
+<p>效果比relu更好，但一般还是选择relu</p>
 <h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplot-inline</span><br><span class="line"></span><br><span class="line">data=pd.read_csv(<span class="string">&quot;./datasets.csv&quot;</span>)</span><br><span class="line">x = data.iloc[:,<span class="number">1</span>:<span class="number">-1</span>]</span><br><span class="line">y = data.iloc[:, <span class="number">-1</span>]</span><br><span class="line"><span class="comment">#建立多层模型</span></span><br><span class="line">model = tf.keras.Sequential([tf.keras.layers.Dense(<span class="number">10</span>, input_shape=(<span class="number">3</span>,), activation=<span class="string">&#x27;relu&#x27;</span>),</span><br><span class="line">                            tf.keras.layers.Dense(<span class="number">1</span>)]</span><br><span class="line">)</span><br><span class="line"><span class="comment">#查看模型总体数据</span></span><br><span class="line">model.summary()</span><br><span class="line"><span class="comment">#模型配置(优化方法adam,损失函数mse均方差)</span></span><br><span class="line">model.compile(optimizer=<span class="string">&#x27;adam&#x27;</span>, loss=<span class="string">&#x27;mse&#x27;</span>)</span><br><span class="line"><span class="comment">#训练模型(epochs表示次数)</span></span><br><span class="line">model.fit(x,y,epochs=<span class="number">1000</span>)</span><br><span class="line"><span class="comment">#预测数据</span></span><br><span class="line">model.predict(Test)</span><br></pre></td></tr></table></figure>
 
-<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><h3 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear  Regression"></a>Linear  Regression</h3><h4 id="梯度下降算法-1"><a href="#梯度下降算法-1" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h4><p><img src="https://i.loli.net/2020/11/24/aTQpnXdNKO71bcU.png" alt="img"></p>
-<p>loss函数表示误差，减去参数的偏导数乘以改变步长lr以减小loss函数值，求出b、w</p>
-<h3 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h3><h3 id="Classification-Regression"><a href="#Classification-Regression" class="headerlink" title="Classification Regression"></a>Classification Regression</h3><p>输出one-hot结果,数值最大的为当前结果的支撑度并作为结果</p>
-<p><img src="https://i.loli.net/2020/11/24/qU9okJVuxW8MOjD.png" alt="img"></p>
-<p>@为矩阵相乘</p>
-<p>叠加多个激活函数</p>
-<p><img src="https://i.loli.net/2020/11/24/vFfPJqhYrRgXC2m.png"></p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tf.reduce_mean(tf)计算均方差</span><br><span class="line">tf.losses.categorical_crossentropy(y_, y)计算交叉熵</span><br><span class="line">tf.nn.softmax_cross_entropy_with_logits(y_, y)将softmax与交叉熵结合，用于多分类问题</span><br><span class="line">自定义损失函数，如下图</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/12/21/hixnQZJ365IbyFK.png" alt="image-20201221162135559"></p>
+<p><img src="https://i.loli.net/2020/12/21/whT9eGHlLZqRkEC.png" alt="image-20201221162430270"></p>
+<h4 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h4><p><img src="https://i.loli.net/2020/12/21/O8Re3jfX2nC7kQq.png" alt="image-20201221163023605"></p>
+<h3 id="神经网络参数优化器"><a href="#神经网络参数优化器" class="headerlink" title="神经网络参数优化器"></a>神经网络参数优化器</h3><p><img src="https://i.loli.net/2020/12/21/3esCl2RQxMFTpNq.png" alt="image-20201221163833148"></p>
+<h4 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h4><p><img src="https://i.loli.net/2020/12/21/ybqoa5lWQA9vghF.png" alt="image-20201221165530498"></p>
+<h4 id="SGDM"><a href="#SGDM" class="headerlink" title="SGDM"></a>SGDM</h4><p><img src="https://i.loli.net/2020/12/21/HBxnvPEhOjg4aRF.png" alt="image-20201221165649601"></p>
+<p>m_t-1表示上一时刻的动量</p>
+<p>实现代码(部分)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">m_w, m_b = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">beta = <span class="number">0.9</span></span><br><span class="line"></span><br><span class="line">m_w = beta * m_w + (<span class="number">1</span> - beta) * grads[<span class="number">0</span>]</span><br><span class="line">        m_b = beta * m_b + (<span class="number">1</span> - beta) * grads[<span class="number">1</span>]</span><br><span class="line">        w1.assign_sub(lr * m_w)</span><br><span class="line">        b1.assign_sub(lr * m_b)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h4><p><img src="https://i.loli.net/2020/12/21/tjugIfeDqPkO7sV.png" alt="image-20201221170155720"></p>
 
     </div>
 
@@ -381,7 +422,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensor%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">Tensor数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAtensor"><span class="nav-number">1.1.</span> <span class="nav-text">创建tensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4Tensor"><span class="nav-number">1.2.</span> <span class="nav-text">多维Tensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tensor%E5%88%87%E7%89%87"><span class="nav-number">1.3.</span> <span class="nav-text">Tensor切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%B4%E5%BA%A6%E5%8F%98%E6%8D%A2"><span class="nav-number">1.4.</span> <span class="nav-text">维度变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-keras"><span class="nav-number">2.</span> <span class="nav-text">tf.keras</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">梯度下降算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E5%99%A8-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">2.2.</span> <span class="nav-text">多层感知器(神经网络)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#relu%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">relu函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sigmoid%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">sigmoid函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tanh%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">tanh函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#leak-relu%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">leak relu函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">3.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linear-Regression"><span class="nav-number">3.1.</span> <span class="nav-text">Linear  Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">梯度下降算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic-Regression"><span class="nav-number">3.2.</span> <span class="nav-text">Logistic Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Classification-Regression"><span class="nav-number">3.3.</span> <span class="nav-text">Classification Regression</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensor%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">Tensor数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAtensor"><span class="nav-number">1.1.</span> <span class="nav-text">创建tensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#axis"><span class="nav-number">1.2.0.0.1.</span> <span class="nav-text">axis</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.3.</span> <span class="nav-text">获取数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">numpy常用函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">神经网络实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E8%A1%B0%E5%87%8F%E5%AD%A6%E4%B9%A0%E7%8E%87"><span class="nav-number">3.1.</span> <span class="nav-text">指数衰减学习率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#relu%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.1.</span> <span class="nav-text">relu函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sigmoid%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.2.</span> <span class="nav-text">sigmoid函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tanh%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.3.</span> <span class="nav-text">tanh函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#leak-relu%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.4.</span> <span class="nav-text">leak relu函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.2.5.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96"><span class="nav-number">3.3.1.</span> <span class="nav-text">正则化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">神经网络参数优化器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SGD"><span class="nav-number">3.4.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SGDM"><span class="nav-number">3.4.2.</span> <span class="nav-text">SGDM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adagrad"><span class="nav-number">3.4.3.</span> <span class="nav-text">Adagrad</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -397,7 +438,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -459,12 +500,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">38k</span>
+    <span title="站点总字数">44k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">35 分钟</span>
+    <span title="站点阅读时长">40 分钟</span>
 </div>
 
         
