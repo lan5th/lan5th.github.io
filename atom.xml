@@ -6,7 +6,7 @@
   <link href="http://lan5th.github.io/atom.xml" rel="self"/>
   
   <link href="http://lan5th.github.io/"/>
-  <updated>2021-02-12T08:26:50.926Z</updated>
+  <updated>2021-02-12T08:25:24.194Z</updated>
   <id>http://lan5th.github.io/</id>
   
   <author>
@@ -15,29 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Test</title>
-    <link href="http://lan5th.github.io/2021/02/12/Test/"/>
-    <id>http://lan5th.github.io/2021/02/12/Test/</id>
-    <published>2021-02-12T08:25:38.559Z</published>
-    <updated>2021-02-12T08:26:50.926Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="Test.assets/image-20210212162643597.png" alt="image-20210212162643597"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;Test.assets/image-20210212162643597.png&quot; alt=&quot;image-20210212162643597&quot;&gt;&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    <category term="后端学习" scheme="http://lan5th.github.io/categories/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
   
   <entry>
     <title>JavaWeb</title>

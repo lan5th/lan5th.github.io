@@ -2563,15 +2563,6 @@ cal [-y]                查询日历(显示一年)
       </categories>
   </entry>
   <entry>
-    <title>Test</title>
-    <url>/2021/02/12/Test/</url>
-    <content><![CDATA[<p><img src="Test.assets/image-20210212162643597.png" alt="image-20210212162643597"></p>
-]]></content>
-      <categories>
-        <category>后端学习</category>
-      </categories>
-  </entry>
-  <entry>
     <title>机器学习原理</title>
     <url>/2021/01/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<h1 id="机器学习原理"><a href="#机器学习原理" class="headerlink" title="机器学习原理"></a>机器学习原理</h1><h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><p>由带标签的数据集∑(x_i,y)进行模型训练</p>
