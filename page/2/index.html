@@ -220,7 +220,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-09 18:26:41" itemprop="dateModified" datetime="2020-10-09T18:26:41+08:00">2020-10-09</time>
+                <time title="修改时间：2021-02-14 20:09:23" itemprop="dateModified" datetime="2021-02-14T20:09:23+08:00">2021-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,48 +258,14 @@
 
       
           <p>官方文档<a target="_blank" rel="noopener" href="https://cn.vuejs.org/">https://cn.vuejs.org/</a></p>
-<h2 id="引入Vue"><a href="#引入Vue" class="headerlink" title="引入Vue"></a>引入Vue</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">开发环境版本</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">生产环境版本</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><p>插值表达式<code>&#123;&#123;&#125;&#125;</code>可直接获取Vue实例中的数据或函数</p>
-<p>同时可以插入任何合法的JS表达式</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  &#123;&#123; message &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message: <span class="string">&#x27;Hello Vue!&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//methods: &#123;&#125;挂载方法可选</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>el为挂载点，挂载选择器，data替换双括号中的内容</p>
-<p>但不能挂载body或html标签</p>
-<p>插值表达式可能会引起插值闪烁（网速慢时先显示表达式后显示数据）可用<code>v-text</code>或<code>v-html</code>指令替代内容来消除该现象</p>
-<h3 id="v-on基础"><a href="#v-on基础" class="headerlink" title="v-on基础"></a>v-on基础</h3><p>用来给元素绑定事件如<code>v-on:click=&quot;方法&quot;</code>或<code>@click=&quot;方法&quot;</code></p>
-<p>方法通过methods声明</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">methods&#123;</span><br><span class="line">	md1:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</span><br><span class="line">	md2:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其他指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v-show					是否显示（操作样式）</span><br><span class="line">v-if					是否显示（操作DOM树）</span><br><span class="line">v-bind					设置属性（v-可用:代替）</span><br><span class="line">v-for					调用数组中的值</span><br><span class="line">v-model					获取和设置表单元素的值</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>改变类名可用多元表达式,是否生效取决于<code>isActive</code>的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img :src&#x3D;&quot;&quot; :class&#x3D;&quot;isActive?&#39;类名&#39;:&#39;&#39;&quot;&gt;</span><br><span class="line">或&#123;active:isActive&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>v-for示例</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;item in arr&quot;</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">	arr:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>调用下标可用</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;&#123;item,index&#125; in arr&quot;</span>&gt;</span>&#123;&#123;index&#125;&#125;&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Axios"><a href="#Axios" class="headerlink" title="Axios"></a>Axios</h2><p>引入网络请求库</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://unpkg.com/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>网络请求方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">axios.get(地址?key1&#x3D;value1&amp;key2&#x3D;value2).them(function(response)&#123;&#125;,function(err)&#123;&#125;)</span><br><span class="line">axios.post(地址,&#123;key1:value1,key2:value2&#125;).then(function(response)&#123;&#125;,function(err)&#123;&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>key由接口文档提供，value为提供的数据</p>
-<h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.stop					阻止事件冒泡</span><br><span class="line">.prevent				阻止事件行为</span><br><span class="line">.capture				事件捕获执行</span><br><span class="line">.self					阻止自身的冒泡</span><br><span class="line">.once					仅执行一次</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/07/Vue/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -349,7 +315,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-07 21:39:41" itemprop="dateModified" datetime="2020-10-07T21:39:41+08:00">2020-10-07</time>
+                <time title="修改时间：2021-02-14 20:12:22" itemprop="dateModified" datetime="2021-02-14T20:12:22+08:00">2021-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -386,13 +352,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="jQuery基本语法"><a href="#jQuery基本语法" class="headerlink" title="jQuery基本语法"></a>jQuery基本语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(选择器)action（）；</span><br></pre></td></tr></table></figure>
+          <a id="more"></a>
+
+<h2 id="JQuery基本语法"><a href="#JQuery基本语法" class="headerlink" title="JQuery基本语法"></a>JQuery基本语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(选择器)action（）；</span><br></pre></td></tr></table></figure>
 
 <p>对选择器进行action操作</p>
 <p>选择器以”标签”或直接指定对象</p>
 <h2 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h2><p>绑定<code>bind(事件,函数);</code></p>
 <p>解绑所有函数<code>unbind(事件);</code></p>
 <p>解绑单一函数<code>unbind(事件,函数)</code></p>
+<!--more-->
+
 <h5 id="JQ1-7之后可用on-off代替bind-unbind"><a href="#JQ1-7之后可用on-off代替bind-unbind" class="headerlink" title="JQ1.7之后可用on off代替bind unbind"></a>JQ1.7之后可用<code>on off</code>代替<code>bind unbind</code></h5><h2 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$().text()				获得文本</span><br><span class="line">$().html()				获得html内容</span><br><span class="line">$().val() 				获得值</span><br></pre></td></tr></table></figure>
 
 <p>第二个括号内可更改捕获</p>
@@ -462,7 +432,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-04 22:26:11" itemprop="dateModified" datetime="2020-10-04T22:26:11+08:00">2020-10-04</time>
+                <time title="修改时间：2021-02-14 20:16:14" itemprop="dateModified" datetime="2021-02-14T20:16:14+08:00">2021-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -499,125 +469,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="JS基础"><a href="#JS基础" class="headerlink" title="JS基础"></a>JS基础</h2><p>引入js文件<code>&lt;script src=&quot;地址&quot;&gt;&lt;/script&gt;</code></p>
+          <h2 id="JS基础s"><a href="#JS基础s" class="headerlink" title="JS基础s"></a>JS基础s</h2><p>引入js文件<code>&lt;script src=&quot;地址&quot;&gt;&lt;/script&gt;</code></p>
 <p>输出<code>document.write(&quot;&lt;h1&gt;内容&lt;/h1&gt;&quot;)</code></p>
 <p>改变html中内容<code>document.getElementById(&quot;ID&quot;).innerHTML=&quot;新内容&quot;</code></p>
-<h5 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h5><p>单行注释<code>//注释</code></p>
-<p>多行注释<code>/*注释*/</code></p>
-<h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><p>通过<code>var</code>声明各种类型</p>
-<p>数组声明<code>var arr=[1,2,3,4];</code></p>
-<p>动态数组<code>var arr=new Array();</code></p>
-<p>不加前缀直接声明全局变量<code>m = 1</code></p>
-<p>严格作用域用<code>let</code></p>
-<p>可以通过赋值为空的方法清除变量<code>a=null</code></p>
-<h5 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h5><p>字符串拼接可直接用<code>+</code></p>
-<p>任何类型与字符串作运算会被强制转换成字符串类型</p>
-<p>比较运算符：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;						双等（其他类型与字符串比较会自动转换）</span><br><span class="line">&#x3D;&#x3D;&#x3D;						三等（完全判等）</span><br><span class="line">!&#x3D;						不等（同双等）</span><br><span class="line">!&#x3D;&#x3D;						不等（同三等）</span><br></pre></td></tr></table></figure>
-
-<p>另外还有&lt; &gt; &lt;= &gt;=比较运算符</p>
-<h5 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h5><p><code>if else,switch,for,while,do while</code>同C语言</p>
-<p><code>for(j in i)</code>结构将j遍历i[]中的所有元素</p>
-<p>跳转语句同C语言</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">常用函数</span><br><span class="line">alert()					弹出对话框</span><br><span class="line">console.log()			在html命令行显示</span><br></pre></td></tr></table></figure>
-
-<p><strong>定义函数</strong><code>function 函数名()&#123;函数体&#125;</code></p>
-<p>函数可以在<code>&lt;script&gt;</code>标签中使用或在HTML文件中使用</p>
-<p>函数加<code>this</code>指向本元素,如</p>
-<p><code>&lt;div onmouseout=&quot;function(this)&quot;&gt;&lt;/div&gt;</code>this指向本<code>div</code></p>
-<p>函数可用<code>arguments.calle(n-1)</code>递归调用自身函数</p>
-<h5 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	异常代码块</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">	<span class="comment">//错误信息处理</span></span><br><span class="line">	alert(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">onClick				    单击事件</span><br><span class="line">onMouseOver				鼠标经过事件</span><br><span class="line">onMouseOut				鼠标移出事件</span><br><span class="line">onChange				文本内容改变事件</span><br><span class="line">onSelect				文本框选中事件</span><br><span class="line">onFocus					光标聚集事件</span><br><span class="line">onBlur					移开光标事件</span><br><span class="line">onLoad					网页加载事件</span><br><span class="line">onUnload				关闭网页事件</span><br></pre></td></tr></table></figure>
-
-<p><code>onload onunload</code>在<code>body</code>中调用</p>
-<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><h5 id="DOM操作HTML"><a href="#DOM操作HTML" class="headerlink" title="DOM操作HTML"></a>DOM操作HTML</h5><ol>
-<li><p>改变HTML输出流</p>
-<p>不要再文档加载完成后再使用<code>document.write()</code>会覆盖文档</p>
-</li>
-<li><p>寻找元素</p>
-<p>通过id(ById)或标签名(ByTagName)找到HTML元素</p>
-<p>ByTagName和ByName寻找到的多个元素会通过数组存储</p>
-</li>
-<li><p>改变HTML内容</p>
-<p>属性<code>innerHTML</code></p>
-</li>
-<li><p>得到HTML属性</p>
-<p><code>getAttribute(&quot;&quot;)</code></p>
-</li>
-<li><p>改变HTML属性</p>
-<p><code>setAttribute(&quot;属性&quot;,&quot;值&quot;)</code></p>
-</li>
-<li><p>其他方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">childNodes()				访问子节点</span><br><span class="line">parentNode()				访问父节点</span><br><span class="line">createElement()				创建元素节点</span><br><span class="line">createTextNode				创建文本节点</span><br><span class="line">insertBefore(,)				插入节点（选择位置）</span><br><span class="line">appendChild()				添加节点（末尾）</span><br><span class="line">removeChild()				删除节点</span><br><span class="line">offsetHeight				网页尺寸（不包含滚动条）</span><br><span class="line">scrollHeight				网页尺寸（包含滚动条）</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<h5 id="DOM-EventListener-句柄"><a href="#DOM-EventListener-句柄" class="headerlink" title="DOM EventListener(句柄)"></a>DOM EventListener(句柄)</h5><p><code>addEventListener(&quot;事件&quot;，函数)</code>: 添加句柄</p>
-<p><code>removeEventListener(&quot;事件&quot;，函数)</code>:移除句柄</p>
-<h2 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h2><p>描述页面中接受事件的顺序</p>
-<p>事件冒泡：由最具体的元素（最内层）接受，然后逐级向上传播至最不具体的结点（最外层）</p>
-<p>事件捕获：最不具体的结点（最外层）先接收事件，最具体的结点（最内层）最后接收事件</p>
-<h5 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h5><ol>
-<li><p>HTML事件处理：直接添加到HTML结构中</p>
-</li>
-<li><p>DOM0级事件处理：把一个函数赋值给一个事件处理程序</p>
-</li>
-<li><p>DOM2级事件处理</p>
-<p>addEventListener(“事件名”,事件处理函数，布尔值（可略）)；</p>
-<p>removeEventListener();</p>
-<p>true:事件捕获 false:事件冒泡</p>
-</li>
-<li><p>IE事件处理</p>
-<p>attachment(“事件名”,事件处理函数，布尔值（可略）)；</p>
-<p>detachment();</p>
-</li>
-</ol>
-<h5 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h5><p>在触发DOM事件时会产生一个对象</p>
-<p>DOM事件发生属于事件冒泡</p>
-<p>事件对象event:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type					获取事件类型</span><br><span class="line">target					获取事件目标</span><br><span class="line">stopPropagation()		 阻止事件冒泡</span><br><span class="line">preventDefault()		 组织事件默认行为</span><br></pre></td></tr></table></figure>
-
-<p>实例</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">&quot;btn1&quot;</span>).addEventListener(<span class="string">&quot;click&quot;</span> , showType)；											                     <span class="built_in">document</span>.getElementById(<span class="string">&quot;div&quot;</span>).addEventListener(<span class="string">&quot;click&quot;</span>,showDiv);</span></span><br><span class="line"><span class="javascript">	<span class="built_in">document</span>.getElementById(<span class="string">&quot;aid&quot;</span> ).addEventListener(<span class="string">&quot;click&quot;</span>,showA);</span></span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showType</span>(<span class="params">event</span>)</span>&#123;</span></span><br><span class="line">		alert(event.type);</span><br><span class="line">		alert(event.target);</span><br><span class="line"><span class="javascript">		event.stopPropagation();<span class="comment">//阻止事件冒泡</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showDiv</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		alert( <span class="string">&quot;div&quot;</span> );</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showA</span>(<span class="params">event</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		event.stopropaaation():<span class="comment">//阻止事件冒泡</span></span></span><br><span class="line"><span class="javascript">		event.preventDefault();<span class="comment">//阻止本事件发生</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="JS内置对象"><a href="#JS内置对象" class="headerlink" title="JS内置对象"></a>JS内置对象</h2><h5 id="自定义对象"><a href="#自定义对象" class="headerlink" title="自定义对象"></a>自定义对象</h5><p>定义并创建对象：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">people = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">people.name = <span class="string">&quot;&quot;</span>; people.age = <span class="string">&quot;&quot;</span>;</span><br><span class="line">或people = &#123;<span class="attr">name</span>:<span class="string">&quot;&quot;</span>,<span class="attr">age</span>:<span class="string">&quot;&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>使用函数来定义对象，然后创建新的对象实例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">people</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = ;</span><br><span class="line">	<span class="built_in">this</span>.age = ;</span><br><span class="line">&#125;</span><br><span class="line">son = <span class="keyword">new</span> people(<span class="string">&quot;&quot;</span>,);</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="字符串对象"><a href="#字符串对象" class="headerlink" title="字符串对象"></a>字符串对象</h5><p>字符串位置：<code>indexOf(&quot;&quot;)</code>存在返回所在位置，不存在返回-1</p>
-<p>匹配字符串：<code>match(&quot;&quot;)</code>存在打印字符串，不存在返回null</p>
-<p>替换字符串：<code>replace(&quot;&quot;,&quot;新字符串&quot;)</code></p>
-<p>大小写转换：<code>toUpperCase()/toLowerCase()</code>全部转大/小写</p>
-<p>字符串转数组：<code>split(&quot;,&quot;)</code>通过<code>,</code>分割数组</p>
-<h5 id="Date日期对象"><a href="#Date日期对象" class="headerlink" title="Date日期对象"></a>Date日期对象</h5><p>当日日期<code>var date = new Date();</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">获取具体信息</span><br><span class="line">getFullYear()				获取年份</span><br><span class="line">getTime()					获取毫秒</span><br><span class="line">setFullYear(y,m,d)			 设置事件</span><br><span class="line">getDay()					获取星期</span><br><span class="line">toLocaleDateString()		获取标准日期格式</span><br><span class="line">toLocaleTimeString()		获取标准时间格式</span><br></pre></td></tr></table></figure>
-
-<p>时钟实例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startTime</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">	<span class="keyword">var</span> h = today.getHours();</span><br><span class="line">	<span class="keyword">var</span> m = today.getMinutes();</span><br><span class="line">	<span class="keyword">var</span> s = today.getSeconds();</span><br><span class="line">	m= checkTime(m);<span class="comment">//对齐格式</span></span><br><span class="line">	s = checkTime(s);</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">&quot;timetxt&quot;</span>).innerHTML = h+<span class="string">&quot;:&quot;</span>+m+<span class="string">&quot;:&quot;</span>+s;</span><br><span class="line">	t= <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span></span>&#123;</span><br><span class="line">		startTime();</span><br><span class="line">	&#125;,<span class="number">1000</span>);<span class="comment">//setTimeout函数将startTime函数1000毫秒调用一次</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkTime</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">10</span>)&#123;</span><br><span class="line">		i = “<span class="number">0</span><span class="string">&quot;&quot;</span>+i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;timetxt&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="数组对象"><a href="#数组对象" class="headerlink" title="数组对象"></a>数组对象</h5><p>两数组a,b</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a.concat(b)					合并数组</span><br><span class="line">a.sort()					排序</span><br><span class="line">a.push(&quot;&quot;)					末尾追加元素</span><br><span class="line">a.reverse()					数组元素反转</span><br></pre></td></tr></table></figure>
-
-<h5 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">round()						四舍五入</span><br><span class="line">random()					返回0~1之间随机数</span><br><span class="line">max()						返回最高值</span><br><span class="line">min()						返回最低值</span><br><span class="line">abs()						返回绝对值</span><br></pre></td></tr></table></figure>
-
-<p><code>parseInt()</code>可以将数据转为int类型</p>
-<h2 id="JS浏览器对象"><a href="#JS浏览器对象" class="headerlink" title="JS浏览器对象"></a>JS浏览器对象</h2><h5 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">window.innerHeight					窗口内部高度</span><br><span class="line">window.innerWidth					窗口内部宽度</span><br><span class="line">window.open(&quot;地址&quot;,&quot;名称&quot;,其他属性)		打开新窗口</span><br><span class="line">window.close()						关闭当前窗口</span><br></pre></td></tr></table></figure>
-
-<h5 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setInterval()				间隔指定毫秒数不停执行指定代码</span><br><span class="line">clearInterval()				清除上述代码</span><br><span class="line">setTimeout()				暂停指定毫秒数后执行指定代码</span><br><span class="line">clearTimeout()				停止上述代码</span><br></pre></td></tr></table></figure>
-
-<h5 id="History对象"><a href="#History对象" class="headerlink" title="History对象"></a>History对象</h5><p><code>history.go()</code>括号里填1或-1等表示前进或后退页面</p>
-<h5 id="Screen对象"><a href="#Screen对象" class="headerlink" title="Screen对象"></a>Screen对象</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">screen.availWidth			可用宽度（除边框）</span><br><span class="line">screen.availHeight			可用高度（除边框）</span><br><span class="line">screen.height			    屏幕高度</span><br><span class="line">screen.width			    屏幕宽度</span><br></pre></td></tr></table></figure>
-
-<h3 id="暂时完结"><a href="#暂时完结" class="headerlink" title="暂时完结"></a>暂时完结</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/06/javascript/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -667,7 +529,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-21 22:50:33" itemprop="dateModified" datetime="2020-10-21T22:50:33+08:00">2020-10-21</time>
+                <time title="修改时间：2021-02-14 20:17:21" itemprop="dateModified" datetime="2021-02-14T20:17:21+08:00">2021-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -704,460 +566,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><ol>
-<li><p>选择器分组 <code>元素1,元素2,元素3&#123;属性;&#125;</code></p>
-</li>
-<li><ul>
-<li><p>派生（后代）选择器 <code>元素1 分级n&#123;属性;&#125;</code>（选择可以跨级）</p>
-</li>
-<li><p>子元素选择器 <code>元素1&gt;分级1&#123;属性;&#125;</code>（只能选择到下一级）</p>
-</li>
-<li><p>相邻兄弟选择器 (了解) <code>元素1+元素2&#123;属性;&#125;</code></p>
-<p>（被选择的元素必须具有前者元素）</p>
-</li>
-</ul>
-</li>
-<li><p>id选择器 <code>#id&#123;属性;&#125;</code></p>
-</li>
-<li><p>类选择器 <code>.class&#123;属性;&#125;</code></p>
-</li>
-<li><p>属性（和值）选择器（在head中加入）</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[元素属性]&#123;属性1;&#125;/*含有目标属性*/</span><br><span class="line">[元素属性=特定值]&#123;属性2;&#125;/*目标属性为特定值*/</span><br><span class="line">[元素属性~=特定值]&#123;属性3;&#125;/*目标属性的值中包含有特定值*/</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="6">
-<li><p>通用配置符 <code>*&#123;属性;&#125;</code></p>
-</li>
-<li><p>多类选择器</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*css文件*/</span></span><br><span class="line">.p1&#123;属性1;&#125;</span><br><span class="line">.p2&#123;属性2;&#125;</span><br><span class="line">.p2.p3&#123;属性3;&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*html文件*/</span></span><br><span class="line">&lt;p class=&quot;p1&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class=&quot;p2&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;p class=&quot;p1 p2&quot;&gt;&lt;/p&gt;</span><br><span class="line"><span class="comment">/*第三个段落属性为&quot;属性1+属性2+属性3&quot;*/</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>附:</p>
-<ol>
-<li><p>元素选择器可与类选择器结合使用<code>a.class&#123;属性&#125;</code>即a元素中class类的属性</p>
-</li>
-<li><p>ID选择器与类选择器区别：</p>
-<p>ID选择器只能在文档中使用一次，而类可以使用多次</p>
-<p>ID选择器不能结合使用</p>
-<p>当使用JS时需要用到ID</p>
-</li>
-</ol>
-<h2 id="CSS样式"><a href="#CSS样式" class="headerlink" title="CSS样式"></a>CSS样式</h2><h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>background-attachment</td>
-<td>背景图片是否随页面滚动</td>
-</tr>
-<tr>
-<td>background-color</td>
-<td>背景颜色</td>
-</tr>
-<tr>
-<td>background-image</td>
-<td>设置图片背景（<code>url</code>引入）</td>
-</tr>
-<tr>
-<td>background-position</td>
-<td>起始位置（两项属性）</td>
-</tr>
-<tr>
-<td>background-repeat</td>
-<td>是否及如何重复</td>
-</tr>
-<tr>
-<td>background-size</td>
-<td>图片尺寸</td>
-</tr>
-<tr>
-<td>background-origin</td>
-<td>图片定位区域</td>
-</tr>
-<tr>
-<td>background-clip</td>
-<td>图片绘制区域</td>
-</tr>
-</tbody></table>
-<h5 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h5><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>color</td>
-<td>文本颜色</td>
-</tr>
-<tr>
-<td>direction</td>
-<td>文本方向</td>
-</tr>
-<tr>
-<td>line-height</td>
-<td>行高</td>
-</tr>
-<tr>
-<td>letter-spacing</td>
-<td>字符间距</td>
-</tr>
-<tr>
-<td>text-align</td>
-<td>对齐文本</td>
-</tr>
-<tr>
-<td>text-decoration</td>
-<td>文本修饰</td>
-</tr>
-<tr>
-<td>text-indent</td>
-<td>缩进文本首行</td>
-</tr>
-<tr>
-<td>text-transform</td>
-<td>元素字母（大小写）</td>
-</tr>
-<tr>
-<td>unicode-bidi</td>
-<td>文本方向</td>
-</tr>
-<tr>
-<td>white-space</td>
-<td>空白处理方式</td>
-</tr>
-<tr>
-<td>word-spacing</td>
-<td>字间距</td>
-</tr>
-<tr>
-<td>text-shadow</td>
-<td>添加阴影</td>
-</tr>
-<tr>
-<td>word-wrap</td>
-<td>换行规则</td>
-</tr>
-</tbody></table>
-<p>text-shadow:四个属性（向右偏移 向下偏移 模糊程度 阴影颜色）</p>
-<p>word-wrap:另外设置行宽度</p>
-<h5 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h5><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>font-family</td>
-<td>字体系列</td>
-</tr>
-<tr>
-<td>font-size</td>
-<td>字体尺寸</td>
-</tr>
-<tr>
-<td>font-style</td>
-<td>字体风格</td>
-</tr>
-<tr>
-<td>font-variant</td>
-<td>大小写或正常字体显示文本</td>
-</tr>
-<tr>
-<td>font-weight</td>
-<td>字体粗细</td>
-</tr>
-</tbody></table>
-<p>网络字体引入</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@font-face</span>&#123;</span><br><span class="line">	<span class="attribute">font-family</span>: myfont;</span><br><span class="line">	<span class="attribute">src</span>: <span class="built_in">url</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h5><p>链接四种状态：</p>
-<table>
-<thead>
-<tr>
-<th>元素</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>a:link</td>
-<td>普通未被访问的链接</td>
-</tr>
-<tr>
-<td>a:visited</td>
-<td>用户已访问的链接</td>
-</tr>
-<tr>
-<td>a:hover</td>
-<td>鼠标位于链接上方</td>
-</tr>
-<tr>
-<td>a:active</td>
-<td>鼠标被点击的时刻</td>
-</tr>
-</tbody></table>
-<p>链接样式：text-decoration</p>
-<p>背景颜色：background-color</p>
-<h5 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h5><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>list-style</td>
-<td>简写列表项</td>
-</tr>
-<tr>
-<td>list-style-image</td>
-<td>列表项图像（引入）</td>
-</tr>
-<tr>
-<td>list-style-position</td>
-<td>列表项标志位置</td>
-</tr>
-<tr>
-<td>list-style-type</td>
-<td>列表类型（普通图图表）</td>
-</tr>
-</tbody></table>
-<h5 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h5><p>使用实例</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#tb</span>&#123;</span><br><span class="line">	<span class="attribute">border-collapse</span>: collapse;<span class="comment">/*合并边框*/</span></span><br><span class="line">	<span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#tb</span> <span class="selector-tag">td</span>,<span class="selector-id">#tb</span> <span class="selector-tag">th</span>&#123;</span><br><span class="line">	<span class="attribute">border</span>:<span class="number">1px</span> solid aqua;<span class="comment">/*边框宽度 实线 颜色*/</span></span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">tb</span> <span class="selector-tag">th</span>&#123;</span><br><span class="line">	<span class="attribute">text-align</span>: right;</span><br><span class="line">	<span class="attribute">background-color</span>:aqua;</span><br><span class="line">	<span class="attribute">color</span>:<span class="number">#FFFFFF</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">tb</span> <span class="selector-tag">tr</span><span class="selector-class">.alt</span> <span class="selector-tag">td</span>&#123;</span><br><span class="line">	<span class="attribute">color</span>: black;</span><br><span class="line">	<span class="attribute">background-color</span>: aquamarine;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="轮廓"><a href="#轮廓" class="headerlink" title="轮廓"></a>轮廓</h5><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>outline</td>
-<td>轮廓属性</td>
-</tr>
-<tr>
-<td>outline-color</td>
-<td>轮廓颜色</td>
-</tr>
-<tr>
-<td>outline-style</td>
-<td>轮廓样式</td>
-</tr>
-<tr>
-<td>outline-width</td>
-<td>轮廓宽度</td>
-</tr>
-</tbody></table>
-<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><p><img src="https://i.loli.net/2020/09/05/PArs37gTpldyUEH.png" alt="img"></p>
-<ul>
-<li>padding-(): 设置边距</li>
-<li>border-()-style: 可设置具体方向边框<ul>
-<li>border-()-width: 设置(单边)宽度</li>
-<li>border-()-color: 设置(单边)颜色</li>
-<li>border-radius: 圆角边框大小</li>
-<li>box-shadow: 阴影效果(属性格式同文字阴影)</li>
-<li>border-image: 边框图片</li>
-</ul>
-</li>
-<li>margin-():设置边距</li>
-</ul>
-<p>两个盒子模型的外边框会合并</p>
-<h5 id="盒子模型实际应用"><a href="#盒子模型实际应用" class="headerlink" title="盒子模型实际应用"></a>盒子模型实际应用</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">*<span class="comment">/*通用配置符*/</span>&#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0px</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">0px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.top</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">100%</span>;</span><br><span class="line">	<span class="attribute">height</span>:<span class="number">50px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: black;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.top_content</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">75%</span>;</span><br><span class="line">	height; 50px;</span><br><span class="line">	<span class="selector-tag">margin</span>: <span class="selector-tag">Opx</span> <span class="selector-tag">auto</span>;<span class="comment">/*左右自适应*/</span></span><br><span class="line">	<span class="selector-tag">background-color</span>: <span class="selector-tag">blue</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.body</span>&#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">20px</span> auto;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">75%</span>;</span><br><span class="line">	<span class="attribute">height</span>:<span class="number">1500px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: blanchedalmond;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.body_img</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">100%</span>;<span class="comment">/*占body75%中的100%*/</span></span><br><span class="line">	<span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">	<span class="attribute">background-coior</span>: darkorange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="定位-amp-浮动"><a href="#定位-amp-浮动" class="headerlink" title="定位&amp;浮动"></a>定位&amp;浮动</h2><h5 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h5><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>position</td>
-<td>元素位置形式</td>
-</tr>
-<tr>
-<td>top</td>
-<td>向上偏移量</td>
-</tr>
-<tr>
-<td>left</td>
-<td>向左偏移量</td>
-</tr>
-<tr>
-<td>right</td>
-<td>向右偏移量</td>
-</tr>
-<tr>
-<td>bottom</td>
-<td>向下偏移量</td>
-</tr>
-<tr>
-<td>overflow</td>
-<td>元素溢出区</td>
-</tr>
-<tr>
-<td>clip</td>
-<td>显示形状</td>
-</tr>
-<tr>
-<td>vertical-align</td>
-<td>对齐方式</td>
-</tr>
-<tr>
-<td>z-index</td>
-<td>堆叠顺序</td>
-</tr>
-</tbody></table>
-<h5 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h5><p>float属性可用值：left right none inherit（从父级继承）</p>
-<p>clear属性（清除浮动属性）：left right both inherit</p>
-<p>附: 通过浮动可作瀑布流效果</p>
-<h2 id="CSS常用操作"><a href="#CSS常用操作" class="headerlink" title="CSS常用操作"></a>CSS常用操作</h2><ol>
-<li><p>应用margin position float操作对齐边框</p>
-</li>
-<li><p>行高 <code>line-height</code></p>
-<p>最大最小高宽度 <code>max-width</code></p>
-</li>
-<li><p>分类</p>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>clear</td>
-<td>设置侧面是否允许其他浮动元素</td>
-</tr>
-<tr>
-<td>cursor</td>
-<td>指向某元素上是的鼠标指针类型</td>
-</tr>
-<tr>
-<td>display</td>
-<td>设置是否及如何显示元素</td>
-</tr>
-<tr>
-<td>float</td>
-<td>定义元素在哪个方向浮动</td>
-</tr>
-<tr>
-<td>position</td>
-<td>设置元素位置</td>
-</tr>
-<tr>
-<td>visibility</td>
-<td>设置元素是否可见</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>导航栏展示</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span>&#123;</span><br><span class="line">	<span class="attribute">list-style-type</span>: none;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0px</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">0px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span>, <span class="selector-tag">a</span><span class="selector-pseudo">:visited</span><span class="comment">/*a链接的状态*/</span>&#123;</span><br><span class="line">	<span class="attribute">text-decoration</span>: none;</span><br><span class="line">	<span class="attribute">display</span>: block;</span><br><span class="line">	<span class="attribute">background-color</span>: burlywood;</span><br><span class="line">	<span class="attribute">color</span>: aliceblue;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">	<span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span>, <span class="selector-tag">a</span>: <span class="selector-tag">hover</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: crimson;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>图片展示</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">margin</span>:_10px auto;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">70%</span>;</span><br><span class="line">	<span class="attribute">height</span>: auto;</span><br><span class="line">	<span class="attribute">background-color</span>: burlywood;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.image</span>&#123;</span><br><span class="line">	border; 1px solid darkgray;</span><br><span class="line">	<span class="selector-tag">width</span>: <span class="selector-tag">auto</span>;</span><br><span class="line">	<span class="selector-tag">height</span><span class="selector-pseudo">:_auto</span>;</span><br><span class="line">	<span class="selector-tag">float</span>: <span class="selector-tag">left</span>;</span><br><span class="line">	<span class="selector-tag">text-align</span>: <span class="selector-tag">center</span>;</span><br><span class="line">	<span class="selector-tag">margin</span>: 5<span class="selector-tag">px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">img</span>&#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">5px</span>;</span><br><span class="line">	<span class="attribute">opacity</span>: <span class="number">1</span>; <span class="comment">/*透明度：0为完全透明，1为完全不透明*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.text</span>&#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">12px</span></span><br><span class="line">	margin-bottom: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="CSS动画"><a href="#CSS动画" class="headerlink" title="CSS动画"></a>CSS动画</h2><h5 id="2D、3D转换"><a href="#2D、3D转换" class="headerlink" title="2D、3D转换"></a>2D、3D转换</h5><p>转换格式：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">transform</span>:转换方法;</span><br><span class="line"><span class="selector-tag">-webkit-transform</span>:转换方法;<span class="comment">/*safari chrome*/</span></span><br><span class="line"><span class="selector-tag">-ms-transform</span>:转换方法;<span class="comment">/*IE 360*/</span></span><br><span class="line"><span class="selector-tag">-o-transform</span>:转换方法;<span class="comment">/*opera*/</span></span><br><span class="line"><span class="selector-tag">-moz-transform</span>:转换方法;<span class="comment">/*firefox*/</span></span><br></pre></td></tr></table></figure>
-
-<p>2D转换方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>translate()</td>
-<td>移动</td>
-</tr>
-<tr>
-<td>rotate()</td>
-<td>旋转</td>
-</tr>
-<tr>
-<td>scale()</td>
-<td>缩放</td>
-</tr>
-<tr>
-<td>skew()</td>
-<td>倾斜</td>
-</tr>
-<tr>
-<td>matrix()</td>
-<td>矩阵</td>
-</tr>
-</tbody></table>
-<p>3D转换方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>rotateX()</td>
-<td>X轴旋转</td>
-</tr>
-<tr>
-<td>rotateY()</td>
-<td>Y轴旋转</td>
-</tr>
-</tbody></table>
-<h5 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h5><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>transition</td>
-<td>设置四个过渡属性</td>
-</tr>
-<tr>
-<td>transition-property</td>
-<td>过渡名称</td>
-</tr>
-<tr>
-<td>transition-duration</td>
-<td>过渡花费时间</td>
-</tr>
-<tr>
-<td>transition-timing-function</td>
-<td>过渡时间曲线</td>
-</tr>
-<tr>
-<td>transition-delay</td>
-<td>过渡开始时间</td>
-</tr>
-</tbody></table>
-<p>代码展示</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">108px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: blue;</span><br><span class="line">	<span class="attribute">-webkit-transition</span>: width <span class="number">2s</span>,height_2s,-webkit-transform <span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">transition </span>: width <span class="number">2s</span>,height <span class="number">2s</span>,transform <span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">-webkit-transition-delay</span>:<span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">transition-delay</span>: <span class="number">2s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span>: <span class="selector-tag">hover</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">208px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>);</span><br><span class="line">	<span class="attribute">webkit-transform</span>: <span class="built_in">rotate</span>( <span class="number">360deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h5><p>代码展示</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: red;</span><br><span class="line">	<span class="attribute">position</span>: relative;</span><br><span class="line">	<span class="attribute">animation</span>:anim <span class="number">5s</span> <span class="comment">/*infinite alternate添加回溯及重复动画*/</span>;</span><br><span class="line">	<span class="attribute">-webkit-animation</span>:anim <span class="number">5s</span><span class="comment">/*同加*/</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> anim&#123;</span><br><span class="line">	0%&#123;<span class="attribute">background</span>: red;<span class="attribute">left</span>: <span class="number">0px</span>; <span class="attribute">top</span>: <span class="number">0px</span>&#125;</span><br><span class="line">	25%&#123;<span class="attribute">background</span>: blue;<span class="attribute">left</span>: <span class="number">200</span>;<span class="attribute">top</span>:<span class="number">0px</span>&#125;</span><br><span class="line">	50%&#123;<span class="attribute">background</span>:<span class="number">#ccffcc</span>;<span class="attribute">left</span>: <span class="number">200px</span>; <span class="attribute">top</span>: <span class="number">200px</span>&#125;</span><br><span class="line">	75%&#123;<span class="attribute">background</span>: <span class="number">#B0ffff</span>;<span class="attribute">left</span>: <span class="number">0px</span>;<span class="attribute">top</span>: <span class="number">200px</span>&#125;</span><br><span class="line">	100%&#123;<span class="attribute">background</span>:red;<span class="attribute">left</span>: <span class="number">0px</span>;<span class="attribute">top</span>: <span class="number">0px</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">-webkit-</span><span class="keyword">@keyframes</span> anim&#123;</span><br><span class="line">	0%&#123;<span class="attribute">background</span>: red;<span class="attribute">left</span>: <span class="number">0px</span>; <span class="attribute">top</span>: <span class="number">0px</span>&#125;</span><br><span class="line">	25%&#123;<span class="attribute">background</span>: blue;<span class="attribute">left</span>: <span class="number">200</span>;<span class="attribute">top</span>:<span class="number">0px</span>&#125;</span><br><span class="line">	50%&#123;<span class="attribute">background</span>:<span class="number">#ccffcc</span>;<span class="attribute">left</span>: <span class="number">200px</span>; <span class="attribute">top</span>: <span class="number">200px</span>&#125;</span><br><span class="line">	75%&#123;<span class="attribute">background</span>: <span class="number">#B0ffff</span>;<span class="attribute">left</span>: <span class="number">0px</span>;<span class="attribute">top</span>: <span class="number">200px</span>&#125;</span><br><span class="line">	100%&#123;<span class="attribute">background</span>:red;<span class="attribute">left</span>: <span class="number">0px</span>;<span class="attribute">top</span>: <span class="number">0px</span>&#125;</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="多列"><a href="#多列" class="headerlink" title="多列"></a>多列</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.div1</span>&#123;</span><br><span class="line">    <span class="attribute">column-count</span>: <span class="number">4</span>;<span class="comment">/*四列*/</span></span><br><span class="line">    <span class="attribute">column-gap</span>: <span class="number">30px</span>;<span class="comment">/*内边距*/</span></span><br><span class="line">    <span class="attribute">column-rule</span>: <span class="number">5px</span> outset red;<span class="comment">/*边界线*/</span></span><br><span class="line">    <span class="attribute">-webkit-column-count</span>: <span class="number">4</span>;</span><br><span class="line">    <span class="attribute">-webkit-column-gap</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">-webkit-column-rule</span>: <span class="number">5px</span> outset red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="多列实现瀑布流-图片宽度一致"><a href="#多列实现瀑布流-图片宽度一致" class="headerlink" title="多列实现瀑布流(图片宽度一致)"></a>多列实现瀑布流(图片宽度一致)</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="attribute">column-width</span>: <span class="number">250px</span>;</span><br><span class="line">    <span class="attribute">column-gap</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">-webkit-column-width</span>: <span class="number">250px</span>;</span><br><span class="line">    <span class="attribute">-webkit-column-gap</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">250px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+          <p>前端基础学习，网页开发的起始</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/04/CSS/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1207,7 +624,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-07 16:56:20" itemprop="dateModified" datetime="2020-10-07T16:56:20+08:00">2020-10-07</time>
+                <time title="修改时间：2021-02-14 20:16:30" itemprop="dateModified" datetime="2021-02-14T20:16:30+08:00">2021-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1244,176 +661,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="HTML概念"><a href="#HTML概念" class="headerlink" title="HTML概念"></a>HTML概念</h2><p>属于静态网页</p>
-<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>指向另一个地址<code>&lt;a href=&quot;地址&quot; traget=&quot;&quot;&gt;名称&lt;/a&gt;</code>地址<code>#</code>可以跳转自身</p>
-<table>
-<thead>
-<tr>
-<th>target</th>
-<th>内涵</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>_blank</code></td>
-<td>另开页面</td>
-</tr>
-<tr>
-<td><code>_self</code></td>
-<td>自身页面</td>
-</tr>
-<tr>
-<td><code>_parent</code></td>
-<td>上级页面</td>
-</tr>
-<tr>
-<td><code>_top</code></td>
-<td>顶级页面</td>
-</tr>
-</tbody></table>
-<p>创建文档内链接<code>&lt;a name=&quot;tips&quot;&gt;&lt;/a&gt;</code><br>另一个超链接可以跳转至该位置<br><code>&lt;a href=&quot;#tips&quot;&gt;跳转&lt;/a&gt;</code></p>
-<p>图片<code>&lt;img src=&quot;图片地址&quot;&gt;</code></p>
-<h2 id="三种样式表插入方法"><a href="#三种样式表插入方法" class="headerlink" title="三种样式表插入方法"></a>三种样式表插入方法</h2><p><strong>外部样式表</strong>:</p>
-<p>其他文件中插入</p>
-<p><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=“mystyle.css&quot;&gt;</code><br><strong>内部样式表</strong>:</p>
-<p>head中插入</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">“text/css</span>&quot;&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-tag">body</span> &#123;<span class="attribute">background-color</span>: red&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-tag">p</span> &#123;<span class="attribute">margin-left</span>: <span class="number">20px</span>&#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>内联样式表</strong>:</p>
-<p>body中插入</p>
-<p><code>&lt;p style=&quot;color: red&gt;</code></p>
-<h2 id="表格-amp-列表"><a href="#表格-amp-列表" class="headerlink" title="表格&amp;列表"></a>表格&amp;列表</h2><table>
-<thead>
-<tr>
-<th>标签</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>&lt;table&gt; </code></td>
-<td>定义表格</td>
-</tr>
-<tr>
-<td><code>&lt;caption&gt; </code></td>
-<td>定义表格标题</td>
-</tr>
-<tr>
-<td><code>&lt;th&gt;</code></td>
-<td>定义表格的表头</td>
-</tr>
-<tr>
-<td><code>&lt;tr&gt;</code></td>
-<td>定义表格的行</td>
-</tr>
-<tr>
-<td><code>&lt;td&gt;</code></td>
-<td>定义表格的单元</td>
-</tr>
-<tr>
-<td><code>&lt;thead&gt;</code></td>
-<td>定义表格的页眉</td>
-</tr>
-<tr>
-<td><code>&lt;tbody&gt;</code></td>
-<td>定义表格的主体</td>
-</tr>
-<tr>
-<td><code>&lt;tfoot&gt;</code></td>
-<td>定义表格的页脚</td>
-</tr>
-<tr>
-<td><code>&lt;Col&gt;</code></td>
-<td>定义表格的列属性</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>标签</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>&lt;ol&gt;</code></td>
-<td>有序列表</td>
-</tr>
-<tr>
-<td><code>&lt;ul&gt;</code></td>
-<td>无序列表</td>
-</tr>
-<tr>
-<td><code>&lt;li&gt;</code></td>
-<td>列表项</td>
-</tr>
-<tr>
-<td><code>&lt;dl&gt;</code></td>
-<td>列表</td>
-</tr>
-<tr>
-<td><code>&lt;dt&gt;</code></td>
-<td>列表项</td>
-</tr>
-<tr>
-<td><code>&lt;dd&gt;</code></td>
-<td>描述</td>
-</tr>
-</tbody></table>
-<h2 id="HTML块"><a href="#HTML块" class="headerlink" title="HTML块"></a>HTML块</h2><p>1、HTML块元素<br>块元素在显示时，通常会以新行开始<br>如: <code>&lt;h1&gt;、&lt;p&gt;、&lt;ul&gt;</code><br>2、HTML内联元素<br>内联元素通常不会以新行开始<br>如:<code>&lt;b&gt;、&lt;a&gt;、&lt;img&gt;</code><br>3、HTML<code>&lt;div&gt;</code>元素</p>
-<p><code>&lt;div&gt;</code>元素也被称为块元素，其主要是组合HTML元素的容器，内部元素自动换行</p>
-<p>4、HTML<code>&lt;span&gt;</code>元素<br><span>`元素是内联元素，可作为文本的容器，内部元素只在一行显示</p>
-<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p><strong>div布局</strong>(单元前<code>#div</code>可删除)</p>
-<p>在head中插入 实例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">body</span>&#123;</span></span><br><span class="line">		margin: 0px;</span><br><span class="line">	&#125;</span><br><span class="line">	#div container&#123;.</span><br><span class="line">		width: 100%</span><br><span class="line">		height: 950px;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">heading</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">width</span><span class="selector-pseudo">:100</span>%;</span></span><br><span class="line">		height: 10%;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">menu</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">width</span><span class="selector-pseudo">:30</span>%;</span></span><br><span class="line">		height: 90%;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="css">	<span class="selector-id">#div</span> <span class="selector-tag">body</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">width</span><span class="selector-pseudo">:70</span>%;</span></span><br><span class="line">		height: 90%;</span><br><span class="line">		background-color: blue;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>table布局</strong></p>
-<p>在body中插入 实例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">width</span>=<span class="string">&quot;100%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;950px&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: darkgray&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">&quot;2&quot;</span> <span class="attr">width</span>=<span class="string">&quot;100%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;10%&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: aqua&quot;</span>&gt;</span>头部<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">width</span>=<span class="string">&quot;30%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;90%&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: blue&quot;</span>&gt;</span>左菜单<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">width</span>=<span class="string">&quot;70%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;90%&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: blue&quot;</span>&gt;</span>主体<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p>使用实例</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">	用户名;</span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&quot;&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">	密码;</span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">	你喜欢的水果有?</span><br><span class="line">	<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">	苹果<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span>&gt;</span></span><br><span class="line">	西红柿<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span>&gt;</span></span><br><span class="line">	香蕉<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">	请选择您的性别;</span><br><span class="line">	男<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span>&gt;</span></span><br><span class="line">	女<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span>&gt;</span>网址1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span>&gt;</span>网址1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">option</span>&gt;</span>网址3<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;内容&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">cols</span>=<span class="string">&quot;30&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;30&quot;</span>&gt;</span>默认信息<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>按钮可直接在表单外用<code>&lt;button onclick=&quot;&quot;&gt;&lt;/button&gt;</code>引用</p>
-<h2 id="表单与PHP交互"><a href="#表单与PHP交互" class="headerlink" title="表单与PHP交互"></a>表单与PHP交互</h2><p>PHP环境搭建暂略</p>
-<h5 id="method"><a href="#method" class="headerlink" title="method:"></a><strong>method</strong>:</h5><p>get会将表单内容与地址结合</p>
-<p>post则不会且更安全</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;php地址&quot;</span> <span class="attr">method</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">	表单</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="框架与背景"><a href="#框架与背景" class="headerlink" title="框架与背景"></a>框架与背景</h2><p>常用框架<code>&lt;iframe&gt;</code></p>
-<p>背景图片:<code>&lt;background&gt;</code></p>
-<p>背景颜色:<code>&lt;bgcolor&gt;</code></p>
-<h3 id="字符转实体"><a href="#字符转实体" class="headerlink" title="字符转实体"></a>字符转实体</h3><p>有些字符无法直接显示在网页上，如<code>&lt; &gt; &amp;</code>等</p>
-<p>当需要特定字符时上网搜索</p>
-<h2 id="XHTML书写规范"><a href="#XHTML书写规范" class="headerlink" title="XHTML书写规范"></a>XHTML书写规范</h2><ol>
-<li>元素语法<ul>
-<li>正确嵌套</li>
-<li>始终关闭</li>
-<li>必须小写</li>
-<li>文档必须有根元素</li>
-</ul>
-</li>
-<li>属性语法<ul>
-<li>必须小写</li>
-<li>必须引号包围</li>
-<li>禁止最小化</li>
-</ul>
-</li>
-</ol>
-<h2 id="插入多媒体"><a href="#插入多媒体" class="headerlink" title="插入多媒体"></a>插入多媒体</h2><ol>
-<li><p>audio播放音频格式：mp3 ogg wav</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">src:文件路径</span><br><span class="line">autoplay:自动播放</span><br><span class="line">loop:循环</span><br><span class="line">controls:控制条</span><br><span class="line">muted:静音</span><br><span class="line">preload:预加载（不能与autoplay共用）</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>video播放视频格式：mpa ogg webm</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">部分属性同音频</span><br><span class="line">width&#x2F;height:宽高</span><br><span class="line">poster:海报（播放之前）</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>embed嵌入内容加载插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">部分属性同视频</span><br><span class="line">type:类型</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-
+          <h2 id="HTML概念"><a href="#HTML概念" class="headerlink" title="HTML概念"></a>HTML概念</h2><p>静态网页</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/03/html5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1463,7 +719,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-03 11:02:02" itemprop="dateModified" datetime="2020-09-03T11:02:02+08:00">2020-09-03</time>
+                <time title="修改时间：2021-02-14 20:14:44" itemprop="dateModified" datetime="2021-02-14T20:14:44+08:00">2021-02-14</time>
               </span>
 
           <br>
@@ -1491,110 +747,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>行内式两头加上反引号`</p>
-<p>多行代码上下行加三重反引```</p>
-<p>段落前加大于号(可分级)<br><code>&gt;段落1</code> <code>&gt;&gt;段落2</code></p>
-<p>三种分割线<code>***或---或___</code></p>
-<p>换行可用<code>&lt;br\&gt;</code></p>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p><strong>无序列表</strong> *-+(加号空格)<br><code>+ sad</code><br>多级列表(前面加tab)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ 一层</span><br><span class="line">  + 二层</span><br><span class="line">    + 三层</span><br></pre></td></tr></table></figure>
-<p><strong>有序列表</strong>(数字.空格)<br><code>1. first</code></p>
-<p><strong>表格</strong><br>加空格使对齐（非必要）冒号设置对其方向</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|Tables       |Are          |Cool |</span><br><span class="line">|------       |:----:       |----:|</span><br><span class="line">|col 3 is     |right-aligned|$1600|</span><br><span class="line">|col 2 is     |centered     |$12  |</span><br><span class="line">|zebra stripes|are neat     |$1   |</span><br></pre></td></tr></table></figure>
-<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>小标题前加#(space)<br>斜前后*<br>粗前后**<br>粗斜前后***<br>删除字前后~~<br>缩进<code>&amp;emsp;</code>（一个中文字符）<br>半个<code>&amp;ensp;</code><br>四分之一个<code>&amp;nbsp;</code><br>居中（html标签）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div align&#x3D;center&gt;(内容)</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><strong>超链接</strong><br><code>[显示名称](http://www.bilibili.com &quot;注释名称&quot;)</code><br>直接显示<code>&lt;http://www.bilibili.com&gt;</code><br>后方注释<code>[名称1][wangzhi1]</code></p>
-<p><strong>图片链接</strong><br><code>![名称](..\images\test.png)</code><br>后方注释<code>![名称1][image1]</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[wangzhi1]:http:&#x2F;&#x2F;www.bilibili.com</span><br><span class="line">[image1]:..\images\test.png</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>详细语法</strong>：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014061630/article/details/81359144?biz_id=102&utm_term=markdown%E8%AF%AD%E6%B3%95&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-81359144&spm=1018.2118.3001.4187#25-%E4%BB%A3%E7%A0%81%E5%9D%97">csdn教程</a></p>
-<p><strong>博客搭建参考</strong><br><a target="_blank" rel="noopener" href="https://koorye.github.io/2020/07/11/%E5%88%A9%E7%94%A8GitHub+Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">koorye的博客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://lan5th.github.io/2020/09/02/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="lan5th">
-      <meta itemprop="description" content="practise more">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lzone">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/02/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-02 15:26:46" itemprop="dateCreated datePublished" datetime="2020-09-02T15:26:46+08:00">2020-09-02</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>367</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+          <p>从此开始的漫漫学习之路</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/02/markdown/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1680,7 +841,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
