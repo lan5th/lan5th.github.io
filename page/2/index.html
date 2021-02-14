@@ -315,7 +315,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-14 20:12:22" itemprop="dateModified" datetime="2021-02-14T20:12:22+08:00">2021-02-14</time>
+                <time title="修改时间：2021-02-14 20:24:16" itemprop="dateModified" datetime="2021-02-14T20:24:16+08:00">2021-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -352,37 +352,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <a id="more"></a>
-
-<h2 id="JQuery基本语法"><a href="#JQuery基本语法" class="headerlink" title="JQuery基本语法"></a>JQuery基本语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(选择器)action（）；</span><br></pre></td></tr></table></figure>
-
-<p>对选择器进行action操作</p>
-<p>选择器以”标签”或直接指定对象</p>
-<h2 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h2><p>绑定<code>bind(事件,函数);</code></p>
-<p>解绑所有函数<code>unbind(事件);</code></p>
-<p>解绑单一函数<code>unbind(事件,函数)</code></p>
-<!--more-->
-
-<h5 id="JQ1-7之后可用on-off代替bind-unbind"><a href="#JQ1-7之后可用on-off代替bind-unbind" class="headerlink" title="JQ1.7之后可用on off代替bind unbind"></a>JQ1.7之后可用<code>on off</code>代替<code>bind unbind</code></h5><h2 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$().text()				获得文本</span><br><span class="line">$().html()				获得html内容</span><br><span class="line">$().val() 				获得值</span><br></pre></td></tr></table></figure>
-
-<p>第二个括号内可更改捕获</p>
-<h2 id="元素操作"><a href="#元素操作" class="headerlink" title="元素操作"></a>元素操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">append()				后添加</span><br><span class="line">prepend()				前添加</span><br><span class="line">before()				前添加（换行）</span><br><span class="line">after()					后添加（换行）</span><br><span class="line">remove()				移除(全部)</span><br><span class="line">empty()					清空(子内容)</span><br></pre></td></tr></table></figure>
-
-<h2 id="CSS方法"><a href="#CSS方法" class="headerlink" title="CSS方法"></a>CSS方法</h2><p><code>$(选择器).css(&quot;样式&quot;,&quot;值&quot;);</code>更改css样式（单属性）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(选择器).css(&#123;</span><br><span class="line">	width:val1,height:val2,background:val3</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">addclass()				添加css样式</span><br><span class="line">removeclass()			移除css样式</span><br><span class="line">toggleclass()			切换</span><br></pre></td></tr></table></figure>
-
-<h2 id="JQ扩展"><a href="#JQ扩展" class="headerlink" title="JQ扩展"></a>JQ扩展</h2><p>1.<code>$.name = function()&#123;&#125;</code>在其他js文件中引用<code>$.name</code>(不常用)</p>
-<p>2.<code>$.fn.name = function()&#123;&#125;</code>引用<code>$().name()</code></p>
-<h2 id="noConflict"><a href="#noConflict" class="headerlink" title="noConflict"></a>noConflict</h2><p>用来防止其他扩展$符号冲突</p>
-<p><code>var name = $.noConflict();</code>用name代替默认的jQuery</p>
-<p>之后可用name代替美元符号</p>
-<h2 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h2><p>异步请求</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">   url:<span class="string">&quot;https://restapi.amap.com/v3/weather/weatherInfo?parameters&quot;</span>,</span><br><span class="line">    type:<span class="string">&quot;GET&quot;</span>,</span><br><span class="line">    success:<span class="function"><span class="keyword">function</span> (<span class="params">data,status</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//具体内容</span></span><br><span class="line">        <span class="built_in">console</span>.log(data);</span><br><span class="line">        <span class="built_in">console</span>.log(status);</span><br><span class="line">        alert();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-
-<p>或直接<code>$.get(&quot;url&quot;,data,fuction)</code>和<code>$.post(&quot;url&quot;,data,function)</code></p>
-
+          <p>前端三件套的延申，点到为止</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/05/JQuery/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -529,7 +507,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-14 20:17:21" itemprop="dateModified" datetime="2021-02-14T20:17:21+08:00">2021-02-14</time>
+                <time title="修改时间：2021-02-14 20:23:24" itemprop="dateModified" datetime="2021-02-14T20:23:24+08:00">2021-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -566,7 +544,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>前端基础学习，网页开发的起始</p>
+          <p>各类选择器的配置应用</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/09/04/CSS/">
@@ -624,7 +602,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-14 20:16:30" itemprop="dateModified" datetime="2021-02-14T20:16:30+08:00">2021-02-14</time>
+                <time title="修改时间：2021-02-14 20:23:39" itemprop="dateModified" datetime="2021-02-14T20:23:39+08:00">2021-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -661,10 +639,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="HTML概念"><a href="#HTML概念" class="headerlink" title="HTML概念"></a>HTML概念</h2><p>静态网页</p>
+          <p>前端基础学习，网页开发的起始</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/09/03/html5/#more" rel="contents">
+              <a class="btn" href="/2020/09/03/html5/">
                 阅读全文 &raquo;
               </a>
             </div>
