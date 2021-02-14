@@ -688,6 +688,7 @@
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">delimiter $$ <span class="comment">--函数标志</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">function</span> myFunction()</span><br><span class="line"><span class="keyword">returns</span> <span class="built_in">int</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">declare</span> <span class="keyword">num</span> <span class="built_in">int</span> <span class="keyword">default</span> <span class="number">1000000</span>;</span><br><span class="line">	<span class="keyword">declare</span> i <span class="built_in">int</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">	while i&lt;num do</span><br><span class="line">		<span class="keyword">insert</span> ...</span><br><span class="line">		<span class="keyword">set</span> i=i+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">while</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
 
 <p><strong>索引数据结构：Btree</strong>,详细介绍<a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html">http://blog.codinglabs.org/articles/theory-of-mysql-index.html</a></p>
+<p>MySQL端口号：3306</p>
 <h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><p>基础概念</p>
 <h3 id="主要操作"><a href="#主要操作" class="headerlink" title="主要操作"></a>主要操作</h3><p>命令结尾跟<code>;</code></p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql -u root -p	<span class="comment">-- 登录</span></span><br><span class="line"><span class="keyword">update</span> mysql.user <span class="keyword">set</span> authentication_string=<span class="keyword">password</span>(<span class="string">&#x27;123456&#x27;</span>)<span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">&#x27;root&#x27;</span> <span class="keyword">and</span> Host=<span class="string">&#x27;localhost&#x27;</span>;	<span class="comment">-- 修改密码</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">version</span>()	<span class="comment">-- 查询mysql版本</span></span><br><span class="line"><span class="keyword">select</span> <span class="number">100</span>*<span class="number">3</span><span class="number">-1</span> <span class="keyword">as</span> 计算结果	<span class="comment">-- 可以用于简单计算</span></span><br><span class="line"><span class="comment">-- 代表注释</span></span><br><span class="line"><span class="comment">-- 字段加``取消高亮,一般用于字段和表名等</span></span><br></pre></td></tr></table></figure>
@@ -2526,22 +2527,57 @@ cal [-y]                查询日历(显示一年)
   <entry>
     <title>JavaWeb</title>
     <url>/2021/02/12/JavaWeb/</url>
-    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>静态web<ul>
-<li>htm，html，css</li>
-<li>如果服务器上一直存在这些文件，就可以被直接读取(网络)</li>
-<li>提供给所有人看的数据始终不会发生变化</li>
+    <content><![CDATA[<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>定义：在Java中，动态web资源开发的技术统称为JavaWeb</p>
+<ul>
+<li><p>静态web</p>
+<ul>
+<li><p>htm，html，css</p>
+</li>
+<li><p>如果服务器上一直存在这些文件，就可以被直接读取(网络)</p>
+</li>
+<li><p>提供给所有人看的数据始终不会发生变化</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210212191911405.png" alt="image-20210212191911405"></p>
+</li>
+<li><p>存在的缺点</p>
+<ul>
+<li><p>web无法动态更新，所有用户看到的都是同一页面</p>
+<p>规避方法：</p>
+<ul>
+<li>轮播图，点击特效：伪动态</li>
+<li>JavaScript(实际开发应用最多)</li>
+<li>VBScript</li>
 </ul>
 </li>
-<li>动态web<ul>
-<li>几乎所有网站都用到动态web</li>
-<li>每个人在不同的时间和地点看到的信息各不相同</li>
-<li>技术栈：Servlet/JSP,ASP,PHP</li>
+<li><p>无法和数据库交互(数据无法持久化，用户无法交互)</p>
+</li>
 </ul>
 </li>
 </ul>
-<p>定义：在Java中，动态web资源开发的技术统称为Javaweb</p>
-<h3 id="web应用程序"><a href="#web应用程序" class="headerlink" title="web应用程序"></a>web应用程序</h3><p><strong>定义：可以提供浏览器访问的程序</strong></p>
+</li>
+<li><p>动态web</p>
+<ul>
+<li><p>几乎所有网站都用到动态web</p>
+</li>
+<li><p>每个人在不同的时间和地点看到的信息各不相同，web页面展示的效果因人而异</p>
+</li>
+<li><p>技术栈：Servlet/JSP,ASP,PHP</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/Q~8QK11T9B77N5OQQ2JB2@D.png" alt="img"></p>
+</li>
+<li><p>存在的缺点</p>
+<ul>
+<li>如果加载服务器的动态web资源出现错误，我们需要重新编写后台程序，重新发布(停机维护)</li>
+</ul>
+</li>
+<li><p>优点</p>
+<ul>
+<li>web页面可以动态更新，所有用户看到的都不是同一个页面</li>
+<li>可以与数据库交互(数据持久化：注册，商品信息，用户信息…)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="web应用程序"><a href="#web应用程序" class="headerlink" title="web应用程序"></a>web应用程序</h2><p><strong>定义：可以提供浏览器访问的程序</strong></p>
 <ul>
 <li>a.html,b.html…多个web资源，可以被外界访问，对外界提供服务</li>
 <li>能访问到的任何页面都存在网络上某台计算机上</li>
@@ -2557,6 +2593,226 @@ cal [-y]                查询日历(显示一年)
 </li>
 </ul>
 <p>web应用程序编写完毕后若想提供给外界访问，<strong>需要一个服务器来统一管理</strong></p>
+<h2 id="web服务器"><a href="#web服务器" class="headerlink" title="web服务器"></a>web服务器</h2><p><strong>问题：请谈谈网站是如何进行访问的？</strong></p>
+<ol>
+<li>输入一个域名，回车</li>
+<li>检查本机<code>C:\\Windows\System32\drivers\etc\hosts</code>配置文件中有没有该域名映射<ul>
+<li>有：直接返回对应的ip地址，在该地址中如果有需要访问的web程序则可以直接访问</li>
+<li>没有：去DNS服务器查找，找到则返回，找不到则返回找不到</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210212211156127.png" alt="image-20210212211156127"></p>
+<h3 id="技术讲解"><a href="#技术讲解" class="headerlink" title="技术讲解"></a>技术讲解</h3><ul>
+<li>ASP(微软)<ul>
+<li>国内最早流行的就是ASP</li>
+<li>在HTML中嵌入了VB的脚本，ASP+COM</li>
+<li>ASP开发中，一个页面都有几千行代码，代码极其混乱，维护成本高</li>
+<li>使用C#语言</li>
+<li>IIS</li>
+</ul>
+</li>
+<li>PHP<ul>
+<li>开发速度快，功能强大，跨平台，代码简单</li>
+<li>无法承载大访问量情况(局限性)</li>
+</ul>
+</li>
+<li>JSP/Servlet(sun)<ul>
+<li>sun公司主推的B/S架构(B/S:浏览和服务器；C/S：客户端和服务器)</li>
+<li>基于Java语言</li>
+<li>可以承载三高问题的影响(高并发，高可用，高性能)</li>
+<li>语法接近ASP，加强市场强度</li>
+</ul>
+</li>
+</ul>
+<h3 id="web服务器-1"><a href="#web服务器-1" class="headerlink" title="web服务器"></a>web服务器</h3><p>服务器是一种被动的操作，用来处理用户的一些请求和给用户一些相应信息</p>
+<h4 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h4><p>Apache软件基金会下的核心项目，免费开源的轻量级服务器</p>
+<p>基于java，使用前应配置好java环境变量</p>
+<p><strong>Tomcat默认端口号：8080</strong></p>
+<p><strong>http默认端口号：80</strong></p>
+<p><strong>https默认端口号：443</strong></p>
+<p><strong>配置</strong></p>
+<p>/conf目录下的server.xml文件：</p>
+<ul>
+<li>配置启动的端口号</li>
+<li>配置主机名称，配置启动端口号</li>
+<li>配置主机名称，默认网络应用存放地址</li>
+</ul>
+<p><strong>发布一个web网站</strong></p>
+<ol>
+<li><p>将自己写的网站放置到服务器中指定的web应用文件夹(webapps)下，就可以进行访问了</p>
+<p>应有的结构：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">--webapps</span><br><span class="line">	&#x3D;ROOT ：默认Webapp目录</span><br><span class="line">	-kuangstudy ：网站目录名</span><br><span class="line">		-WEB-INF</span><br><span class="line">			-classes ：java程序</span><br><span class="line">			-lib ：web应用所依赖的jar包</span><br><span class="line">			-web.xml ：网站配置文件</span><br><span class="line">		-index.html ：默认的首页(或jsp文件)</span><br><span class="line">		-static</span><br><span class="line">			-css</span><br><span class="line">				-style.css</span><br><span class="line">			-js</span><br><span class="line">			-img</span><br><span class="line">		-......</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<ul>
+<li>IIS(Windows自带)</li>
+</ul>
+<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><p>HTTP(超文本传输协议)是一个简单的请求-响应协议，通常运行在TCP之上</p>
+<ul>
+<li>文本：html，字符串……</li>
+<li>超文本：图片，音乐，视频，定位，地图……</li>
+<li>默认端口80</li>
+</ul>
+<p><strong>两个时代</strong></p>
+<ul>
+<li>http1.0<ul>
+<li>客户端可以与web服务器连接后，只能获取一个web资源</li>
+</ul>
+</li>
+<li>http1.1<ul>
+<li>客户端可以与web服务器连接后，可以获取多个web资源</li>
+</ul>
+</li>
+</ul>
+<h2 id="http请求"><a href="#http请求" class="headerlink" title="http请求"></a>http请求</h2><p>客户端–发请求–&gt;服务器</p>
+<p><strong>请求行</strong></p>
+<ul>
+<li>请求方式：<strong>Get,Post</strong>,HEAD,DELETE,PUT,TRACT<ul>
+<li>Get：能够携带的参数较少，大小有限制，会在浏览器的URL地址栏显示数据内容，不安全，但高效</li>
+<li>Post：能够携带的参数没有限制，大小没有限制，不会在浏览器的URL地址栏显示数据内容，安全，但不高效</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Request URL: https:<span class="comment">//www.baidu.com/ ;请求地址</span></span><br><span class="line">Request Method: GET <span class="comment">//请求方式</span></span><br><span class="line">Status Code: <span class="number">200</span> OK <span class="comment">//状态代码:200</span></span><br><span class="line">Remote Address: <span class="number">14.215</span>.<span class="number">177.38</span>:<span class="number">443</span> <span class="comment">//远程地址</span></span><br><span class="line">Referrer Policy: unsafe-url <span class="comment">//引用站点协议</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>请求头</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Accept: text/plain <span class="comment">//所支持数据类型</span></span><br><span class="line">Accept-Encoding: gzip, deflate, br <span class="comment">//支持的编码形式</span></span><br><span class="line">Accept-Language: zh-CN,zh;q=<span class="number">0.9</span>,en;q=<span class="number">0.8</span>,en-GB;q=<span class="number">0.7</span>,en-US;q=<span class="number">0.6</span> <span class="comment">//支持的语言环境</span></span><br><span class="line">cache-Control:max-age=<span class="number">0</span> <span class="comment">//缓存控制</span></span><br><span class="line">Connection: keep-alive <span class="comment">//完成后式断开还是保持连接</span></span><br><span class="line">HOST: <span class="comment">//主机</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="http响应"><a href="#http响应" class="headerlink" title="http响应"></a>http响应</h2><p>服务器–响应–&gt;客户端</p>
+<p>百度的响应</p>
+<p><strong>响应头</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Cache-Control: <span class="keyword">private</span> <span class="comment">//缓存控制</span></span><br><span class="line">Connection: keep-alive <span class="comment">//连接</span></span><br><span class="line">Content-Encoding: gzip <span class="comment">//编码</span></span><br><span class="line">Content-Type: text/html;charset=utf-<span class="number">8</span> <span class="comment">//类型</span></span><br><span class="line"><span class="comment">//Content-Length: 78</span></span><br><span class="line"><span class="comment">//Date: Fri, 12 Feb 2021 13:48:52 GMT</span></span><br><span class="line"><span class="comment">//Expires: Fri, 12 Feb 2021 13:48:52 GMT</span></span><br><span class="line"><span class="comment">//Server: BWS/1.0</span></span><br><span class="line"><span class="comment">//Vary: Accept-Encoding</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>响应体</strong></p>
+<p>一部分与请求头相同</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Accept: text/plain //所支持数据类型</span></span><br><span class="line"><span class="comment">//Accept-Encoding: gzip, deflate, br //支持的编码形式</span></span><br><span class="line"><span class="comment">//Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6 //支持的语言环境</span></span><br><span class="line"><span class="comment">//cache-Control:max-age=0 //缓存控制</span></span><br><span class="line"><span class="comment">//Connection: keep-alive //完成后式断开还是保持连接</span></span><br><span class="line"><span class="comment">//HOST: //主机</span></span><br><span class="line">Refresh: 刷新间隔</span><br><span class="line">Location: 重定位</span><br></pre></td></tr></table></figure>
+
+<p><strong>响应码</strong></p>
+<table>
+<thead>
+<tr>
+<th>响应码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>请求成功</td>
+</tr>
+<tr>
+<td>3**</td>
+<td>请求重定向</td>
+</tr>
+<tr>
+<td>4**</td>
+<td>找不到资源(404)</td>
+</tr>
+<tr>
+<td>5**</td>
+<td>服务器代码错误(500,502)</td>
+</tr>
+</tbody></table>
+<p><strong>当浏览器地址栏输入地址并回车的一瞬间到页面能够展示回来，经历了什么？</strong></p>
+<h1 id="MAVEN"><a href="#MAVEN" class="headerlink" title="MAVEN"></a>MAVEN</h1><p>Javaweb开发中需使用大量jar包需要手动导入，而Maven可以帮助我们导入和配置jar包</p>
+<p>Maven是一个项目架构管理工具</p>
+<p><strong>核心思想：约定大于配置</strong></p>
+<p><strong>配置</strong></p>
+<p>更改位于/conf目录下的settings.xml配置文件</p>
+<ul>
+<li><p>更改镜像：在mirrors头下添加以下标签</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*,!jeecg,!jeecg-snapshots<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改本地仓库位置：在settings头下的localRepository标签下改写位置</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>D:\systems\apache-maven-3.6.3\maven-repo<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="使用idea创建Maven项目"><a href="#使用idea创建Maven项目" class="headerlink" title="使用idea创建Maven项目"></a>使用idea创建Maven项目</h2><p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210213113705365.png" alt="image-20210213113705365"></p>
+<p>使用maven创建模板</p>
+<p>一个干净的maven项目：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210213121845476.png" alt="image-20210213121845476"></p>
+<p>maven目录：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210213155645318.png" alt="image-20210213155645318"></p>
+<p>pom.xml是maven的核心配置文件：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--Maven版本和头文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--配置的GAV--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Javaweb-01-maven<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--项目打包方式</span></span><br><span class="line"><span class="comment">  jar包：java应用</span></span><br><span class="line"><span class="comment">  war包：javaweb应用</span></span><br><span class="line"><span class="comment">  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--配置--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--项目默认构建编码--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--编译版本--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--项目依赖--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--Maven的高级之处在于可以帮助导入需要导入的包所依赖的其他的包(套娃)--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--项目构建所需--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>Javaweb-01-maven<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">pluginManagement</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">pluginManagement</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>idea生成目录树，代表maven中jar包的结构体系</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210213162604310.png" alt="image-20210213162604310"></p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li>Maven与idea版本不匹配问题(比如2019.3之前的版本无法使用Maven3.6.3)</li>
+<li>Tomcat闪退：环境变量问题</li>
+<li>替换webapp4.0版本与tomcat一致</li>
+<li>java和resources文件夹添加标记</li>
+</ol>
+<h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><p>sun公司开发动态web的一门技术，实现了Servlet接口的Java程序称为Servlet</p>
+<p>开发Servlet程序的两个小步骤：</p>
+<ul>
+<li>编写一个类实现Servlet接口</li>
+<li>把开发好的java类部署到web服务器中</li>
+</ul>
+<h2 id="HelloServlet"><a href="#HelloServlet" class="headerlink" title="HelloServlet"></a>HelloServlet</h2><p>Servlet有两个默认的实现类：HttpServlet和GenericServlet</p>
+<ol>
+<li><p>构建一个普通的Maven项目，删掉src目录，在项目中建立moudel，作为夫项目的子工程</p>
+</li>
+<li><p>父子项目的理解：</p>
+<p>父项目中有</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">module</span>&gt;</span>Servlet<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>子项目中有</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Javaweb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父项目中的java子项目苦役直接使用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">son extends father</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Maven环境优化</p>
+<ul>
+<li>更新web.xml</li>
+<li>将Maven结构搭建完整</li>
+</ul>
+</li>
+<li><p>编写Servlet程序</p>
+<ul>
+<li><p>写一个普通类</p>
+</li>
+<li><p>实现Servlet接口(继承已经实现好的类HttpServlet)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="comment">//get或post只是实现请求的不同方式，可以互相调用，业务逻辑相同</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        PrintWriter Writer = resp.getWriter();</span><br><span class="line">        Writer.print(<span class="string">&quot;HelloServlet&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.doGet(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>编写Sevlet映射</p>
+<p>原因：编写的是java程序，要通过浏览器访问，而浏览器要连接web服务器，所以我们需要在web服务中注册编写的Servlet，还需给他一个浏览器能够访问的路径</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--注册Servlet--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.lan5th.servlet.HelloServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--Servlet请求路径--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hello<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置Tomcat(配置项目发布路径)</p>
+</li>
+<li><p>启动测试</p>
+</li>
+</ol>
+<h2 id="Servlet运行原理"><a href="#Servlet运行原理" class="headerlink" title="Servlet运行原理"></a>Servlet运行原理</h2><p>Servlet由web服务器调用，web服务器在收到浏览器请求递交处理请求和响应</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210214165555258.png" alt="image-20210214165555258"></p>
+<p><strong>Mapping</strong></p>
+<ol>
+<li><p>指定一个映射路径</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hello<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定多个映射路径</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--此时多个url都可以访问到指定资源--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hello1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hello2<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定通用映射路径</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--此时后缀任意字符url都可以访问到指定资源--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hello/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>默认请求路径</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--此时任意字符url都可以访问到指定资源--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现自定义后缀映射路径</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--此时后缀任意带指定后缀url都可以访问到指定资源</span></span><br><span class="line"><span class="comment">但是*前面不能加项目映射路径</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.lan5th<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优先级：指定了固有映射路径优先级最高，找不到就会走默认的处理请求</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>后端学习</category>
