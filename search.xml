@@ -790,6 +790,75 @@
       </categories>
   </entry>
   <entry>
+    <title>Sklearn学习</title>
+    <url>/2020/12/15/Sklearn/</url>
+    <content><![CDATA[<p>简略的sklearn学习</p>
+<a id="more"></a>
+
+<h4 id="数据集api"><a href="#数据集api" class="headerlink" title="数据集api"></a>数据集api</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.datasets.datasets.load_*()						小规模数据集</span><br><span class="line">sklearn.datasets.datasets.fetch_*(data_home&#x3D;None)		 大规模数据集，需要下载</span><br></pre></td></tr></table></figure>
+
+<p>数据集返回值<code>datasets.base.Bunch</code>字典类型</p>
+<p>通过<code>dict[&quot;key&quot;]</code>或<code>bunch.key</code>来获得数据</p>
+<h4 id="数据集划分"><a href="#数据集划分" class="headerlink" title="数据集划分"></a>数据集划分</h4><p>训练数据：用于训练，构建模型</p>
+<p>测试数据：模型检验时使用，用于评估模型(20%~30%)</p>
+<!--more-->
+
+<h4 id="数据划分api"><a href="#数据划分api" class="headerlink" title="数据划分api"></a>数据划分api</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.model_selection.train_test_split(data,[target],*options)</span><br></pre></td></tr></table></figure>
+
+<p>参数：<code>test_size</code>测试集大小，float型，<code>random_state</code>随机数种子</p>
+<p>返回四个值：训练集特征值，测试集特征值，训练集目标值，测试集目标值</p>
+<h3 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h3><p>——决定机器学习上限</p>
+<h4 id="特征抽取-提取"><a href="#特征抽取-提取" class="headerlink" title="特征抽取/提取"></a>特征抽取/提取</h4><p>文本、类型-&gt;数值</p>
+<h5 id="特征提取api"><a href="#特征提取api" class="headerlink" title="特征提取api"></a>特征提取api</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction</span><br></pre></td></tr></table></figure>
+
+<h5 id="字典特征提取"><a href="#字典特征提取" class="headerlink" title="字典特征提取"></a>字典特征提取</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction.DictVectorizer(sparse&#x3D;True,...)		(sparse默认稀疏矩阵)</span><br><span class="line">DictVectorizer.fit_transfer(data)							  返回sparse矩阵</span><br><span class="line">DictVectorizer.inverse_transform(marix)						  返回原先数据</span><br><span class="line">DictVectorizer.get_feature_names()							  返回类别名称</span><br></pre></td></tr></table></figure>
+
+<p>one-hot编码：一个类占矩阵的一列</p>
+<h5 id="文本特征提取"><a href="#文本特征提取" class="headerlink" title="文本特征提取"></a>文本特征提取</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction.text.CountVectorizer(stop_words&#x3D;[])	可设置停用词，即不统计文本</span><br><span class="line">DictVectorizer.fit_transfer(data)                             	返回sparse矩阵DictVectorizer.inverse_transform(marix)                       	返回原先数据格DictVectorizer.get_feature_names()                            	返回单词列表</span><br><span class="line">sklearn.feature_extraction.text.TfidfVectorizer					找出重要词</span><br></pre></td></tr></table></figure>
+
+<p>#中文需要手动分割词句或使用jieba库</p>
+<h6 id="jieba使用"><a href="#jieba使用" class="headerlink" title="jieba使用"></a>jieba使用</h6><p><code>jieba.cut(&quot;&quot;)</code>分割单个字符串，对多个字符串的列表进行分割时使用<code>for in</code>进行遍历</p>
+<h5 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction.text.TfidfVectorizer(stop_words&#x3D;None,...)</span><br><span class="line">TfidfVectorizer.fit_transform(X)								X为文本或字符串，返回sparse矩阵</span><br></pre></td></tr></table></figure>
+
+<p>TF：词频：一个词出现次数/总词数</p>
+<p>IDF：逆向文档频率：lg(文章数/包含该词文章数)</p>
+<p>TF-IDF：重要程度：TF*IDF</p>
+<h3 id="特征预处理"><a href="#特征预处理" class="headerlink" title="特征预处理"></a>特征预处理</h3><p>特征预处理api</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.preprocessing</span><br></pre></td></tr></table></figure>
+
+<p>特征单位或大小相差的程度不同，某特征方差比其他特征大出几个数量级，容易影响目标结果，使一些算法无法学习到其他特征</p>
+<h4 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h4><p>对原始数据进行变换把数据映射到(默认[0,1])之间，适合精确小数据场景(受异常值影响较大，稳定性较差)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">X&#39;&#x3D;(x-min)&#x2F;(max-min)							maa,min为数据中的最大最小值</span><br><span class="line">X&#39;&#39;&#x3D;X&#39;*(mx-mi)+mi								mx,mi为指定区间范围的最大值最小值</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.preprocessing.MinMaxScaler(feature_range&#x3D;(0,1)...)</span><br><span class="line">MinMaxScaler.fit_transform(X)				X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+
+<h4 id="标准化"><a href="#标准化" class="headerlink" title="标准化"></a>标准化</h4><p>对原始数据进行变换把数据变换到均值为0，标准差为1的范围内,适合嘈杂的大数据场景</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">X&#39;&#x3D;(x-mean)&#x2F;std									mean平均值，std标准差</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.preprocessing.StanderdScaler()</span><br><span class="line">StanderdScaler.fit_transform(X)				X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+
+<h3 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h3><p>ndarray：维数：嵌套的层数</p>
+<p>降低特征个数，效果：特征之间不相关</p>
+<h4 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h4><h5 id="Filter过滤式"><a href="#Filter过滤式" class="headerlink" title="Filter过滤式"></a>Filter过滤式</h5><h6 id="方差选择法"><a href="#方差选择法" class="headerlink" title="方差选择法"></a>方差选择法</h6><p>低方差值特征过滤API</p>
+<p>删除小于设定方差的特征值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_selection.VarianceThreshold(threshold &#x3D; 0.0)</span><br><span class="line">VarianceThreshold.fit_transform(X)			X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+
+<h6 id="相关系数"><a href="#相关系数" class="headerlink" title="相关系数"></a>相关系数</h6><p>特征之间相关程度</p>
+<p>皮尔逊相关系数api</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from scipy.stats import pearsonr</span><br><span class="line">pearsonr(data[&quot;var1&quot;], data[&quot;var2&quot;])		计算相关系数,返回(r,p) r:相关系数;p:p越小表示相关系数月显著</span><br></pre></td></tr></table></figure>
+
+<p>相关性很高时：选取一个/加权求和</p>
+<h5 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h5><p>高维转低维特征，可能舍弃原有数据，创造新的变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.decomposition.PCA(n_components&#x3D;None)	n-components:小数:表示保留%的信息;整数:减少到几个特征值</span><br><span class="line">PCA.fit_transform(X)					X为numpy array数据[n_samples, n_features],返回同指定维度array</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h6><h6 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h6><h6 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h6>]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Java相关</title>
     <url>/2020/10/12/Java%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>线程分为执行时间与等待事件，在一个线程的等待事件中可以执行其他线程</p>
@@ -958,72 +1027,55 @@
       </categories>
   </entry>
   <entry>
-    <title>Sklearn学习</title>
-    <url>/2020/12/15/Sklearn/</url>
-    <content><![CDATA[<p>简略的sklearn学习</p>
+    <title>Vue基础</title>
+    <url>/2020/10/07/Vue/</url>
+    <content><![CDATA[<p>官方文档<a href="https://cn.vuejs.org/">https://cn.vuejs.org/</a></p>
 <a id="more"></a>
 
-<h4 id="数据集api"><a href="#数据集api" class="headerlink" title="数据集api"></a>数据集api</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.datasets.datasets.load_*()						小规模数据集</span><br><span class="line">sklearn.datasets.datasets.fetch_*(data_home&#x3D;None)		 大规模数据集，需要下载</span><br></pre></td></tr></table></figure>
+<h2 id="引入Vue"><a href="#引入Vue" class="headerlink" title="引入Vue"></a>引入Vue</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">开发环境版本</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">生产环境版本</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>数据集返回值<code>datasets.base.Bunch</code>字典类型</p>
-<p>通过<code>dict[&quot;key&quot;]</code>或<code>bunch.key</code>来获得数据</p>
-<h4 id="数据集划分"><a href="#数据集划分" class="headerlink" title="数据集划分"></a>数据集划分</h4><p>训练数据：用于训练，构建模型</p>
-<p>测试数据：模型检验时使用，用于评估模型(20%~30%)</p>
-<!--more-->
+<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><p>插值表达式<code>&#123;&#123;&#125;&#125;</code>可直接获取Vue实例中的数据或函数</p>
+<p>同时可以插入任何合法的JS表达式</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  &#123;&#123; message &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="数据划分api"><a href="#数据划分api" class="headerlink" title="数据划分api"></a>数据划分api</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.model_selection.train_test_split(data,[target],*options)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message: <span class="string">&#x27;Hello Vue!&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//methods: &#123;&#125;挂载方法可选</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>参数：<code>test_size</code>测试集大小，float型，<code>random_state</code>随机数种子</p>
-<p>返回四个值：训练集特征值，测试集特征值，训练集目标值，测试集目标值</p>
-<h3 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h3><p>——决定机器学习上限</p>
-<h4 id="特征抽取-提取"><a href="#特征抽取-提取" class="headerlink" title="特征抽取/提取"></a>特征抽取/提取</h4><p>文本、类型-&gt;数值</p>
-<h5 id="特征提取api"><a href="#特征提取api" class="headerlink" title="特征提取api"></a>特征提取api</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction</span><br></pre></td></tr></table></figure>
+<p>el为挂载点，挂载选择器，data替换双括号中的内容</p>
+<p>但不能挂载body或html标签</p>
+<p>插值表达式可能会引起插值闪烁（网速慢时先显示表达式后显示数据）可用<code>v-text</code>或<code>v-html</code>指令替代内容来消除该现象</p>
+<h3 id="v-on基础"><a href="#v-on基础" class="headerlink" title="v-on基础"></a>v-on基础</h3><p>用来给元素绑定事件如<code>v-on:click=&quot;方法&quot;</code>或<code>@click=&quot;方法&quot;</code></p>
+<p>方法通过methods声明</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">methods&#123;</span><br><span class="line">	md1:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</span><br><span class="line">	md2:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="字典特征提取"><a href="#字典特征提取" class="headerlink" title="字典特征提取"></a>字典特征提取</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction.DictVectorizer(sparse&#x3D;True,...)		(sparse默认稀疏矩阵)</span><br><span class="line">DictVectorizer.fit_transfer(data)							  返回sparse矩阵</span><br><span class="line">DictVectorizer.inverse_transform(marix)						  返回原先数据</span><br><span class="line">DictVectorizer.get_feature_names()							  返回类别名称</span><br></pre></td></tr></table></figure>
+<p>其他指令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">v-show					是否显示（操作样式）</span><br><span class="line">v-if					是否显示（操作DOM树）</span><br><span class="line">v-bind					设置属性（v-可用:代替）</span><br><span class="line">v-for					调用数组中的值</span><br><span class="line">v-model					获取和设置表单元素的值</span><br></pre></td></tr></table></figure>
 
-<p>one-hot编码：一个类占矩阵的一列</p>
-<h5 id="文本特征提取"><a href="#文本特征提取" class="headerlink" title="文本特征提取"></a>文本特征提取</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction.text.CountVectorizer(stop_words&#x3D;[])	可设置停用词，即不统计文本</span><br><span class="line">DictVectorizer.fit_transfer(data)                             	返回sparse矩阵DictVectorizer.inverse_transform(marix)                       	返回原先数据格DictVectorizer.get_feature_names()                            	返回单词列表</span><br><span class="line">sklearn.feature_extraction.text.TfidfVectorizer					找出重要词</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>改变类名可用多元表达式,是否生效取决于<code>isActive</code>的值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;img :src&#x3D;&quot;&quot; :class&#x3D;&quot;isActive?&#39;类名&#39;:&#39;&#39;&quot;&gt;</span><br><span class="line">或&#123;active:isActive&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>v-for示例</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;item in arr&quot;</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>#中文需要手动分割词句或使用jieba库</p>
-<h6 id="jieba使用"><a href="#jieba使用" class="headerlink" title="jieba使用"></a>jieba使用</h6><p><code>jieba.cut(&quot;&quot;)</code>分割单个字符串，对多个字符串的列表进行分割时使用<code>for in</code>进行遍历</p>
-<h5 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_extraction.text.TfidfVectorizer(stop_words&#x3D;None,...)</span><br><span class="line">TfidfVectorizer.fit_transform(X)								X为文本或字符串，返回sparse矩阵</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">	arr:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>TF：词频：一个词出现次数/总词数</p>
-<p>IDF：逆向文档频率：lg(文章数/包含该词文章数)</p>
-<p>TF-IDF：重要程度：TF*IDF</p>
-<h3 id="特征预处理"><a href="#特征预处理" class="headerlink" title="特征预处理"></a>特征预处理</h3><p>特征预处理api</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.preprocessing</span><br></pre></td></tr></table></figure>
+<p>调用下标可用</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;&#123;item,index&#125; in arr&quot;</span>&gt;</span>&#123;&#123;index&#125;&#125;&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>特征单位或大小相差的程度不同，某特征方差比其他特征大出几个数量级，容易影响目标结果，使一些算法无法学习到其他特征</p>
-<h4 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h4><p>对原始数据进行变换把数据映射到(默认[0,1])之间，适合精确小数据场景(受异常值影响较大，稳定性较差)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">X&#39;&#x3D;(x-min)&#x2F;(max-min)							maa,min为数据中的最大最小值</span><br><span class="line">X&#39;&#39;&#x3D;X&#39;*(mx-mi)+mi								mx,mi为指定区间范围的最大值最小值</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Axios"><a href="#Axios" class="headerlink" title="Axios"></a>Axios</h2><p>引入网络请求库</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://unpkg.com/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.preprocessing.MinMaxScaler(feature_range&#x3D;(0,1)...)</span><br><span class="line">MinMaxScaler.fit_transform(X)				X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+<p>网络请求方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">axios.get(地址?key1&#x3D;value1&amp;key2&#x3D;value2).them(function(response)&#123;&#125;,function(err)&#123;&#125;)</span><br><span class="line">axios.post(地址,&#123;key1:value1,key2:value2&#125;).then(function(response)&#123;&#125;,function(err)&#123;&#125;)</span><br></pre></td></tr></table></figure>
 
-<h4 id="标准化"><a href="#标准化" class="headerlink" title="标准化"></a>标准化</h4><p>对原始数据进行变换把数据变换到均值为0，标准差为1的范围内,适合嘈杂的大数据场景</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">X&#39;&#x3D;(x-mean)&#x2F;std									mean平均值，std标准差</span><br></pre></td></tr></table></figure>
+<p>key由接口文档提供，value为提供的数据</p>
+<h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.stop					阻止事件冒泡</span><br><span class="line">.prevent				阻止事件行为</span><br><span class="line">.capture				事件捕获执行</span><br><span class="line">.self					阻止自身的冒泡</span><br><span class="line">.once					仅执行一次</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.preprocessing.StanderdScaler()</span><br><span class="line">StanderdScaler.fit_transform(X)				X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
-
-<h3 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h3><p>ndarray：维数：嵌套的层数</p>
-<p>降低特征个数，效果：特征之间不相关</p>
-<h4 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h4><h5 id="Filter过滤式"><a href="#Filter过滤式" class="headerlink" title="Filter过滤式"></a>Filter过滤式</h5><h6 id="方差选择法"><a href="#方差选择法" class="headerlink" title="方差选择法"></a>方差选择法</h6><p>低方差值特征过滤API</p>
-<p>删除小于设定方差的特征值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.feature_selection.VarianceThreshold(threshold &#x3D; 0.0)</span><br><span class="line">VarianceThreshold.fit_transform(X)			X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
-
-<h6 id="相关系数"><a href="#相关系数" class="headerlink" title="相关系数"></a>相关系数</h6><p>特征之间相关程度</p>
-<p>皮尔逊相关系数api</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from scipy.stats import pearsonr</span><br><span class="line">pearsonr(data[&quot;var1&quot;], data[&quot;var2&quot;])		计算相关系数,返回(r,p) r:相关系数;p:p越小表示相关系数月显著</span><br></pre></td></tr></table></figure>
-
-<p>相关性很高时：选取一个/加权求和</p>
-<h5 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h5><p>高维转低维特征，可能舍弃原有数据，创造新的变量</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sklearn.decomposition.PCA(n_components&#x3D;None)	n-components:小数:表示保留%的信息;整数:减少到几个特征值</span><br><span class="line">PCA.fit_transform(X)					X为numpy array数据[n_samples, n_features],返回同指定维度array</span><br></pre></td></tr></table></figure>
-
-
-
-<h6 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h6><h6 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h6><h6 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h6>]]></content>
+]]></content>
       <categories>
-        <category>机器学习</category>
+        <category>web前端</category>
       </categories>
   </entry>
   <entry>
@@ -1190,53 +1242,129 @@ cal [-y]                查询日历(显示一年)
       </categories>
   </entry>
   <entry>
-    <title>Vue基础</title>
-    <url>/2020/10/07/Vue/</url>
-    <content><![CDATA[<p>官方文档<a href="https://cn.vuejs.org/">https://cn.vuejs.org/</a></p>
+    <title>Javascript总结</title>
+    <url>/2020/09/06/javascript/</url>
+    <content><![CDATA[<h2 id="JS基础s"><a href="#JS基础s" class="headerlink" title="JS基础s"></a>JS基础s</h2><p>引入js文件<code>&lt;script src=&quot;地址&quot;&gt;&lt;/script&gt;</code></p>
+<p>输出<code>document.write(&quot;&lt;h1&gt;内容&lt;/h1&gt;&quot;)</code></p>
+<p>改变html中内容<code>document.getElementById(&quot;ID&quot;).innerHTML=&quot;新内容&quot;</code></p>
 <a id="more"></a>
 
-<h2 id="引入Vue"><a href="#引入Vue" class="headerlink" title="引入Vue"></a>引入Vue</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">开发环境版本</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">生产环境版本</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h5><p>单行注释<code>//注释</code></p>
+<p>多行注释<code>/*注释*/</code></p>
+<h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><p>通过<code>var</code>声明各种类型</p>
+<p>数组声明<code>var arr=[1,2,3,4];</code></p>
+<p>动态数组<code>var arr=new Array();</code></p>
+<p>不加前缀直接声明全局变量<code>m = 1</code></p>
+<p>严格作用域用<code>let</code></p>
+<p>可以通过赋值为空的方法清除变量<code>a=null</code></p>
+<h5 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h5><p>字符串拼接可直接用<code>+</code></p>
+<p>任何类型与字符串作运算会被强制转换成字符串类型</p>
+<p>比较运算符：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x3D;&#x3D;						双等（其他类型与字符串比较会自动转换）</span><br><span class="line">&#x3D;&#x3D;&#x3D;						三等（完全判等）</span><br><span class="line">!&#x3D;						不等（同双等）</span><br><span class="line">!&#x3D;&#x3D;						不等（同三等）</span><br></pre></td></tr></table></figure>
 
-<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><p>插值表达式<code>&#123;&#123;&#125;&#125;</code>可直接获取Vue实例中的数据或函数</p>
-<p>同时可以插入任何合法的JS表达式</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  &#123;&#123; message &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>另外还有&lt; &gt; &lt;= &gt;=比较运算符</p>
+<h5 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h5><p><code>if else,switch,for,while,do while</code>同C语言</p>
+<p><code>for(j in i)</code>结构将j遍历i[]中的所有元素</p>
+<p>跳转语句同C语言</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">常用函数</span><br><span class="line">alert()					弹出对话框</span><br><span class="line">console.log()			在html命令行显示</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message: <span class="string">&#x27;Hello Vue!&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//methods: &#123;&#125;挂载方法可选</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>定义函数</strong><code>function 函数名()&#123;函数体&#125;</code></p>
+<p>函数可以在<code>&lt;script&gt;</code>标签中使用或在HTML文件中使用</p>
+<p>函数加<code>this</code>指向本元素,如</p>
+<p><code>&lt;div onmouseout=&quot;function(this)&quot;&gt;&lt;/div&gt;</code>this指向本<code>div</code></p>
+<p>函数可用<code>arguments.calle(n-1)</code>递归调用自身函数</p>
+<h5 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	异常代码块</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">	<span class="comment">//错误信息处理</span></span><br><span class="line">	alert(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>el为挂载点，挂载选择器，data替换双括号中的内容</p>
-<p>但不能挂载body或html标签</p>
-<p>插值表达式可能会引起插值闪烁（网速慢时先显示表达式后显示数据）可用<code>v-text</code>或<code>v-html</code>指令替代内容来消除该现象</p>
-<h3 id="v-on基础"><a href="#v-on基础" class="headerlink" title="v-on基础"></a>v-on基础</h3><p>用来给元素绑定事件如<code>v-on:click=&quot;方法&quot;</code>或<code>@click=&quot;方法&quot;</code></p>
-<p>方法通过methods声明</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">methods&#123;</span><br><span class="line">	md1:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</span><br><span class="line">	md2:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">onClick				    单击事件</span><br><span class="line">onMouseOver				鼠标经过事件</span><br><span class="line">onMouseOut				鼠标移出事件</span><br><span class="line">onChange				文本内容改变事件</span><br><span class="line">onSelect				文本框选中事件</span><br><span class="line">onFocus					光标聚集事件</span><br><span class="line">onBlur					移开光标事件</span><br><span class="line">onLoad					网页加载事件</span><br><span class="line">onUnload				关闭网页事件</span><br></pre></td></tr></table></figure>
 
-<p>其他指令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">v-show					是否显示（操作样式）</span><br><span class="line">v-if					是否显示（操作DOM树）</span><br><span class="line">v-bind					设置属性（v-可用:代替）</span><br><span class="line">v-for					调用数组中的值</span><br><span class="line">v-model					获取和设置表单元素的值</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>改变类名可用多元表达式,是否生效取决于<code>isActive</code>的值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;img :src&#x3D;&quot;&quot; :class&#x3D;&quot;isActive?&#39;类名&#39;:&#39;&#39;&quot;&gt;</span><br><span class="line">或&#123;active:isActive&#125;</span><br></pre></td></tr></table></figure>
+<p><code>onload onunload</code>在<code>body</code>中调用</p>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><h5 id="DOM操作HTML"><a href="#DOM操作HTML" class="headerlink" title="DOM操作HTML"></a>DOM操作HTML</h5><ol>
+<li><p>改变HTML输出流</p>
+<p>不要再文档加载完成后再使用<code>document.write()</code>会覆盖文档</p>
 </li>
-<li><p>v-for示例</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;item in arr&quot;</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li><p>寻找元素</p>
+<p>通过id(ById)或标签名(ByTagName)找到HTML元素</p>
+<p>ByTagName和ByName寻找到的多个元素会通过数组存储</p>
+</li>
+<li><p>改变HTML内容</p>
+<p>属性<code>innerHTML</code></p>
+</li>
+<li><p>得到HTML属性</p>
+<p><code>getAttribute(&quot;&quot;)</code></p>
+</li>
+<li><p>改变HTML属性</p>
+<p><code>setAttribute(&quot;属性&quot;,&quot;值&quot;)</code></p>
+</li>
+<li><p>其他方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">childNodes()				访问子节点</span><br><span class="line">parentNode()				访问父节点</span><br><span class="line">createElement()				创建元素节点</span><br><span class="line">createTextNode				创建文本节点</span><br><span class="line">insertBefore(,)				插入节点（选择位置）</span><br><span class="line">appendChild()				添加节点（末尾）</span><br><span class="line">removeChild()				删除节点</span><br><span class="line">offsetHeight				网页尺寸（不包含滚动条）</span><br><span class="line">scrollHeight				网页尺寸（包含滚动条）</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">	arr:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>调用下标可用</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;&#123;item,index&#125; in arr&quot;</span>&gt;</span>&#123;&#123;index&#125;&#125;&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 </li>
-</ul>
-<h2 id="Axios"><a href="#Axios" class="headerlink" title="Axios"></a>Axios</h2><p>引入网络请求库</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://unpkg.com/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</ol>
+<h5 id="DOM-EventListener-句柄"><a href="#DOM-EventListener-句柄" class="headerlink" title="DOM EventListener(句柄)"></a>DOM EventListener(句柄)</h5><p><code>addEventListener(&quot;事件&quot;，函数)</code>: 添加句柄</p>
+<p><code>removeEventListener(&quot;事件&quot;，函数)</code>:移除句柄</p>
+<h2 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h2><p>描述页面中接受事件的顺序</p>
+<p>事件冒泡：由最具体的元素（最内层）接受，然后逐级向上传播至最不具体的结点（最外层）</p>
+<p>事件捕获：最不具体的结点（最外层）先接收事件，最具体的结点（最内层）最后接收事件</p>
+<h5 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h5><ol>
+<li><p>HTML事件处理：直接添加到HTML结构中</p>
+</li>
+<li><p>DOM0级事件处理：把一个函数赋值给一个事件处理程序</p>
+</li>
+<li><p>DOM2级事件处理</p>
+<p>addEventListener(“事件名”,事件处理函数，布尔值（可略）)；</p>
+<p>removeEventListener();</p>
+<p>true:事件捕获 false:事件冒泡</p>
+</li>
+<li><p>IE事件处理</p>
+<p>attachment(“事件名”,事件处理函数，布尔值（可略）)；</p>
+<p>detachment();</p>
+</li>
+</ol>
+<h5 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h5><p>在触发DOM事件时会产生一个对象</p>
+<p>DOM事件发生属于事件冒泡</p>
+<p>事件对象event:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">type					获取事件类型</span><br><span class="line">target					获取事件目标</span><br><span class="line">stopPropagation()		 阻止事件冒泡</span><br><span class="line">preventDefault()		 组织事件默认行为</span><br></pre></td></tr></table></figure>
 
-<p>网络请求方法</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">axios.get(地址?key1&#x3D;value1&amp;key2&#x3D;value2).them(function(response)&#123;&#125;,function(err)&#123;&#125;)</span><br><span class="line">axios.post(地址,&#123;key1:value1,key2:value2&#125;).then(function(response)&#123;&#125;,function(err)&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>实例</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">&quot;btn1&quot;</span>).addEventListener(<span class="string">&quot;click&quot;</span> , showType)；											                     <span class="built_in">document</span>.getElementById(<span class="string">&quot;div&quot;</span>).addEventListener(<span class="string">&quot;click&quot;</span>,showDiv);</span></span><br><span class="line"><span class="javascript">	<span class="built_in">document</span>.getElementById(<span class="string">&quot;aid&quot;</span> ).addEventListener(<span class="string">&quot;click&quot;</span>,showA);</span></span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showType</span>(<span class="params">event</span>)</span>&#123;</span></span><br><span class="line">		alert(event.type);</span><br><span class="line">		alert(event.target);</span><br><span class="line"><span class="javascript">		event.stopPropagation();<span class="comment">//阻止事件冒泡</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showDiv</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		alert( <span class="string">&quot;div&quot;</span> );</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showA</span>(<span class="params">event</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		event.stopropaaation():<span class="comment">//阻止事件冒泡</span></span></span><br><span class="line"><span class="javascript">		event.preventDefault();<span class="comment">//阻止本事件发生</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>key由接口文档提供，value为提供的数据</p>
-<h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.stop					阻止事件冒泡</span><br><span class="line">.prevent				阻止事件行为</span><br><span class="line">.capture				事件捕获执行</span><br><span class="line">.self					阻止自身的冒泡</span><br><span class="line">.once					仅执行一次</span><br></pre></td></tr></table></figure>
+<h2 id="JS内置对象"><a href="#JS内置对象" class="headerlink" title="JS内置对象"></a>JS内置对象</h2><h5 id="自定义对象"><a href="#自定义对象" class="headerlink" title="自定义对象"></a>自定义对象</h5><p>定义并创建对象：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">people = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">people.name = <span class="string">&quot;&quot;</span>; people.age = <span class="string">&quot;&quot;</span>;</span><br><span class="line">或people = &#123;<span class="attr">name</span>:<span class="string">&quot;&quot;</span>,<span class="attr">age</span>:<span class="string">&quot;&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
 
-]]></content>
+<p>使用函数来定义对象，然后创建新的对象实例：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">people</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = ;</span><br><span class="line">	<span class="built_in">this</span>.age = ;</span><br><span class="line">&#125;</span><br><span class="line">son = <span class="keyword">new</span> people(<span class="string">&quot;&quot;</span>,);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="字符串对象"><a href="#字符串对象" class="headerlink" title="字符串对象"></a>字符串对象</h5><p>字符串位置：<code>indexOf(&quot;&quot;)</code>存在返回所在位置，不存在返回-1</p>
+<p>匹配字符串：<code>match(&quot;&quot;)</code>存在打印字符串，不存在返回null</p>
+<p>替换字符串：<code>replace(&quot;&quot;,&quot;新字符串&quot;)</code></p>
+<p>大小写转换：<code>toUpperCase()/toLowerCase()</code>全部转大/小写</p>
+<p>字符串转数组：<code>split(&quot;,&quot;)</code>通过<code>,</code>分割数组</p>
+<h5 id="Date日期对象"><a href="#Date日期对象" class="headerlink" title="Date日期对象"></a>Date日期对象</h5><p>当日日期<code>var date = new Date();</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">获取具体信息</span><br><span class="line">getFullYear()				获取年份</span><br><span class="line">getTime()					获取毫秒</span><br><span class="line">setFullYear(y,m,d)			 设置事件</span><br><span class="line">getDay()					获取星期</span><br><span class="line">toLocaleDateString()		获取标准日期格式</span><br><span class="line">toLocaleTimeString()		获取标准时间格式</span><br></pre></td></tr></table></figure>
+
+<p>时钟实例</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startTime</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">	<span class="keyword">var</span> h = today.getHours();</span><br><span class="line">	<span class="keyword">var</span> m = today.getMinutes();</span><br><span class="line">	<span class="keyword">var</span> s = today.getSeconds();</span><br><span class="line">	m= checkTime(m);<span class="comment">//对齐格式</span></span><br><span class="line">	s = checkTime(s);</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">&quot;timetxt&quot;</span>).innerHTML = h+<span class="string">&quot;:&quot;</span>+m+<span class="string">&quot;:&quot;</span>+s;</span><br><span class="line">	t= <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span></span>&#123;</span><br><span class="line">		startTime();</span><br><span class="line">	&#125;,<span class="number">1000</span>);<span class="comment">//setTimeout函数将startTime函数1000毫秒调用一次</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkTime</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">10</span>)&#123;</span><br><span class="line">		i = “<span class="number">0</span><span class="string">&quot;&quot;</span>+i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;timetxt&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="数组对象"><a href="#数组对象" class="headerlink" title="数组对象"></a>数组对象</h5><p>两数组a,b</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a.concat(b)					合并数组</span><br><span class="line">a.sort()					排序</span><br><span class="line">a.push(&quot;&quot;)					末尾追加元素</span><br><span class="line">a.reverse()					数组元素反转</span><br></pre></td></tr></table></figure>
+
+<h5 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">round()						四舍五入</span><br><span class="line">random()					返回0~1之间随机数</span><br><span class="line">max()						返回最高值</span><br><span class="line">min()						返回最低值</span><br><span class="line">abs()						返回绝对值</span><br></pre></td></tr></table></figure>
+
+<p><code>parseInt()</code>可以将数据转为int类型</p>
+<h2 id="JS浏览器对象"><a href="#JS浏览器对象" class="headerlink" title="JS浏览器对象"></a>JS浏览器对象</h2><h5 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">window.innerHeight					窗口内部高度</span><br><span class="line">window.innerWidth					窗口内部宽度</span><br><span class="line">window.open(&quot;地址&quot;,&quot;名称&quot;,其他属性)		打开新窗口</span><br><span class="line">window.close()						关闭当前窗口</span><br></pre></td></tr></table></figure>
+
+<h5 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">setInterval()				间隔指定毫秒数不停执行指定代码</span><br><span class="line">clearInterval()				清除上述代码</span><br><span class="line">setTimeout()				暂停指定毫秒数后执行指定代码</span><br><span class="line">clearTimeout()				停止上述代码</span><br></pre></td></tr></table></figure>
+
+<h5 id="History对象"><a href="#History对象" class="headerlink" title="History对象"></a>History对象</h5><p><code>history.go()</code>括号里填1或-1等表示前进或后退页面</p>
+<h5 id="Screen对象"><a href="#Screen对象" class="headerlink" title="Screen对象"></a>Screen对象</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">screen.availWidth			可用宽度（除边框）</span><br><span class="line">screen.availHeight			可用高度（除边框）</span><br><span class="line">screen.height			    屏幕高度</span><br><span class="line">screen.width			    屏幕宽度</span><br></pre></td></tr></table></figure>
+
+<h3 id="暂时完结"><a href="#暂时完结" class="headerlink" title="暂时完结"></a>暂时完结</h3>]]></content>
       <categories>
         <category>web前端</category>
       </categories>
@@ -1421,131 +1549,52 @@ cal [-y]                查询日历(显示一年)
       </categories>
   </entry>
   <entry>
-    <title>Javascript总结</title>
-    <url>/2020/09/06/javascript/</url>
-    <content><![CDATA[<h2 id="JS基础s"><a href="#JS基础s" class="headerlink" title="JS基础s"></a>JS基础s</h2><p>引入js文件<code>&lt;script src=&quot;地址&quot;&gt;&lt;/script&gt;</code></p>
-<p>输出<code>document.write(&quot;&lt;h1&gt;内容&lt;/h1&gt;&quot;)</code></p>
-<p>改变html中内容<code>document.getElementById(&quot;ID&quot;).innerHTML=&quot;新内容&quot;</code></p>
+    <title>数据分析</title>
+    <url>/2020/11/15/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<p>过程：提出问题-&gt;准备数据-&gt;分析数据-&gt;获得结论-&gt;(成果可视化)</p>
 <a id="more"></a>
 
-<h5 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h5><p>单行注释<code>//注释</code></p>
-<p>多行注释<code>/*注释*/</code></p>
-<h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><p>通过<code>var</code>声明各种类型</p>
-<p>数组声明<code>var arr=[1,2,3,4];</code></p>
-<p>动态数组<code>var arr=new Array();</code></p>
-<p>不加前缀直接声明全局变量<code>m = 1</code></p>
-<p>严格作用域用<code>let</code></p>
-<p>可以通过赋值为空的方法清除变量<code>a=null</code></p>
-<h5 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h5><p>字符串拼接可直接用<code>+</code></p>
-<p>任何类型与字符串作运算会被强制转换成字符串类型</p>
-<p>比较运算符：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x3D;&#x3D;						双等（其他类型与字符串比较会自动转换）</span><br><span class="line">&#x3D;&#x3D;&#x3D;						三等（完全判等）</span><br><span class="line">!&#x3D;						不等（同双等）</span><br><span class="line">!&#x3D;&#x3D;						不等（同三等）</span><br></pre></td></tr></table></figure>
+<p>注：变量前带#表示可选项</p>
+<h2 id="matplotlib"><a href="#matplotlib" class="headerlink" title="matplotlib"></a>matplotlib</h2><h3 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h3><h4 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from matplotlib import pyplot as plt		  导入pyplot</span><br><span class="line">plt.plot(x,y)								绘制折线图</span><br><span class="line">plt.show()									展示图形</span><br><span class="line">.plot()其他属性：label,color,linestyle,linewidth,alpha</span><br><span class="line">plt.subplot(rows,clos,num)绘制多个子图，要求行数、列数、正在绘制第几张图参数</span><br></pre></td></tr></table></figure>
 
-<p>另外还有&lt; &gt; &lt;= &gt;=比较运算符</p>
-<h5 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h5><p><code>if else,switch,for,while,do while</code>同C语言</p>
-<p><code>for(j in i)</code>结构将j遍历i[]中的所有元素</p>
-<p>跳转语句同C语言</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">常用函数</span><br><span class="line">alert()					弹出对话框</span><br><span class="line">console.log()			在html命令行显示</span><br></pre></td></tr></table></figure>
+<p>多次调用<code>.plot()</code>函数可以在一个图形上绘制多个图形</p>
+<h6 id="设置展示细节"><a href="#设置展示细节" class="headerlink" title="设置展示细节"></a>设置展示细节</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">plt.figure(figsize&#x3D;(20,8),dpi&#x3D;80)			  figsize传入宽高,dpi传入清晰度</span><br><span class="line">plt.savefig(&quot;&quot;)								传入地址保存图片</span><br><span class="line">plt.xticks(x)								将x全部标注在x轴上(y轴同理)</span><br><span class="line">plt.xticks(x，x_list)						以x_list一一对应替换x</span><br><span class="line">plt.xticks(x，x_list,rotation&#x3D;90)			 rotation旋转角度</span><br><span class="line">plt.xlabel(&quot;content&quot;)						x轴标注(y轴同理)</span><br><span class="line">plt.title(&quot;title&quot;)							表格标题							</span><br><span class="line">plt.grid(#alpha&#x3D;0.4)						绘制网格 alpha表示透明度</span><br><span class="line">plt.legend()								添加图例(需要在.plot(label&#x3D;&quot;lab1&quot;)设置标签)</span><br></pre></td></tr></table></figure>
 
-<p><strong>定义函数</strong><code>function 函数名()&#123;函数体&#125;</code></p>
-<p>函数可以在<code>&lt;script&gt;</code>标签中使用或在HTML文件中使用</p>
-<p>函数加<code>this</code>指向本元素,如</p>
-<p><code>&lt;div onmouseout=&quot;function(this)&quot;&gt;&lt;/div&gt;</code>this指向本<code>div</code></p>
-<p>函数可用<code>arguments.calle(n-1)</code>递归调用自身函数</p>
-<h5 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	异常代码块</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">	<span class="comment">//错误信息处理</span></span><br><span class="line">	alert(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="其他图形"><a href="#其他图形" class="headerlink" title="其他图形"></a>其他图形</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">plt.scatter(x,y)							绘制散点图</span><br><span class="line">plt.bar(x,y)								绘制条形图</span><br><span class="line">plt.barh(x,y)								绘制横状条形图</span><br><span class="line">plt.hist(a, num_bins)						绘制直方图 num_bins:分成的组数</span><br></pre></td></tr></table></figure>
 
-<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">onClick				    单击事件</span><br><span class="line">onMouseOver				鼠标经过事件</span><br><span class="line">onMouseOut				鼠标移出事件</span><br><span class="line">onChange				文本内容改变事件</span><br><span class="line">onSelect				文本框选中事件</span><br><span class="line">onFocus					光标聚集事件</span><br><span class="line">onBlur					移开光标事件</span><br><span class="line">onLoad					网页加载事件</span><br><span class="line">onUnload				关闭网页事件</span><br></pre></td></tr></table></figure>
+<h3 id="其他绘图工具"><a href="#其他绘图工具" class="headerlink" title="其他绘图工具"></a>其他绘图工具</h3><p>ploty，百度echarts等</p>
+<h2 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h2><h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import numpy as np							导入numpy</span><br><span class="line">np.array(X，#dtype&#x3D;)							X为列表，将其转换为数组，dtype指定类型</span><br><span class="line">np.arrage(a,b)								生成从a到b的整数数组</span><br><span class="line">np.reshape(X）								传入一个元组，重新定义矩阵形状，返回新矩阵</span><br><span class="line">np.flatten()								将矩阵转为一维数组</span><br><span class="line">np.transpose() 或 np.T()						矩阵转置</span><br><span class="line">np.swapaxes(,)								转换轴(可用于转置)</span><br></pre></td></tr></table></figure>
 
-<p><code>onload onunload</code>在<code>body</code>中调用</p>
-<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><h5 id="DOM操作HTML"><a href="#DOM操作HTML" class="headerlink" title="DOM操作HTML"></a>DOM操作HTML</h5><ol>
-<li><p>改变HTML输出流</p>
-<p>不要再文档加载完成后再使用<code>document.write()</code>会覆盖文档</p>
-</li>
-<li><p>寻找元素</p>
-<p>通过id(ById)或标签名(ByTagName)找到HTML元素</p>
-<p>ByTagName和ByName寻找到的多个元素会通过数组存储</p>
-</li>
-<li><p>改变HTML内容</p>
-<p>属性<code>innerHTML</code></p>
-</li>
-<li><p>得到HTML属性</p>
-<p><code>getAttribute(&quot;&quot;)</code></p>
-</li>
-<li><p>改变HTML属性</p>
-<p><code>setAttribute(&quot;属性&quot;,&quot;值&quot;)</code></p>
-</li>
-<li><p>其他方法</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">childNodes()				访问子节点</span><br><span class="line">parentNode()				访问父节点</span><br><span class="line">createElement()				创建元素节点</span><br><span class="line">createTextNode				创建文本节点</span><br><span class="line">insertBefore(,)				插入节点（选择位置）</span><br><span class="line">appendChild()				添加节点（末尾）</span><br><span class="line">removeChild()				删除节点</span><br><span class="line">offsetHeight				网页尺寸（不包含滚动条）</span><br><span class="line">scrollHeight				网页尺寸（包含滚动条）</span><br></pre></td></tr></table></figure>
+<h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><p>csv：逗号分割型数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">np.loadtxt(frame, dtype&#x3D;np.float, delimiter&#x3D;None, skiprows&#x3D;0, usecols&#x3D;None, unpack&#x3D;False)</span><br><span class="line">读取文本文件 frame:文件路径 delimiter:分割方法 unpack:转置</span><br></pre></td></tr></table></figure>
 
+<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">np.where(条件,操作1,操作2)					numpy的三元运算符</span><br><span class="line">np.clip(10,8)								裁剪(小于10替换为10，大于18替换为18)</span><br><span class="line">np.vstack((t1,t2))							竖直拼接矩阵</span><br><span class="line">np.hstack((t1,t2))							水平拼接矩阵</span><br><span class="line">t[[1,2],:]									交换1，2行</span><br><span class="line">t[:,[1,2]]									交换1，2列</span><br><span class="line">np.ones((3,4))								生成一个全1的3*4矩阵</span><br><span class="line">np.zeros((3,4))								生成一个全0的3*4矩阵</span><br><span class="line">np.eye(10)									生成一个宽高为10的对角矩阵</span><br><span class="line">np.argmax(t,axis&#x3D;0)							取0号坐标轴(x轴)每项最大值</span><br><span class="line">np.argmax(t,axis&#x3D;1)							取1号坐标轴(y轴)每项最小值</span><br></pre></td></tr></table></figure>
 
+<p>随机数</p>
+<img src="https://i.loli.net/2020/11/17/1DFgnzsaPCo6VRU.png" alt="img"  />
 
-</li>
-</ol>
-<h5 id="DOM-EventListener-句柄"><a href="#DOM-EventListener-句柄" class="headerlink" title="DOM EventListener(句柄)"></a>DOM EventListener(句柄)</h5><p><code>addEventListener(&quot;事件&quot;，函数)</code>: 添加句柄</p>
-<p><code>removeEventListener(&quot;事件&quot;，函数)</code>:移除句柄</p>
-<h2 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h2><p>描述页面中接受事件的顺序</p>
-<p>事件冒泡：由最具体的元素（最内层）接受，然后逐级向上传播至最不具体的结点（最外层）</p>
-<p>事件捕获：最不具体的结点（最外层）先接收事件，最具体的结点（最内层）最后接收事件</p>
-<h5 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h5><ol>
-<li><p>HTML事件处理：直接添加到HTML结构中</p>
-</li>
-<li><p>DOM0级事件处理：把一个函数赋值给一个事件处理程序</p>
-</li>
-<li><p>DOM2级事件处理</p>
-<p>addEventListener(“事件名”,事件处理函数，布尔值（可略）)；</p>
-<p>removeEventListener();</p>
-<p>true:事件捕获 false:事件冒泡</p>
-</li>
-<li><p>IE事件处理</p>
-<p>attachment(“事件名”,事件处理函数，布尔值（可略）)；</p>
-<p>detachment();</p>
-</li>
-</ol>
-<h5 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h5><p>在触发DOM事件时会产生一个对象</p>
-<p>DOM事件发生属于事件冒泡</p>
-<p>事件对象event:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">type					获取事件类型</span><br><span class="line">target					获取事件目标</span><br><span class="line">stopPropagation()		 阻止事件冒泡</span><br><span class="line">preventDefault()		 组织事件默认行为</span><br></pre></td></tr></table></figure>
+<h3 id="常用统计函数"><a href="#常用统计函数" class="headerlink" title="常用统计函数"></a>常用统计函数</h3><p><img src="https://i.loli.net/2020/11/17/YjdXTt53G7akcuR.png" alt="img"></p>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a&#x3D;b										浅拷贝</span><br><span class="line">a&#x3D;b[:]									切片方法(同浅拷贝)</span><br><span class="line">a&#x3D;b.copy()								深拷贝</span><br></pre></td></tr></table></figure>
 
-<p>实例</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">&quot;btn1&quot;</span>).addEventListener(<span class="string">&quot;click&quot;</span> , showType)；											                     <span class="built_in">document</span>.getElementById(<span class="string">&quot;div&quot;</span>).addEventListener(<span class="string">&quot;click&quot;</span>,showDiv);</span></span><br><span class="line"><span class="javascript">	<span class="built_in">document</span>.getElementById(<span class="string">&quot;aid&quot;</span> ).addEventListener(<span class="string">&quot;click&quot;</span>,showA);</span></span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showType</span>(<span class="params">event</span>)</span>&#123;</span></span><br><span class="line">		alert(event.type);</span><br><span class="line">		alert(event.target);</span><br><span class="line"><span class="javascript">		event.stopPropagation();<span class="comment">//阻止事件冒泡</span></span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showDiv</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		alert( <span class="string">&quot;div&quot;</span> );</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">showA</span>(<span class="params">event</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		event.stopropaaation():<span class="comment">//阻止事件冒泡</span></span></span><br><span class="line"><span class="javascript">		event.preventDefault();<span class="comment">//阻止本事件发生</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>特殊数据类型</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">np.nan									not a number(非数字，或计算错误)</span><br><span class="line">np.inf									infinity(无穷，有正负)</span><br><span class="line">np.isnan(t1)							返回是否nan的布尔矩阵</span><br><span class="line">注：np.nan!&#x3D;np.nan</span><br></pre></td></tr></table></figure>
 
-<h2 id="JS内置对象"><a href="#JS内置对象" class="headerlink" title="JS内置对象"></a>JS内置对象</h2><h5 id="自定义对象"><a href="#自定义对象" class="headerlink" title="自定义对象"></a>自定义对象</h5><p>定义并创建对象：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">people = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">people.name = <span class="string">&quot;&quot;</span>; people.age = <span class="string">&quot;&quot;</span>;</span><br><span class="line">或people = &#123;<span class="attr">name</span>:<span class="string">&quot;&quot;</span>,<span class="attr">age</span>:<span class="string">&quot;&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h2><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import pandas as pd								导入pandas</span><br><span class="line">pd.Series([],#index&#x3D;)							创建带标签数组(字典？),index指定索引</span><br><span class="line">pd.Series(&#123;&#125;)									直接传入字典创建</span><br><span class="line">series.index&#x2F;series.value						调用索引&#x2F;值</span><br></pre></td></tr></table></figure>
 
-<p>使用函数来定义对象，然后创建新的对象实例：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">people</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = ;</span><br><span class="line">	<span class="built_in">this</span>.age = ;</span><br><span class="line">&#125;</span><br><span class="line">son = <span class="keyword">new</span> people(<span class="string">&quot;&quot;</span>,);</span><br></pre></td></tr></table></figure>
+<h3 id="读取外部数据"><a href="#读取外部数据" class="headerlink" title="读取外部数据"></a>读取外部数据</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pd.read_csv(&quot;&quot;)									读取文件</span><br><span class="line">pd.read_sql(sql_sentence.connection)			  读取数据库</span><br></pre></td></tr></table></figure>
 
+<h3 id="DatFrame"><a href="#DatFrame" class="headerlink" title="DatFrame"></a>DatFrame</h3><p>矩阵型series,有行索引和类索引</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pd.DataFrame([],#index&#x3D;,#columxs&#x3D;)					创建DataFrame,index行索引，colums列索引</span><br><span class="line">pd.DataFrame(&#123;&#125;,&#123;&#125;,&#123;&#125;)								传入字典行索引自动从0排序</span><br><span class="line">df.dead(2)											显示前2行</span><br><span class="line">df.tail(3)											显示后3行</span><br><span class="line">df.info()											显示信息</span><br><span class="line">df.describe()										统计信息</span><br><span class="line">df.sort_values(by&#x3D;&quot;&quot;,ascending&#x3D;True)				  排序 by按某标签排序，scending正序排序</span><br><span class="line">df.loc[]											通过标签索引行数据</span><br><span class="line">df.iloc[]											通过位置获取行数据</span><br><span class="line">df.set_index()										设置索引</span><br><span class="line">df.set_index([])									设置复合索引</span><br><span class="line">df.swaplevel()										交换复合索引次序</span><br></pre></td></tr></table></figure>
 
+<p>数据合并</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">t1.join(t2, on&#x3D;&quot;a&quot;)									按行索引将两个dataframe合并(以t1为准,通过a项)</span><br><span class="line">t1.merge(t2， on&#x3D;&quot;a&quot;)								按列索引将两个dataframe合并(以t1为准,通过a项)</span><br><span class="line">df1.merge(df2, on&#x3D;&quot;&quot;, how&#x3D;&quot;inner&quot;)					inner表示内连接(交集)outer表示外连接(并集)</span><br><span class="line">df1.merge(df2, on&#x3D;&quot;&quot;, how&#x3D;&quot;left&quot;)					left表示左连接(以df1为准)right表示右连接(以df2为准)</span><br><span class="line">不存在的值都补充为Nan,默认内连接</span><br></pre></td></tr></table></figure>
 
-<h5 id="字符串对象"><a href="#字符串对象" class="headerlink" title="字符串对象"></a>字符串对象</h5><p>字符串位置：<code>indexOf(&quot;&quot;)</code>存在返回所在位置，不存在返回-1</p>
-<p>匹配字符串：<code>match(&quot;&quot;)</code>存在打印字符串，不存在返回null</p>
-<p>替换字符串：<code>replace(&quot;&quot;,&quot;新字符串&quot;)</code></p>
-<p>大小写转换：<code>toUpperCase()/toLowerCase()</code>全部转大/小写</p>
-<p>字符串转数组：<code>split(&quot;,&quot;)</code>通过<code>,</code>分割数组</p>
-<h5 id="Date日期对象"><a href="#Date日期对象" class="headerlink" title="Date日期对象"></a>Date日期对象</h5><p>当日日期<code>var date = new Date();</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">获取具体信息</span><br><span class="line">getFullYear()				获取年份</span><br><span class="line">getTime()					获取毫秒</span><br><span class="line">setFullYear(y,m,d)			 设置事件</span><br><span class="line">getDay()					获取星期</span><br><span class="line">toLocaleDateString()		获取标准日期格式</span><br><span class="line">toLocaleTimeString()		获取标准时间格式</span><br></pre></td></tr></table></figure>
+<p>数据分组</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grouped&#x3D;df.groupby(by&#x3D;&quot;a&quot;)							将数据按a分组，返回包含元组的Series类型</span><br><span class="line">df[&quot;country&quot;].groupby(by&#x3D;[df[&quot;country&quot;],df[&quot;state&#x2F;province&quot;]])		对几列数据进行分组</span><br><span class="line">grouped.count()										统计个数</span><br><span class="line">遍历groupby:</span><br><span class="line">#i为a的类型，j为具体数据</span><br><span class="line">for i, j in grouped:</span><br><span class="line">	#TODO</span><br></pre></td></tr></table></figure>
 
-<p>时钟实例</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startTime</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">	<span class="keyword">var</span> h = today.getHours();</span><br><span class="line">	<span class="keyword">var</span> m = today.getMinutes();</span><br><span class="line">	<span class="keyword">var</span> s = today.getSeconds();</span><br><span class="line">	m= checkTime(m);<span class="comment">//对齐格式</span></span><br><span class="line">	s = checkTime(s);</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">&quot;timetxt&quot;</span>).innerHTML = h+<span class="string">&quot;:&quot;</span>+m+<span class="string">&quot;:&quot;</span>+s;</span><br><span class="line">	t= <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span></span>&#123;</span><br><span class="line">		startTime();</span><br><span class="line">	&#125;,<span class="number">1000</span>);<span class="comment">//setTimeout函数将startTime函数1000毫秒调用一次</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkTime</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">10</span>)&#123;</span><br><span class="line">		i = “<span class="number">0</span><span class="string">&quot;&quot;</span>+i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;timetxt&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="数组对象"><a href="#数组对象" class="headerlink" title="数组对象"></a>数组对象</h5><p>两数组a,b</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a.concat(b)					合并数组</span><br><span class="line">a.sort()					排序</span><br><span class="line">a.push(&quot;&quot;)					末尾追加元素</span><br><span class="line">a.reverse()					数组元素反转</span><br></pre></td></tr></table></figure>
-
-<h5 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">round()						四舍五入</span><br><span class="line">random()					返回0~1之间随机数</span><br><span class="line">max()						返回最高值</span><br><span class="line">min()						返回最低值</span><br><span class="line">abs()						返回绝对值</span><br></pre></td></tr></table></figure>
-
-<p><code>parseInt()</code>可以将数据转为int类型</p>
-<h2 id="JS浏览器对象"><a href="#JS浏览器对象" class="headerlink" title="JS浏览器对象"></a>JS浏览器对象</h2><h5 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">window.innerHeight					窗口内部高度</span><br><span class="line">window.innerWidth					窗口内部宽度</span><br><span class="line">window.open(&quot;地址&quot;,&quot;名称&quot;,其他属性)		打开新窗口</span><br><span class="line">window.close()						关闭当前窗口</span><br></pre></td></tr></table></figure>
-
-<h5 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">setInterval()				间隔指定毫秒数不停执行指定代码</span><br><span class="line">clearInterval()				清除上述代码</span><br><span class="line">setTimeout()				暂停指定毫秒数后执行指定代码</span><br><span class="line">clearTimeout()				停止上述代码</span><br></pre></td></tr></table></figure>
-
-<h5 id="History对象"><a href="#History对象" class="headerlink" title="History对象"></a>History对象</h5><p><code>history.go()</code>括号里填1或-1等表示前进或后退页面</p>
-<h5 id="Screen对象"><a href="#Screen对象" class="headerlink" title="Screen对象"></a>Screen对象</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">screen.availWidth			可用宽度（除边框）</span><br><span class="line">screen.availHeight			可用高度（除边框）</span><br><span class="line">screen.height			    屏幕高度</span><br><span class="line">screen.width			    屏幕宽度</span><br></pre></td></tr></table></figure>
-
-<h3 id="暂时完结"><a href="#暂时完结" class="headerlink" title="暂时完结"></a>暂时完结</h3>]]></content>
+]]></content>
       <categories>
-        <category>web前端</category>
+        <category>机器学习</category>
       </categories>
   </entry>
   <entry>
@@ -1660,55 +1709,6 @@ cal [-y]                查询日历(显示一年)
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    url = <span class="string">&#x27;https://bj.58.com/ershoufang/&#x27;</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36 Edg/87.0.664.41&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 获取整张页面数据</span></span><br><span class="line">    page_text = requests.get(url=url, headers=headers).text</span><br><span class="line">    tree = etree.HTML(page_text)</span><br><span class="line">    li_list = tree.xpath(<span class="string">&#x27;//ul[@class=&quot;house-list-wrap&quot;]/li&#x27;</span>)</span><br><span class="line">    <span class="comment">#数据解析</span></span><br><span class="line">    fp = open(<span class="string">&#x27;../dataset/58.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> li_list:</span><br><span class="line">        <span class="comment">#局部解析,&#x27;./&#x27;表示本级目录</span></span><br><span class="line">        title = li.xpath(<span class="string">&#x27;./div[2]/h2/a/text()&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">        print(title)</span><br><span class="line">        fp.write(title+<span class="string">&#x27;\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <h2 id="反爬机制"><a href="#反爬机制" class="headerlink" title="反爬机制"></a>反爬机制</h2><h3 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h3><p>第三方自动识别</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>数据分析</title>
-    <url>/2020/11/15/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<p>过程：提出问题-&gt;准备数据-&gt;分析数据-&gt;获得结论-&gt;(成果可视化)</p>
-<a id="more"></a>
-
-<p>注：变量前带#表示可选项</p>
-<h2 id="matplotlib"><a href="#matplotlib" class="headerlink" title="matplotlib"></a>matplotlib</h2><h3 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h3><h4 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from matplotlib import pyplot as plt		  导入pyplot</span><br><span class="line">plt.plot(x,y)								绘制折线图</span><br><span class="line">plt.show()									展示图形</span><br><span class="line">.plot()其他属性：label,color,linestyle,linewidth,alpha</span><br><span class="line">plt.subplot(rows,clos,num)绘制多个子图，要求行数、列数、正在绘制第几张图参数</span><br></pre></td></tr></table></figure>
-
-<p>多次调用<code>.plot()</code>函数可以在一个图形上绘制多个图形</p>
-<h6 id="设置展示细节"><a href="#设置展示细节" class="headerlink" title="设置展示细节"></a>设置展示细节</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">plt.figure(figsize&#x3D;(20,8),dpi&#x3D;80)			  figsize传入宽高,dpi传入清晰度</span><br><span class="line">plt.savefig(&quot;&quot;)								传入地址保存图片</span><br><span class="line">plt.xticks(x)								将x全部标注在x轴上(y轴同理)</span><br><span class="line">plt.xticks(x，x_list)						以x_list一一对应替换x</span><br><span class="line">plt.xticks(x，x_list,rotation&#x3D;90)			 rotation旋转角度</span><br><span class="line">plt.xlabel(&quot;content&quot;)						x轴标注(y轴同理)</span><br><span class="line">plt.title(&quot;title&quot;)							表格标题							</span><br><span class="line">plt.grid(#alpha&#x3D;0.4)						绘制网格 alpha表示透明度</span><br><span class="line">plt.legend()								添加图例(需要在.plot(label&#x3D;&quot;lab1&quot;)设置标签)</span><br></pre></td></tr></table></figure>
-
-<h4 id="其他图形"><a href="#其他图形" class="headerlink" title="其他图形"></a>其他图形</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">plt.scatter(x,y)							绘制散点图</span><br><span class="line">plt.bar(x,y)								绘制条形图</span><br><span class="line">plt.barh(x,y)								绘制横状条形图</span><br><span class="line">plt.hist(a, num_bins)						绘制直方图 num_bins:分成的组数</span><br></pre></td></tr></table></figure>
-
-<h3 id="其他绘图工具"><a href="#其他绘图工具" class="headerlink" title="其他绘图工具"></a>其他绘图工具</h3><p>ploty，百度echarts等</p>
-<h2 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h2><h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import numpy as np							导入numpy</span><br><span class="line">np.array(X，#dtype&#x3D;)							X为列表，将其转换为数组，dtype指定类型</span><br><span class="line">np.arrage(a,b)								生成从a到b的整数数组</span><br><span class="line">np.reshape(X）								传入一个元组，重新定义矩阵形状，返回新矩阵</span><br><span class="line">np.flatten()								将矩阵转为一维数组</span><br><span class="line">np.transpose() 或 np.T()						矩阵转置</span><br><span class="line">np.swapaxes(,)								转换轴(可用于转置)</span><br></pre></td></tr></table></figure>
-
-<h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><p>csv：逗号分割型数据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">np.loadtxt(frame, dtype&#x3D;np.float, delimiter&#x3D;None, skiprows&#x3D;0, usecols&#x3D;None, unpack&#x3D;False)</span><br><span class="line">读取文本文件 frame:文件路径 delimiter:分割方法 unpack:转置</span><br></pre></td></tr></table></figure>
-
-<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">np.where(条件,操作1,操作2)					numpy的三元运算符</span><br><span class="line">np.clip(10,8)								裁剪(小于10替换为10，大于18替换为18)</span><br><span class="line">np.vstack((t1,t2))							竖直拼接矩阵</span><br><span class="line">np.hstack((t1,t2))							水平拼接矩阵</span><br><span class="line">t[[1,2],:]									交换1，2行</span><br><span class="line">t[:,[1,2]]									交换1，2列</span><br><span class="line">np.ones((3,4))								生成一个全1的3*4矩阵</span><br><span class="line">np.zeros((3,4))								生成一个全0的3*4矩阵</span><br><span class="line">np.eye(10)									生成一个宽高为10的对角矩阵</span><br><span class="line">np.argmax(t,axis&#x3D;0)							取0号坐标轴(x轴)每项最大值</span><br><span class="line">np.argmax(t,axis&#x3D;1)							取1号坐标轴(y轴)每项最小值</span><br></pre></td></tr></table></figure>
-
-<p>随机数</p>
-<img src="https://i.loli.net/2020/11/17/1DFgnzsaPCo6VRU.png" alt="img"  />
-
-<h3 id="常用统计函数"><a href="#常用统计函数" class="headerlink" title="常用统计函数"></a>常用统计函数</h3><p><img src="https://i.loli.net/2020/11/17/YjdXTt53G7akcuR.png" alt="img"></p>
-<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a&#x3D;b										浅拷贝</span><br><span class="line">a&#x3D;b[:]									切片方法(同浅拷贝)</span><br><span class="line">a&#x3D;b.copy()								深拷贝</span><br></pre></td></tr></table></figure>
-
-<p>特殊数据类型</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">np.nan									not a number(非数字，或计算错误)</span><br><span class="line">np.inf									infinity(无穷，有正负)</span><br><span class="line">np.isnan(t1)							返回是否nan的布尔矩阵</span><br><span class="line">注：np.nan!&#x3D;np.nan</span><br></pre></td></tr></table></figure>
-
-<h2 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h2><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import pandas as pd								导入pandas</span><br><span class="line">pd.Series([],#index&#x3D;)							创建带标签数组(字典？),index指定索引</span><br><span class="line">pd.Series(&#123;&#125;)									直接传入字典创建</span><br><span class="line">series.index&#x2F;series.value						调用索引&#x2F;值</span><br></pre></td></tr></table></figure>
-
-<h3 id="读取外部数据"><a href="#读取外部数据" class="headerlink" title="读取外部数据"></a>读取外部数据</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pd.read_csv(&quot;&quot;)									读取文件</span><br><span class="line">pd.read_sql(sql_sentence.connection)			  读取数据库</span><br></pre></td></tr></table></figure>
-
-<h3 id="DatFrame"><a href="#DatFrame" class="headerlink" title="DatFrame"></a>DatFrame</h3><p>矩阵型series,有行索引和类索引</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pd.DataFrame([],#index&#x3D;,#columxs&#x3D;)					创建DataFrame,index行索引，colums列索引</span><br><span class="line">pd.DataFrame(&#123;&#125;,&#123;&#125;,&#123;&#125;)								传入字典行索引自动从0排序</span><br><span class="line">df.dead(2)											显示前2行</span><br><span class="line">df.tail(3)											显示后3行</span><br><span class="line">df.info()											显示信息</span><br><span class="line">df.describe()										统计信息</span><br><span class="line">df.sort_values(by&#x3D;&quot;&quot;,ascending&#x3D;True)				  排序 by按某标签排序，scending正序排序</span><br><span class="line">df.loc[]											通过标签索引行数据</span><br><span class="line">df.iloc[]											通过位置获取行数据</span><br><span class="line">df.set_index()										设置索引</span><br><span class="line">df.set_index([])									设置复合索引</span><br><span class="line">df.swaplevel()										交换复合索引次序</span><br></pre></td></tr></table></figure>
-
-<p>数据合并</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">t1.join(t2, on&#x3D;&quot;a&quot;)									按行索引将两个dataframe合并(以t1为准,通过a项)</span><br><span class="line">t1.merge(t2， on&#x3D;&quot;a&quot;)								按列索引将两个dataframe合并(以t1为准,通过a项)</span><br><span class="line">df1.merge(df2, on&#x3D;&quot;&quot;, how&#x3D;&quot;inner&quot;)					inner表示内连接(交集)outer表示外连接(并集)</span><br><span class="line">df1.merge(df2, on&#x3D;&quot;&quot;, how&#x3D;&quot;left&quot;)					left表示左连接(以df1为准)right表示右连接(以df2为准)</span><br><span class="line">不存在的值都补充为Nan,默认内连接</span><br></pre></td></tr></table></figure>
-
-<p>数据分组</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grouped&#x3D;df.groupby(by&#x3D;&quot;a&quot;)							将数据按a分组，返回包含元组的Series类型</span><br><span class="line">df[&quot;country&quot;].groupby(by&#x3D;[df[&quot;country&quot;],df[&quot;state&#x2F;province&quot;]])		对几列数据进行分组</span><br><span class="line">grouped.count()										统计个数</span><br><span class="line">遍历groupby:</span><br><span class="line">#i为a的类型，j为具体数据</span><br><span class="line">for i, j in grouped:</span><br><span class="line">	#TODO</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -2007,7 +2007,7 @@ cal [-y]                查询日历(显示一年)
   <entry>
     <title>机器学习原理</title>
     <url>/2021/01/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<h1 id="机器学习原理"><a href="#机器学习原理" class="headerlink" title="机器学习原理"></a>机器学习原理</h1><h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><p>由带标签的数据集∑(x_i,y)进行模型训练</p>
+    <content><![CDATA[<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><p>由带标签的数据集∑(x_i,y)进行模型训练</p>
 <a id="more"></a>
 
 <h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><p>假设函数：<img src="https://i.loli.net/2020/12/01/OzqdH14BwN9bSCK.png" alt="image"></p>
@@ -2282,7 +2282,7 @@ cal [-y]                查询日历(显示一年)
 <p>链接：<a href="https://pan.baidu.com/s/1LJM8_QoT-Z88VYwZhSonFw">https://pan.baidu.com/s/1LJM8_QoT-Z88VYwZhSonFw</a><br>提取码：ammg </p>
 <h2 id="Tensor数据"><a href="#Tensor数据" class="headerlink" title="Tensor数据"></a>Tensor数据</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">list</span><br><span class="line">np.array科学计算库</span><br><span class="line">tf.Tensor支持连续求导</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\57624\AppData\Roaming\Typora\typora-user-images\image-20201221104752364.png" alt="image-20201221104752364"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20201221104752364.png" alt="image-20201221104752364"></p>
 <h3 id="创建tensor"><a href="#创建tensor" class="headerlink" title="创建tensor"></a>创建tensor</h3><p><code>tf.constant([1,5], dtype=tf.int64)</code>创建一个tensor</p>
 <p><code>tf.convert_to_tensor(np, dtype=tf.int64)</code>可以将numpy数据转换为tensor</p>
 <p><img src="https://i.loli.net/2020/12/21/Nxp5XbZOtnaql9W.png" alt="image-20201221110137328"></p>
@@ -2411,7 +2411,7 @@ cal [-y]                查询日历(显示一年)
 <h5 id="实现代码-部分-1"><a href="#实现代码-部分-1" class="headerlink" title="实现代码(部分)"></a>实现代码(部分)</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.keras.preprocessing.image <span class="keyword">import</span> ImageDataGenerator</span><br><span class="line"></span><br><span class="line">x_train = x_train.reshape(x_train.shape[<span class="number">0</span>], <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>)<span class="comment">#fit要求秩为4</span></span><br><span class="line">image_gen_train = ImageDataGenerator(</span><br><span class="line">    rescale=<span class="number">1.</span> / <span class="number">1.</span>,  <span class="comment"># 如为图像，分母为255时，可归至0～1</span></span><br><span class="line">    rotation_range=<span class="number">45</span>,  <span class="comment"># 随机45度旋转</span></span><br><span class="line">    width_shift_range=<span class="number">.15</span>,  <span class="comment"># 宽度偏移</span></span><br><span class="line">    height_shift_range=<span class="number">.15</span>,  <span class="comment"># 高度偏移</span></span><br><span class="line">    horizontal_flip=<span class="literal">False</span>,  <span class="comment"># 水平翻转</span></span><br><span class="line">    zoom_range=<span class="number">0.5</span>  <span class="comment"># 将图像随机缩放阈量50％</span></span><br><span class="line">)</span><br><span class="line">image_gen_train.fit(x_train)</span><br><span class="line"></span><br><span class="line">model.fit(image_gen_train.flow(x_train, y_train, batch_size=<span class="number">32</span>), epochs=<span class="number">5</span>, validation_data=(x_test, y_test),</span><br><span class="line">          validation_freq=<span class="number">1</span>)<span class="comment">#填入训练数据和标签要用flow函数生成增强数据</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="断点续训"><a href="#断点续训" class="headerlink" title="断点续训"></a>断点续训</h4><p>将之前训练好的模型加载进来，在原来模型的基础上再进行训练</p>
-<p><img src="C:\Users\57624\AppData\Roaming\Typora\typora-user-images\image-20201223095033595.png" alt="image-20201223095033595"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20201223095033595.png" alt="image-20201223095033595"></p>
 <h5 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">mnist = tf.keras.datasets.mnist</span><br><span class="line">(x_train, y_train), (x_test, y_test) = mnist.load_data()</span><br><span class="line">x_train, x_test = x_train / <span class="number">255.0</span>, x_test / <span class="number">255.0</span></span><br><span class="line"></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">    tf.keras.layers.Flatten(),</span><br><span class="line">    tf.keras.layers.Dense(<span class="number">128</span>, activation=<span class="string">&#x27;relu&#x27;</span>),</span><br><span class="line">    tf.keras.layers.Dense(<span class="number">10</span>, activation=<span class="string">&#x27;softmax&#x27;</span>)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=<span class="string">&#x27;adam&#x27;</span>,</span><br><span class="line">              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">False</span>),</span><br><span class="line">              metrics=[<span class="string">&#x27;sparse_categorical_accuracy&#x27;</span>])</span><br><span class="line"></span><br><span class="line">checkpoint_save_path = <span class="string">&quot;./checkpoint/mnist.ckpt&quot;</span><span class="comment">#保存模型路径</span></span><br><span class="line"><span class="keyword">if</span> os.path.exists(checkpoint_save_path + <span class="string">&#x27;.index&#x27;</span>):<span class="comment">#检查是否已生成索引表</span></span><br><span class="line">    print(<span class="string">&#x27;-------------load the model-----------------&#x27;</span>)</span><br><span class="line">    model.load_weights(checkpoint_save_path)<span class="comment">#加载模型</span></span><br><span class="line"></span><br><span class="line">cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_save_path,</span><br><span class="line">                                                 save_weights_only=<span class="literal">True</span>,</span><br><span class="line">                                                 save_best_only=<span class="literal">True</span>)<span class="comment">#回调函数</span></span><br><span class="line"></span><br><span class="line">history = model.fit(x_train, y_train, batch_size=<span class="number">32</span>, epochs=<span class="number">5</span>, validation_data=(x_test, y_test), validation_freq=<span class="number">1</span>,</span><br><span class="line">                    callbacks=[cp_callback])<span class="comment">#添加callback选项，若没有checkpoint文件夹则会自动创建</span></span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
 
 <h4 id="参数提取"><a href="#参数提取" class="headerlink" title="参数提取"></a>参数提取</h4><p><img src="https://i.loli.net/2020/12/23/jh5svyZizwU4Rx2.png" alt="image-20201223101139650"></p>

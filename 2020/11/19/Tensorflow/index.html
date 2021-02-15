@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="Lzone">
 <meta property="og:description" content="1import tensorflow as tf								导入tensorflow">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:/Users/57624/AppData/Roaming/Typora/typora-user-images/image-20201221104752364.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20201221104752364.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/21/Nxp5XbZOtnaql9W.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/21/DIXJaLF2lEcWH1R.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/21/YAXDR6zK9JVFswZ.png">
@@ -58,7 +58,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/12/22/6xrMUNYS4Pgdbhf.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/22/wkdYRCqVHcMOuxA.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/22/mKfH5dh6pvRkBMq.png">
-<meta property="og:image" content="c:/Users/57624/AppData/Roaming/Typora/typora-user-images/image-20201223095033595.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20201223095033595.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/23/jh5svyZizwU4Rx2.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/23/ImxZkehCEloinvP.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/23/FiPRgWhA7ubK2EV.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="https://i.loli.net/2020/12/23/2pmQUrVJ96hPbRL.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/23/QmLoOwrtcKBqb2X.png">
 <meta property="article:published_time" content="2020-11-18T16:19:14.401Z">
-<meta property="article:modified_time" content="2021-02-14T12:09:47.447Z">
+<meta property="article:modified_time" content="2021-02-15T02:53:27.068Z">
 <meta property="article:author" content="lan5th">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/57624/AppData/Roaming/Typora/typora-user-images/image-20201221104752364.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20201221104752364.png">
 
 <link rel="canonical" href="http://lan5th.github.io/2020/11/19/Tensorflow/">
 
@@ -290,7 +290,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-14 20:09:47" itemprop="dateModified" datetime="2021-02-14T20:09:47+08:00">2021-02-14</time>
+                <time title="修改时间：2021-02-15 10:53:27" itemprop="dateModified" datetime="2021-02-15T10:53:27+08:00">2021-02-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -335,7 +335,7 @@
 <p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1LJM8_QoT-Z88VYwZhSonFw">https://pan.baidu.com/s/1LJM8_QoT-Z88VYwZhSonFw</a><br>提取码：ammg </p>
 <h2 id="Tensor数据"><a href="#Tensor数据" class="headerlink" title="Tensor数据"></a>Tensor数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list</span><br><span class="line">np.array科学计算库</span><br><span class="line">tf.Tensor支持连续求导</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\57624\AppData\Roaming\Typora\typora-user-images\image-20201221104752364.png" alt="image-20201221104752364"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20201221104752364.png" alt="image-20201221104752364"></p>
 <h3 id="创建tensor"><a href="#创建tensor" class="headerlink" title="创建tensor"></a>创建tensor</h3><p><code>tf.constant([1,5], dtype=tf.int64)</code>创建一个tensor</p>
 <p><code>tf.convert_to_tensor(np, dtype=tf.int64)</code>可以将numpy数据转换为tensor</p>
 <p><img src="https://i.loli.net/2020/12/21/Nxp5XbZOtnaql9W.png" alt="image-20201221110137328"></p>
@@ -464,7 +464,7 @@
 <h5 id="实现代码-部分-1"><a href="#实现代码-部分-1" class="headerlink" title="实现代码(部分)"></a>实现代码(部分)</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.keras.preprocessing.image <span class="keyword">import</span> ImageDataGenerator</span><br><span class="line"></span><br><span class="line">x_train = x_train.reshape(x_train.shape[<span class="number">0</span>], <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>)<span class="comment">#fit要求秩为4</span></span><br><span class="line">image_gen_train = ImageDataGenerator(</span><br><span class="line">    rescale=<span class="number">1.</span> / <span class="number">1.</span>,  <span class="comment"># 如为图像，分母为255时，可归至0～1</span></span><br><span class="line">    rotation_range=<span class="number">45</span>,  <span class="comment"># 随机45度旋转</span></span><br><span class="line">    width_shift_range=<span class="number">.15</span>,  <span class="comment"># 宽度偏移</span></span><br><span class="line">    height_shift_range=<span class="number">.15</span>,  <span class="comment"># 高度偏移</span></span><br><span class="line">    horizontal_flip=<span class="literal">False</span>,  <span class="comment"># 水平翻转</span></span><br><span class="line">    zoom_range=<span class="number">0.5</span>  <span class="comment"># 将图像随机缩放阈量50％</span></span><br><span class="line">)</span><br><span class="line">image_gen_train.fit(x_train)</span><br><span class="line"></span><br><span class="line">model.fit(image_gen_train.flow(x_train, y_train, batch_size=<span class="number">32</span>), epochs=<span class="number">5</span>, validation_data=(x_test, y_test),</span><br><span class="line">          validation_freq=<span class="number">1</span>)<span class="comment">#填入训练数据和标签要用flow函数生成增强数据</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="断点续训"><a href="#断点续训" class="headerlink" title="断点续训"></a>断点续训</h4><p>将之前训练好的模型加载进来，在原来模型的基础上再进行训练</p>
-<p><img src="C:\Users\57624\AppData\Roaming\Typora\typora-user-images\image-20201223095033595.png" alt="image-20201223095033595"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20201223095033595.png" alt="image-20201223095033595"></p>
 <h5 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">mnist = tf.keras.datasets.mnist</span><br><span class="line">(x_train, y_train), (x_test, y_test) = mnist.load_data()</span><br><span class="line">x_train, x_test = x_train / <span class="number">255.0</span>, x_test / <span class="number">255.0</span></span><br><span class="line"></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">    tf.keras.layers.Flatten(),</span><br><span class="line">    tf.keras.layers.Dense(<span class="number">128</span>, activation=<span class="string">&#x27;relu&#x27;</span>),</span><br><span class="line">    tf.keras.layers.Dense(<span class="number">10</span>, activation=<span class="string">&#x27;softmax&#x27;</span>)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=<span class="string">&#x27;adam&#x27;</span>,</span><br><span class="line">              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">False</span>),</span><br><span class="line">              metrics=[<span class="string">&#x27;sparse_categorical_accuracy&#x27;</span>])</span><br><span class="line"></span><br><span class="line">checkpoint_save_path = <span class="string">&quot;./checkpoint/mnist.ckpt&quot;</span><span class="comment">#保存模型路径</span></span><br><span class="line"><span class="keyword">if</span> os.path.exists(checkpoint_save_path + <span class="string">&#x27;.index&#x27;</span>):<span class="comment">#检查是否已生成索引表</span></span><br><span class="line">    print(<span class="string">&#x27;-------------load the model-----------------&#x27;</span>)</span><br><span class="line">    model.load_weights(checkpoint_save_path)<span class="comment">#加载模型</span></span><br><span class="line"></span><br><span class="line">cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_save_path,</span><br><span class="line">                                                 save_weights_only=<span class="literal">True</span>,</span><br><span class="line">                                                 save_best_only=<span class="literal">True</span>)<span class="comment">#回调函数</span></span><br><span class="line"></span><br><span class="line">history = model.fit(x_train, y_train, batch_size=<span class="number">32</span>, epochs=<span class="number">5</span>, validation_data=(x_test, y_test), validation_freq=<span class="number">1</span>,</span><br><span class="line">                    callbacks=[cp_callback])<span class="comment">#添加callback选项，若没有checkpoint文件夹则会自动创建</span></span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
 
 <h4 id="参数提取"><a href="#参数提取" class="headerlink" title="参数提取"></a>参数提取</h4><p><img src="https://i.loli.net/2020/12/23/jh5svyZizwU4Rx2.png" alt="image-20201223101139650"></p>
