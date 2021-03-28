@@ -2628,7 +2628,7 @@ cal [-y]                查询日历(显示一年)
 <h5 id="fit"><a href="#fit" class="headerlink" title="fit"></a>fit</h5><p>使用时validation_data和validation_split二选一</p>
 <p><img src="https://i.loli.net/2020/12/21/H2JcEDCTWRgGMkP.png" alt="image-20201221234952677"></p>
 <h5 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h5><p>在终端输出训练结果</p>
-<h5 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x_train = datasets.load_iris().data</span><br><span class="line">y_train = datasets.load_iris().target</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">116</span>)</span><br><span class="line">np.random.shuffle(x_train)</span><br><span class="line">np.random.seed(<span class="number">116</span>)</span><br><span class="line">np.random.shuffle(y_train)</span><br><span class="line">tf.random.set_seed(<span class="number">116</span>)</span><br><span class="line"></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">    tf.keras.layers.Dense(<span class="number">3</span>, activation=<span class="string">&#x27;softmax&#x27;</span>, kernel_regularizer=tf.keras.regularizers.l2())</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=tf.keras.optimizers.SGD(lr=<span class="number">0.1</span>),</span><br><span class="line">              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">False</span>),</span><br><span class="line">              metrics=[<span class="string">&#x27;sparse_categorical_accuracy&#x27;</span>])</span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, batch_size=<span class="number">32</span>, epochs=<span class="number">500</span>, validation_split=<span class="number">0.2</span>, validation_freq=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
+<h5 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x_train = datasets.load_iris().data</span><br><span class="line">y_train = datasets.load_iris().target</span><br><span class="line"></span><br><span class="line"><span class="comment">#打乱数据集，使用相同的seed保证输入特征和标签对应</span></span><br><span class="line">np.random.seed(<span class="number">116</span>)</span><br><span class="line">np.random.shuffle(x_train)</span><br><span class="line">np.random.seed(<span class="number">116</span>)</span><br><span class="line">np.random.shuffle(y_train)</span><br><span class="line">tf.random.set_seed(<span class="number">116</span>)</span><br><span class="line"></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">    tf.keras.layers.Dense(<span class="number">3</span>, activation=<span class="string">&#x27;softmax&#x27;</span>, kernel_regularizer=tf.keras.regularizers.l2())</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=tf.keras.optimizers.SGD(lr=<span class="number">0.1</span>),</span><br><span class="line">              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">False</span>),</span><br><span class="line">              metrics=[<span class="string">&#x27;sparse_categorical_accuracy&#x27;</span>])</span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, batch_size=<span class="number">32</span>, epochs=<span class="number">500</span>, validation_split=<span class="number">0.2</span>, validation_freq=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
 
 <h4 id="class-MyModel-Model-model-MyModel"><a href="#class-MyModel-Model-model-MyModel" class="headerlink" title="class MyModel(Model) model=MyModel"></a>class MyModel(Model) model=MyModel</h4><p>将之前的Sequential替换为自定义class继承Model类</p>
 <p><img src="https://i.loli.net/2020/12/22/dhiJTE7Y61LbGMU.png" alt="image-20201222142747894"></p>
@@ -3148,6 +3148,7 @@ cal [-y]                查询日历(显示一年)
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--Maven版本和头文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--配置的GAV--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Javaweb-01-maven<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--项目打包方式</span></span><br><span class="line"><span class="comment">  jar包：java应用</span></span><br><span class="line"><span class="comment">  war包：javaweb应用</span></span><br><span class="line"><span class="comment">  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--配置--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--项目默认构建编码--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--编译版本--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--项目依赖--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--Maven的高级之处在于可以帮助导入需要导入的包所依赖的其他的包(套娃)--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--项目构建所需--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>Javaweb-01-maven<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">pluginManagement</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">pluginManagement</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>由于约定大于配置的特性，若要导出位于标记为源码目录下的配置文件，需要在pom.xml的build头中添加配置</strong></p>
+<p>以下示例为添加<code>src/main/java</code>路径下的所有properties和xml文件</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">......</span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.properties<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>idea生成目录树，代表maven中jar包的结构体系</strong></p>
@@ -3605,6 +3606,231 @@ cal [-y]                查询日历(显示一年)
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SendMail</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//在这里写发送邮件代码</span></span><br><span class="line">         <span class="comment">//......</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>后端学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>JUC</title>
+    <url>/2021/03/20/JUC/</url>
+    <content><![CDATA[<p>juc指一个java并发工具包：java.utils.concurrent</p>
+]]></content>
+      <categories>
+        <category>语言学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>JVM</title>
+    <url>/2021/03/16/JVM/</url>
+    <content><![CDATA[<p>JVM相关问题</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210316204938405.png" alt="image-20210316204938405"></p>
+<ol>
+<li><p>JVM位置</p>
+<ul>
+<li><p>JVM处于Java程序之下，os操作系统之上</p>
+</li>
+<li><p>java程序执行过程</p>
+<blockquote>
+<p>注：jdk1.8后，方法区在堆中的元空间中，这里为了直观表现将其单独划分出来</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210316211308576.png" alt="image-20210316211308576"></p>
+<p>栈和程序计数器中不会有垃圾，JVM调优一般指对堆进行调优</p>
+</li>
+<li><p>类加载器</p>
+<p>作用：加载Class文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210316212657927.png" alt="image-20210316212657927"></p>
+<p>虚拟机自带加载器</p>
+<ul>
+<li>启动类（根）加载器</li>
+<li>扩展类加载器B</li>
+<li>应用程序加载器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>双亲委派机制</strong>（安全）：APP-&gt;EXC-&gt;BOOT(最终执行)</p>
+<ul>
+<li>类加载器收到类加载的请求</li>
+<li>将请求向上委托给父类加载器去完成，一直向上委托，直到启动类加载器</li>
+<li>启动加载器检查是否能加载当前类，能加载就结束，使用当前加载器，否则抛出异常，通知子加载器进行加载</li>
+<li>重复步骤3，如果最终APP加载器也未找到，则class not found</li>
+</ul>
+</li>
+<li><p>沙箱安全机制（了解）</p>
+<p>对于远程代码所添加安全性评估</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210317212730693.png" alt="image-20210317212730693"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210317212804935.png" alt="image-20210317212804935"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210317212829577.png" alt="image-20210317212829577"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210317212913937.png" alt="image-20210317212913937"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210317212939096.png" alt="image-20210317212939096"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210317213055170.png" alt="image-20210317213055170"></p>
+</li>
+<li><p>Native关键字</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210317213554828.png" alt="image-20210317213554828"></p>
+<p>带native关键字的说明java的作用范围无法达到，调用了底层C语言库，进入本地方法栈，调用本地方法本地接口JNI(Java Native Interface)</p>
+<p>JNI作用：扩展Java使用，融合不同的编程语言为Java所用，最初有C和C++；他在内存中专门开辟一块标记区域：Native Method Stack，等级native方法；最终执行时，加载本地方法库中的方法通过JNI</p>
+<p>用于驱动打印机，管理系统等</p>
+</li>
+<li><p>PC：程序计数器</p>
+<p>每个线程私有的一个指针，指向方法区中的方法字节码，在执行引擎读取下一条指令，内存空间很小</p>
+</li>
+<li><p>方法区</p>
+<p>静态变量(static)、常量(final)、类信息(Class)，运行时的常量池存在方法区中，但是实例变量存在堆内存中，和方法区无关</p>
+</li>
+<li><p><strong>java栈</strong></p>
+<p>先进先后，后进先出(main()方法最先执行，最后结束)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210317223932685.png" alt="image-20210317223932685"></p>
+<p>存储内容：8大基本类型，对象引用，实例方法</p>
+<p>运行原理：栈帧</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210318001816793.png" alt="image-20210318001816793"></p>
+<p>栈满后抛出错误：StackOverflowError</p>
+</li>
+<li><p>Java种类</p>
+<ul>
+<li>Sun公司Hotspot(主修)</li>
+<li>BEA JRsocket</li>
+<li>IBM J9 VM</li>
+</ul>
+</li>
+<li><p><strong>堆</strong></p>
+<p>一个JVM只有一个堆内存，堆内存的大小是可以调节的</p>
+<p>类加载器读取了类文件后，一般把<code>类、方法、常量、变量</code>，保存我们所有引用类型的真实对象</p>
+<ul>
+<li><p>堆内存</p>
+<ul>
+<li><p>新生区(伊甸园区)</p>
+<p>类诞生和成长的低方，所有对象都是在伊甸园区new出来的</p>
+<ul>
+<li><p>伊甸园区</p>
+</li>
+<li><p>幸存区0区(from区)</p>
+</li>
+<li><p>幸存区1区(to区)</p>
+<p><strong>from区和to区会轮流交换，而to区一般为空</strong>：为了平衡空间，内存占用多的区会将对象移向内存较小的区，即from被占用内存多to空区</p>
+</li>
+</ul>
+</li>
+<li><p>养老区(老年区)</p>
+</li>
+<li><p>永久区</p>
+<p>(jdk8以后，永久区更名为元空间)</p>
+<ul>
+<li>jdk1.6前：永久代，常量在方法区</li>
+<li>jdk1.7：永久代，慢慢退化（区有就代），常量在堆中</li>
+<li>jdk1.8之后：无永久代，常量池在元空间</li>
+</ul>
+<p>方法区(非堆)也在元空间中，而常量池在方法区中</p>
+<p>常驻内存，用来存放jdk自身携带的Class对象，Interface元数据，存储的是Java运行时的一些环境或类信息，该区域不存在垃圾回收，关闭VM虚拟机会释放这个区域的内存</p>
+<p>警告：启动类加载了大量的第三方jar包，Tomcat部署了太多应用或大量动态生成的反射类，不断被加载直到内存满，也会出现OOM</p>
+</li>
+</ul>
+</li>
+<li><p>垃圾回收</p>
+<p>GC垃圾回收主要是在伊甸园区和养老区，假设内存都满了，堆内存不够，抛出错误：OutOfMemoryError</p>
+<ul>
+<li>轻GC</li>
+<li>重GC(Full GC)</li>
+</ul>
+</li>
+<li><p>新生区的子区伊甸园区满后触发一次轻GC，过滤后的对象进入幸存区0区，新生区的三个子区都满后触发一次重GC，过滤后的对象进入养老区</p>
+</li>
+<li><p>经研究，99%的对象都是临时对象</p>
+</li>
+<li><p><strong>在计算内存时元空间逻辑上存在，物理上不存在</strong></p>
+<p>通过添加VM option<code>-Xms1024m -Xmx1024m -XX:+PrintGCDetails</code>来自定义虚拟机参数r</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-Xms 设置初始化内存分配大小，默认1&#x2F;64</span><br><span class="line">  -Xmx 设置最大分配内存，默认1&#x2F;4</span><br><span class="line">-XX:+PrintPrintGCDetails 打印GC垃圾回收信息</span><br><span class="line">  -XX:+HeapDumpOnOutOfMemoryError 当发生OutOfMemoryError时dump出内存文件，可被jprofiler等调优软件读取</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210320170930669.png" alt="image-20210320170930669"></p>
+<p>经计算新生区和养老区大小之和为实际堆占用大小，即堆内存未计算元空间大小</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210320171030538.png" alt="image-20210320171030538"></p>
+</li>
+<li><p>MAT，Jprofiler等调优器作用</p>
+<ul>
+<li>分析Dump内存文件，快速定位内存泄漏</li>
+<li>获得堆中数据</li>
+<li>获得大对象等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>GC</strong>：垃圾回收机制</p>
+<p>两种类型：轻GC/重GC</p>
+<p>GC常用算法：</p>
+<ol>
+<li><p>标记清除法</p>
+<p>第一阶段：标记。从根结点出发遍历对象，对访问过的对象打上标记，表示该对象可达。</p>
+<p>第二阶段：清除。对那些没有标记的对象进行回收，这样使得不能利用的空间能够重新被利用。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210320221642511.png" alt="image-20210320221642511"></p>
+<p>优点：不需要额外空间</p>
+<p>缺点：两次扫描严重浪费时间，会产生内存碎片</p>
+</li>
+<li><p>标记压缩(标记整理)</p>
+<p>对标记清除法的优化</p>
+<p>可以先标记清除多次再进行标记压缩(标记清除压缩)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210320222153030.png" alt="image-20210320222153030"></p>
+<p>优点：防止内存碎片产生</p>
+<p>缺点：又增加了一次扫描时间和移动成本</p>
+</li>
+<li><p>复制算法</p>
+<p>每次GC都会将Eden区的对象移至幸存区，而Eden区被GC后就会变空，两个幸存区中，谁空谁是to区</p>
+<p>一个对象经历了15次GC(默认)都没有死时会进入养老区</p>
+<p>用<code>-XX:MaxTenuringThreshold=9</code>设置参数可以设定进入养老区所需GC次数为9</p>
+<p>复制算法一般用于年轻代GC，如图所示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210320220709842.png" alt="image-20210320220709842"></p>
+<p>优点：没有内存碎片，对象存货度较低时使用效果好</p>
+<p>缺点：浪费一般的幸存空间</p>
+</li>
+<li><p>引用计数器</p>
+<p>给每个计数器创造专属计数器并赋值为0，每当一个对象被引用便给它的计数器+1，触发GC时淘汰计数器数值小的数个对象</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210320214546430.png" alt="image-20210320214546430"></p>
+<p>缺点是计数器本身也要占用内存，因此在JVM中不应用此方法</p>
+</li>
+</ol>
+</li>
+<li><p>GC总结</p>
+<ul>
+<li>内存效率：复制效率&gt;标记清除算法&gt;标记压缩算法(时间复杂度)</li>
+<li>内内存整齐度：复制算法=标记压缩算法&gt;标记清除算法</li>
+<li>内存利用率：标记压缩算法=标记清除算法&gt;复制算法</li>
+</ul>
+<p>没有最好的算法，只有最合适的算法</p>
+<p>GC：分代收集算法</p>
+<ul>
+<li>年轻代：存活率低：复制算法</li>
+<li>老年代：区域大，存活率高：标记清除+标记压缩混合实现</li>
+</ul>
+</li>
+<li><p>JMM(Java Memory Model)</p>
+<p>作用：缓存一致性协议，用于定义数据读取的规则；定义了线程工作内存和主内存之间的抽象关系：线程之间的共享变量储存在主内存中，每个线程都有一个私有的本地内存</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210320225105255.png" alt="image-20210320225105255"></p>
+<p>解决共享对象可见性问题：volilate关键字</p>
+<p>JMM对这八种指令的使用，制定了如下规则：</p>
+<ul>
+<li>不允许read和load、store和write操作之一单独出现。即使用了read必须load，使用了store必须write</li>
+<li>不允许线程丢弃他最近的assign操作，即工作变量的数据改变了之后，必须告知主存</li>
+<li>不允许一个线程将没有assign的数据从工作内存同步回主内存</li>
+<li>一个新的变量必须在主内存中诞生，不允许工作内存直接使用一个未被初始化的变量。就是怼变量实施use、store操作之前，必须经过assign和load操作</li>
+<li>一个变量同一时间只有一个线程能对其进行lock。多次lock后，必须执行相同次数的unlock才能解锁</li>
+<li>如果对一个变量进行lock操作，会清空所有工作内存中此变量的值，在执行引擎使用这个变量前，必须重新load或assign操作初始化变量的值</li>
+<li>如果一个变量没有被lock，就不能对其进行unlock操作。也不能unlock一个被其他线程锁住的变量</li>
+<li>对一个变量进行unlock操作之前，必须把此变量同步回主内存</li>
+</ul>
+<p>　　JMM对这八种操作规则和对volatile的一些特殊规则就能确定哪里操作是线程安全，哪些操作是线程不安全的了。但是这些规则实在复杂，很难在实践中直接分析。所以一般我们也不会通过上述规则进行分析。更多的时候，使用java的happen-before规则来进行分析。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>语言学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Mybatis</title>
+    <url>/2021/03/28/Mybatis/</url>
+    <content><![CDATA[<p>maven仓库</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>持久层</strong>：持久化就是将程序的数据在瞬时状态和持久状态转化的过程，一般是数据库</p>
 ]]></content>
       <categories>
         <category>后端学习</category>

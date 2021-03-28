@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/12/23/2pmQUrVJ96hPbRL.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/23/QmLoOwrtcKBqb2X.png">
 <meta property="article:published_time" content="2020-11-18T16:19:14.401Z">
-<meta property="article:modified_time" content="2021-02-15T02:53:27.068Z">
+<meta property="article:modified_time" content="2021-03-11T15:21:08.910Z">
 <meta property="article:author" content="lan5th">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20201221104752364.png">
@@ -290,7 +290,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-15 10:53:27" itemprop="dateModified" datetime="2021-02-15T10:53:27+08:00">2021-02-15</time>
+                <time title="修改时间：2021-03-11 23:21:08" itemprop="dateModified" datetime="2021-03-11T23:21:08+08:00">2021-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -417,7 +417,7 @@
 <h5 id="fit"><a href="#fit" class="headerlink" title="fit"></a>fit</h5><p>使用时validation_data和validation_split二选一</p>
 <p><img src="https://i.loli.net/2020/12/21/H2JcEDCTWRgGMkP.png" alt="image-20201221234952677"></p>
 <h5 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h5><p>在终端输出训练结果</p>
-<h5 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x_train = datasets.load_iris().data</span><br><span class="line">y_train = datasets.load_iris().target</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">116</span>)</span><br><span class="line">np.random.shuffle(x_train)</span><br><span class="line">np.random.seed(<span class="number">116</span>)</span><br><span class="line">np.random.shuffle(y_train)</span><br><span class="line">tf.random.set_seed(<span class="number">116</span>)</span><br><span class="line"></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">    tf.keras.layers.Dense(<span class="number">3</span>, activation=<span class="string">&#x27;softmax&#x27;</span>, kernel_regularizer=tf.keras.regularizers.l2())</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=tf.keras.optimizers.SGD(lr=<span class="number">0.1</span>),</span><br><span class="line">              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">False</span>),</span><br><span class="line">              metrics=[<span class="string">&#x27;sparse_categorical_accuracy&#x27;</span>])</span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, batch_size=<span class="number">32</span>, epochs=<span class="number">500</span>, validation_split=<span class="number">0.2</span>, validation_freq=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
+<h5 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x_train = datasets.load_iris().data</span><br><span class="line">y_train = datasets.load_iris().target</span><br><span class="line"></span><br><span class="line"><span class="comment">#打乱数据集，使用相同的seed保证输入特征和标签对应</span></span><br><span class="line">np.random.seed(<span class="number">116</span>)</span><br><span class="line">np.random.shuffle(x_train)</span><br><span class="line">np.random.seed(<span class="number">116</span>)</span><br><span class="line">np.random.shuffle(y_train)</span><br><span class="line">tf.random.set_seed(<span class="number">116</span>)</span><br><span class="line"></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">    tf.keras.layers.Dense(<span class="number">3</span>, activation=<span class="string">&#x27;softmax&#x27;</span>, kernel_regularizer=tf.keras.regularizers.l2())</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=tf.keras.optimizers.SGD(lr=<span class="number">0.1</span>),</span><br><span class="line">              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=<span class="literal">False</span>),</span><br><span class="line">              metrics=[<span class="string">&#x27;sparse_categorical_accuracy&#x27;</span>])</span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, batch_size=<span class="number">32</span>, epochs=<span class="number">500</span>, validation_split=<span class="number">0.2</span>, validation_freq=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
 
 <h4 id="class-MyModel-Model-model-MyModel"><a href="#class-MyModel-Model-model-MyModel" class="headerlink" title="class MyModel(Model) model=MyModel"></a>class MyModel(Model) model=MyModel</h4><p>将之前的Sequential替换为自定义class继承Model类</p>
 <p><img src="https://i.loli.net/2020/12/22/dhiJTE7Y61LbGMU.png" alt="image-20201222142747894"></p>
@@ -669,7 +669,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -731,12 +731,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">150k</span>
+    <span title="站点总字数">154k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:17</span>
+    <span title="站点阅读时长">2:20</span>
 </div>
 
         
