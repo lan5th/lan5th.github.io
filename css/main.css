@@ -1246,7 +1246,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #7f1d60;
+  background: #830013;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2236,7 +2236,7 @@ ul.breadcrumb li + li:last-child {
   visibility: visible;
 }
 .search-popup {
-  background: #fff;
+  background: var(--card-bg-color);
   border-radius: 5px;
   height: 80%;
   left: calc(50% - 350px);
@@ -2245,7 +2245,7 @@ ul.breadcrumb li + li:last-child {
   transform: scale(0);
   transition: transform 0.2s;
   width: 700px;
-  z-index: 10000;
+  z-index: 1500;
 }
 .search-active .search-popup {
   transform: scale(1);
@@ -2752,13 +2752,6 @@ body {
   font-size: 1em;
   line-height: 2;
 }
-.header-inner {
-  opacity: 0.8;
-}
-.sidebar {
-  transition-duration: 0.4s;
-  opacity: 0.8;
-}
 .content {
   padding-top: 15px;
   background: rgba(255,255,255,0);
@@ -2784,6 +2777,15 @@ code {
   border-radius: 3px;
 }
 .search-popup {
-  opacity: 1;
   background: #fff;
+}
+.header-inner {
+  background: rgba(255,255,255,0.8);
+}
+.sidebar-inner {
+  background: rgba(255,255,255,0);
+}
+.sidebar {
+  transition-duration: 0.4s;
+  background: rgba(255,255,255,0.8);
 }
