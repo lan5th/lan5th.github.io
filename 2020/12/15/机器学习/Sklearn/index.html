@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lan5th.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="简略的sklearn学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sklearn学习">
+<meta property="og:url" content="http://lan5th.github.io/2020/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Sklearn/index.html">
+<meta property="og:site_name" content="Lzone">
+<meta property="og:description" content="简略的sklearn学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-15T14:13:39.217Z">
+<meta property="article:modified_time" content="2021-02-14T12:10:41.854Z">
+<meta property="article:author" content="lan5th">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://lan5th.github.io/2020/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Sklearn/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Sklearn学习 | Lzone</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+  
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
+    <script src="/js/cursor/text.js"></script>
+  
+
+<link rel="alternate" href="/atom.xml" title="Lzone" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lzone</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">always be doing</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/lan5th" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://lan5th.github.io/2020/12/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Sklearn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lan5th">
+      <meta itemprop="description" content="practise more">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lzone">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Sklearn学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-15 22:13:39" itemprop="dateCreated datePublished" datetime="2020-12-15T22:13:39+08:00">2020-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-14 20:10:41" itemprop="dateModified" datetime="2021-02-14T20:10:41+08:00">2021-02-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>简略的sklearn学习</p>
+<a id="more"></a>
+
+<h4 id="数据集api"><a href="#数据集api" class="headerlink" title="数据集api"></a>数据集api</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sklearn.datasets.datasets.load_*()						小规模数据集</span><br><span class="line">sklearn.datasets.datasets.fetch_*(data_home&#x3D;None)		 大规模数据集，需要下载</span><br></pre></td></tr></table></figure>
+
+<p>数据集返回值<code>datasets.base.Bunch</code>字典类型</p>
+<p>通过<code>dict[&quot;key&quot;]</code>或<code>bunch.key</code>来获得数据</p>
+<h4 id="数据集划分"><a href="#数据集划分" class="headerlink" title="数据集划分"></a>数据集划分</h4><p>训练数据：用于训练，构建模型</p>
+<p>测试数据：模型检验时使用，用于评估模型(20%~30%)</p>
+<!--more-->
+
+<h4 id="数据划分api"><a href="#数据划分api" class="headerlink" title="数据划分api"></a>数据划分api</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sklearn.model_selection.train_test_split(data,[target],*options)</span><br></pre></td></tr></table></figure>
+
+<p>参数：<code>test_size</code>测试集大小，float型，<code>random_state</code>随机数种子</p>
+<p>返回四个值：训练集特征值，测试集特征值，训练集目标值，测试集目标值</p>
+<h3 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h3><p>——决定机器学习上限</p>
+<h4 id="特征抽取-提取"><a href="#特征抽取-提取" class="headerlink" title="特征抽取/提取"></a>特征抽取/提取</h4><p>文本、类型-&gt;数值</p>
+<h5 id="特征提取api"><a href="#特征提取api" class="headerlink" title="特征提取api"></a>特征提取api</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sklearn.feature_extraction</span><br></pre></td></tr></table></figure>
+
+<h5 id="字典特征提取"><a href="#字典特征提取" class="headerlink" title="字典特征提取"></a>字典特征提取</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sklearn.feature_extraction.DictVectorizer(sparse&#x3D;True,...)		(sparse默认稀疏矩阵)</span><br><span class="line">DictVectorizer.fit_transfer(data)							  返回sparse矩阵</span><br><span class="line">DictVectorizer.inverse_transform(marix)						  返回原先数据</span><br><span class="line">DictVectorizer.get_feature_names()							  返回类别名称</span><br></pre></td></tr></table></figure>
+
+<p>one-hot编码：一个类占矩阵的一列</p>
+<h5 id="文本特征提取"><a href="#文本特征提取" class="headerlink" title="文本特征提取"></a>文本特征提取</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sklearn.feature_extraction.text.CountVectorizer(stop_words&#x3D;[])	可设置停用词，即不统计文本</span><br><span class="line">DictVectorizer.fit_transfer(data)                             	返回sparse矩阵DictVectorizer.inverse_transform(marix)                       	返回原先数据格DictVectorizer.get_feature_names()                            	返回单词列表</span><br><span class="line">sklearn.feature_extraction.text.TfidfVectorizer					找出重要词</span><br></pre></td></tr></table></figure>
+
+<p>#中文需要手动分割词句或使用jieba库</p>
+<h6 id="jieba使用"><a href="#jieba使用" class="headerlink" title="jieba使用"></a>jieba使用</h6><p><code>jieba.cut(&quot;&quot;)</code>分割单个字符串，对多个字符串的列表进行分割时使用<code>for in</code>进行遍历</p>
+<h5 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sklearn.feature_extraction.text.TfidfVectorizer(stop_words&#x3D;None,...)</span><br><span class="line">TfidfVectorizer.fit_transform(X)								X为文本或字符串，返回sparse矩阵</span><br></pre></td></tr></table></figure>
+
+<p>TF：词频：一个词出现次数/总词数</p>
+<p>IDF：逆向文档频率：lg(文章数/包含该词文章数)</p>
+<p>TF-IDF：重要程度：TF*IDF</p>
+<h3 id="特征预处理"><a href="#特征预处理" class="headerlink" title="特征预处理"></a>特征预处理</h3><p>特征预处理api</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sklearn.preprocessing</span><br></pre></td></tr></table></figure>
+
+<p>特征单位或大小相差的程度不同，某特征方差比其他特征大出几个数量级，容易影响目标结果，使一些算法无法学习到其他特征</p>
+<h4 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h4><p>对原始数据进行变换把数据映射到(默认[0,1])之间，适合精确小数据场景(受异常值影响较大，稳定性较差)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X&#39;&#x3D;(x-min)&#x2F;(max-min)							maa,min为数据中的最大最小值</span><br><span class="line">X&#39;&#39;&#x3D;X&#39;*(mx-mi)+mi								mx,mi为指定区间范围的最大值最小值</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sklearn.preprocessing.MinMaxScaler(feature_range&#x3D;(0,1)...)</span><br><span class="line">MinMaxScaler.fit_transform(X)				X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+
+<h4 id="标准化"><a href="#标准化" class="headerlink" title="标准化"></a>标准化</h4><p>对原始数据进行变换把数据变换到均值为0，标准差为1的范围内,适合嘈杂的大数据场景</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X&#39;&#x3D;(x-mean)&#x2F;std									mean平均值，std标准差</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sklearn.preprocessing.StanderdScaler()</span><br><span class="line">StanderdScaler.fit_transform(X)				X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+
+<h3 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h3><p>ndarray：维数：嵌套的层数</p>
+<p>降低特征个数，效果：特征之间不相关</p>
+<h4 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h4><h5 id="Filter过滤式"><a href="#Filter过滤式" class="headerlink" title="Filter过滤式"></a>Filter过滤式</h5><h6 id="方差选择法"><a href="#方差选择法" class="headerlink" title="方差选择法"></a>方差选择法</h6><p>低方差值特征过滤API</p>
+<p>删除小于设定方差的特征值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sklearn.feature_selection.VarianceThreshold(threshold &#x3D; 0.0)</span><br><span class="line">VarianceThreshold.fit_transform(X)			X为numpy array数据[n_samples, n_features],返回同形状数组</span><br></pre></td></tr></table></figure>
+
+<h6 id="相关系数"><a href="#相关系数" class="headerlink" title="相关系数"></a>相关系数</h6><p>特征之间相关程度</p>
+<p>皮尔逊相关系数api</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from scipy.stats import pearsonr</span><br><span class="line">pearsonr(data[&quot;var1&quot;], data[&quot;var2&quot;])		计算相关系数,返回(r,p) r:相关系数;p:p越小表示相关系数月显著</span><br></pre></td></tr></table></figure>
+
+<p>相关性很高时：选取一个/加权求和</p>
+<h5 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h5><p>高维转低维特征，可能舍弃原有数据，创造新的变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sklearn.decomposition.PCA(n_components&#x3D;None)	n-components:小数:表示保留%的信息;整数:减少到几个特征值</span><br><span class="line">PCA.fit_transform(X)					X为numpy array数据[n_samples, n_features],返回同指定维度array</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h6><h6 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h6><h6 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h6>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/python%E7%88%AC%E8%99%AB/" rel="prev" title="Python爬虫">
+      <i class="fa fa-chevron-left"></i> Python爬虫
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B/" rel="next" title="机器学习流程">
+      机器学习流程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86api"><span class="nav-number">1.</span> <span class="nav-text">数据集api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86"><span class="nav-number">2.</span> <span class="nav-text">数据集划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%92%E5%88%86api"><span class="nav-number">3.</span> <span class="nav-text">数据划分api</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="nav-number"></span> <span class="nav-text">特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E6%8A%BD%E5%8F%96-%E6%8F%90%E5%8F%96"><span class="nav-number">1.</span> <span class="nav-text">特征抽取&#x2F;提取</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96api"><span class="nav-number">1.1.</span> <span class="nav-text">特征提取api</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96"><span class="nav-number">1.2.</span> <span class="nav-text">字典特征提取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96"><span class="nav-number">1.3.</span> <span class="nav-text">文本特征提取</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#jieba%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">jieba使用</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TF-IDF"><span class="nav-number">1.4.</span> <span class="nav-text">TF-IDF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number"></span> <span class="nav-text">特征预处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">归一化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">标准化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%8D%E7%BB%B4"><span class="nav-number"></span> <span class="nav-text">降维</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="nav-number">1.</span> <span class="nav-text">特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter%E8%BF%87%E6%BB%A4%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">Filter过滤式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE%E9%80%89%E6%8B%A9%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">方差选择法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">相关系数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">主成分分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-number">1.2.1.</span> <span class="nav-text">决策树</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96"><span class="nav-number">1.2.2.</span> <span class="nav-text">正则化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.3.</span> <span class="nav-text">深度学习</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lan5th"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lan5th</p>
+  <div class="site-description" itemprop="description">practise more</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lan5th" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lan5th" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/video/BV1Lt411R78H?p=1" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Lt411R78H?p&#x3D;1" rel="noopener" target="_blank">主题教程</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://lixint.github.io/" title="https:&#x2F;&#x2F;lixint.github.io&#x2F;" rel="noopener" target="_blank">教程博客</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lan5th</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">469k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:07</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

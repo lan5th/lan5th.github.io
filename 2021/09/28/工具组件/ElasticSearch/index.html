@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lan5th.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="大数据量的分布式搜索引擎">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ElasticSearch">
+<meta property="og:url" content="http://lan5th.github.io/2021/09/28/%E5%B7%A5%E5%85%B7%E7%BB%84%E4%BB%B6/ElasticSearch/index.html">
+<meta property="og:site_name" content="Lzone">
+<meta property="og:description" content="大数据量的分布式搜索引擎">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928233250409.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928233316851.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928203305132.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928211015608.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928221955266.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929134825982.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929140317605.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929152227468.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929150503941.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929193234642.png">
+<meta property="article:published_time" content="2021-09-28T10:25:09.707Z">
+<meta property="article:modified_time" content="2021-10-05T12:17:24.060Z">
+<meta property="article:author" content="lan5th">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928233250409.png">
+
+<link rel="canonical" href="http://lan5th.github.io/2021/09/28/%E5%B7%A5%E5%85%B7%E7%BB%84%E4%BB%B6/ElasticSearch/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ElasticSearch | Lzone</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+  
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
+    <script src="/js/cursor/text.js"></script>
+  
+
+<link rel="alternate" href="/atom.xml" title="Lzone" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lzone</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">always be doing</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/lan5th" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://lan5th.github.io/2021/09/28/%E5%B7%A5%E5%85%B7%E7%BB%84%E4%BB%B6/ElasticSearch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lan5th">
+      <meta itemprop="description" content="practise more">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lzone">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ElasticSearch
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-28 18:25:09" itemprop="dateCreated datePublished" datetime="2021-09-28T18:25:09+08:00">2021-09-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-05 20:17:24" itemprop="dateModified" datetime="2021-10-05T20:17:24+08:00">2021-10-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">工具组件</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+            <div class="post-description">大数据量的分布式搜索引擎</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="基本概述"><a href="#基本概述" class="headerlink" title="基本概述"></a>基本概述</h2><p>ELK：Elasticsearch+Logstash+Kibana</p>
+<p>基本特征</p>
+<ul>
+<li>Elasticsearch基于Lucene，java开发的，而Lucene是一套信息检索工具包(jar)，不包含搜索引擎</li>
+<li>开源高扩展的分布式搜索引擎，近乎实时的存储和检索数据，可以处理PB级别的数据</li>
+<li>主要功能：全文搜索、结构化搜索、分析</li>
+</ul>
+<p>最低要求jdk1.8</p>
+<p>默认端口9200，集群通信端口9300</p>
+<h2 id="ES数据结构"><a href="#ES数据结构" class="headerlink" title="ES数据结构"></a>ES数据结构</h2><ul>
+<li>索引indices</li>
+<li>types(逐渐弃用)</li>
+<li>documents</li>
+<li>fields</li>
+</ul>
+<h2 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h2><ul>
+<li><p>正排索引</p>
+<p>以文档ID为key建立索引表，用户搜索时查询所有索引的content(包括大部分与输入的关键词无关的word)，速度很慢</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928233250409.png" alt="image-20210928233250409"></p>
+</li>
+<li><p>倒排索引</p>
+<p>预先以word为key建立索引表，只有出现过某个词语的文档才会添加到索引队列，用户搜索时只需要遍历所有索引(这些索引的表项都是与输入的关键词直接相关的)，只需要对比各个文档中关键词出现的次数就可以很快查出并排序</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928233316851.png" alt="image-20210928233316851"></p>
+</li>
+</ul>
+<h1 id="开始ES"><a href="#开始ES" class="headerlink" title="开始ES"></a>开始ES</h1><h2 id="安装ES"><a href="#安装ES" class="headerlink" title="安装ES"></a>安装ES</h2><p>这里使用docker安装</p>
+<p>限制系统进程的虚拟内存区域大小，否则可能无法运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w vm.max_map_count=262144</span><br><span class="line">cat /proc/sys/vm/max_map_count</span><br></pre></td></tr></table></figure>
+
+<p>服务器运存小，因此设置虚拟机最大内存Xms为256m</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拉取镜像</span></span><br><span class="line">docker pull elasticsearch:7.14.1</span><br><span class="line"><span class="comment">#运行镜像</span></span><br><span class="line">docker run --name elasticsearch -d -e ES_JAVA_OPTS=<span class="string">&quot;-Xms256m -Xmx256m&quot;</span> -e <span class="string">&quot;discovery.type=single-node&quot;</span> -p 9200:9200 -p 9300:9300 elasticsearch:7.14.1</span><br></pre></td></tr></table></figure>
+
+<p>访问9200端口，能够返回提示信息json即运行成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928203305132.png" alt="image-20210928203305132"></p>
+<h2 id="安装ES-header"><a href="#安装ES-header" class="headerlink" title="安装ES-header"></a>安装ES-header</h2><p>elasticsearch-head是一个简单的的es可视化界面，可以用来查看数据，默认端口9100</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拉取镜像</span></span><br><span class="line">docker pull mobz/elasticsearch-head:5</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动镜像</span></span><br><span class="line">docker run --name elasticsearch-head -p 9100:9100 -d mobz/elasticsearch-head:5</span><br></pre></td></tr></table></figure>
+
+<p>这时访问9100端口就可以看到可视化界面了</p>
+<p>这时9100端口的ES-header是无法访问到9200端口的ES，存在跨域问题</p>
+<p>需要修改ES的配置文件，默认在<code>/config</code>下的elasticsearch.yml</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi config/elasticsearch.yml</span><br></pre></td></tr></table></figure>
+
+<p>如果不能用vi，就在外部编写配置文件然后cp进容器</p>
+<p>在末尾添加配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http.cors.enabled: <span class="literal">true</span> </span><br><span class="line">http.cors.allow-origin: <span class="string">&quot;*&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为docker容器的ip是内部ip，因此我们需要手动连接，将上方连接栏的<code>http://localhost:9200/</code>改为我们自己的ip</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928211015608.png" alt="image-20210928211015608"></p>
+<blockquote>
+<p> ES-header无法查询数据问题</p>
+</blockquote>
+<p>修改/usr/src/app/_site下的vendor.js文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker cp elasticsearch-head:/usr/src/app/_site/vendor.js vendor.js</span><br><span class="line">vim vendor.js</span><br></pre></td></tr></table></figure>
+
+<p>vim快捷键<code>:行号</code>跳到指定行</p>
+<p>修改</p>
+<p>1、6886行<br><code>contentType: &quot;application/x-www-form-urlencoded&quot;</code><br>改成<br><code>contentType: “application/json;charset=UTF-8”</code></p>
+<p>2、7573行<br><code>var inspectData = s.contentType === “application/x-www-form-urlencoded” &amp;&amp;</code><br>改成<br><code>var inspectData = s.contentType === “application/json;charset=UTF-8” &amp;&amp;</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp vendor.js elasticsearch-head:/usr/src/app/_site/vendor.js</span><br></pre></td></tr></table></figure>
+
+<p>无需重启，刷新页面就可以显示索引数据了</p>
+<h2 id="安装kibana"><a href="#安装kibana" class="headerlink" title="安装kibana"></a>安装kibana</h2><p>kibana是一个好用的es可视化界面，可以用来发送请求，默认端口5601</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#注意kibana版本需要与ES版本相对应</span></span><br><span class="line">docker pull kibana:7.14.1</span><br><span class="line"><span class="comment"># 需要绑定ES的ip</span></span><br><span class="line">docker run --name kibana -e ELASTICSEARCH_URL=http://47.113.225.244:9200 -p 5601:5601 -d kibana:7.14.1</span><br></pre></td></tr></table></figure>
+
+<p>这时访问5601端口，显示Kibana server is not ready yet，我们需要进一步的配置</p>
+<p>进入kibana容器修改文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it kibana bash</span><br><span class="line">vi /opt/kibana/config/kibana.yml</span><br></pre></td></tr></table></figure>
+
+<p>将<code>elasticsearch.hosts</code>修改为自己ES的IP</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elasticsearch.hosts: [ <span class="string">&quot;http://47.113.225.244:9200&quot;</span> ]</span><br></pre></td></tr></table></figure>
+
+<p>再次访问，发现可以正常访问了</p>
+<p><strong>启用汉化</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it kibana bash</span><br><span class="line">vi /usr/share/kibana/config/kibana.yml</span><br></pre></td></tr></table></figure>
+
+<p>在文件末尾追加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i18n.locale: <span class="string">&quot;zh-CN&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这时我们重启kibana就能看到中文界面了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210928221955266.png" alt="image-20210928221955266"></p>
+<h2 id="IK分词器"><a href="#IK分词器" class="headerlink" title="IK分词器"></a>IK分词器</h2><p>IK分词器可以帮助我们分解中文词句</p>
+<p>因为是需要在ES内部安装的插件，因此需要我们手动下载，github地址：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-ik/releases">Releases · medcl/elasticsearch-analysis-ik (github.com)</a>，下载完成后传输到服务器</p>
+<p>==这里也需要注意版本对应，否则会报错==</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#cp文件到ES容器内部</span></span><br><span class="line">docker cp elasticsearch-analysis-ik-7.14.1.zip elasticsearch:/usr/share/elasticsearch/plugins</span><br><span class="line"></span><br><span class="line">docker <span class="built_in">exec</span> -it elasticsearch bash</span><br><span class="line"></span><br><span class="line">mkdir /usr/share/elasticsearch/plugins/ik</span><br><span class="line"></span><br><span class="line">mv /usr/share/elasticsearch/plugins/elasticsearch-analysis-ik-7.14.1.zip /usr/share/elasticsearch/plugins/ik</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /usr/share/elasticsearch/plugins/ik/</span><br><span class="line"></span><br><span class="line">unzip elasticsearch-analysis-ik-7.14.1.zip</span><br><span class="line"></span><br><span class="line">rm -rf elasticsearch-analysis-ik-7.14.1.zip</span><br></pre></td></tr></table></figure>
+
+<p>然后重启ES容器</p>
+<p>可以在容器中使用命令来查看是否启用成功，路径<code>/usr/share/elasticsearch/bin</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929134825982.png" alt="image-20210929134825982"></p>
+<p><strong>简单使用</strong></p>
+<ul>
+<li><p><code>ik_smart</code>：最粗粒度划分</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET _analyze</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;analyzer&quot;</span>: <span class="string">&quot;ik_smart&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;中国共产党&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回结果只有<code>中国共产党</code></p>
+</li>
+<li><p><code>ik_max_word</code>：最细粒度划分</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET _analyze</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;analyzer&quot;</span>: <span class="string">&quot;ik_max_word&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;中国共产党&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回结果有<code>中国共产党、中国、国共、共产党、共产、党</code></p>
+</li>
+</ul>
+<p>ik分词器是从它的字典中进行词句匹配的，如果想让分词结果中能够包含我们自己的词语就需要向字典中添加</p>
+<p>在容器内<code>/usr/share/elasticsearch/plugins/ik/config</code>路径下先编写自己的.dic文件，然后将其添加到配置文件IKAnalyzer.cfg.xml中</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929140317605.png" alt="image-20210929140317605"></p>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><h2 id="索引操作"><a href="#索引操作" class="headerlink" title="索引操作"></a>索引操作</h2><p>基本方法表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929152227468.png" alt="image-20210929152227468"></p>
+<ul>
+<li><p>PUT创建索引</p>
+<p>注意以后类型名type会逐渐弃用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT /索引名/类型名/文档id</span><br></pre></td></tr></table></figure>
+
+<p>存入或覆盖数据(如果没有索引则会自动创建，并自动指定字段类型)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PUT /test_index/test_id</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;lan5th&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;age&quot;</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建索引并定义规则</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">PUT /test01</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;mappings&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;properties&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">&quot;age&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;long&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">&quot;birthday&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;date&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>GET获取信息(索引、type或文档id)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET test01</span><br></pre></td></tr></table></figure>
+
+<p>查看所有索引</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET _cat/indices?v</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929150503941.png" alt="image-20210929150503941"></p>
+</li>
+<li><p>修改信息</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">UPDATE /test01/1</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;age&quot;</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="attr">&quot;birthday&quot;</span>: <span class="string">&quot;2021-9-29&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用UPDATE或PUT方式实际上是覆盖原有数据，如果有字段漏填会造成数据丢失</p>
+<p>可以使用POST指定方法的方式进行更新，仅修改指定了的字段</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST /test01/1/_update</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;张三&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>无论使用怎样的方式，修改信息后默认version字段都会自增</p>
+</li>
+<li><p>DELETE删除信息(索引、type或文档id)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE test01</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /test01/_search?q=name:lan5th</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/image-20210929193234642.png" alt="image-20210929193234642"></p>
+<p>查询结果中的score代表匹配度</p>
+<p>标准的查询</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">GET /test01/_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;match&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;lan5th&quot;</span> <span class="comment">//匹配方式</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;_source&quot;</span>: [ <span class="comment">//指定获取的结果字段</span></span><br><span class="line">    <span class="string">&quot;name&quot;</span>,</span><br><span class="line">    <span class="string">&quot;birthday&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;sort&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;age&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;order&quot;</span>: <span class="string">&quot;desc&quot;</span> <span class="comment">//按age降序排序，升序为asc</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;from&quot;</span>: <span class="number">0</span>, <span class="comment">//分页：从第几条开始</span></span><br><span class="line">  <span class="attr">&quot;size&quot;</span>: <span class="number">1</span> <span class="comment">//分页：返回几条数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>bool查询</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">GET /test01/_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;bool&quot;</span>: &#123; <span class="comment">//精确多条件查找</span></span><br><span class="line">      <span class="attr">&quot;must&quot;</span>: [ <span class="comment">//相当于交集集，并集为should，非为must_not</span></span><br><span class="line">        &#123; </span><br><span class="line">          <span class="attr">&quot;match&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;lan5th&quot;</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;match&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;age&quot;</span>: <span class="number">3</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>过滤器</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">GET /test01/_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;bool&quot;</span>: &#123; </span><br><span class="line">      <span class="attr">&quot;must&quot;</span>: [</span><br><span class="line">        &#123; </span><br><span class="line">          <span class="attr">&quot;match&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;lan5th&quot;</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">&quot;filter&quot;</span>: &#123; <span class="comment">//使用filter进行过滤</span></span><br><span class="line">        <span class="attr">&quot;range&quot;</span>: &#123;</span><br><span class="line">          <span class="attr">&quot;age&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;gt&quot;</span>: <span class="number">13</span>, <span class="comment">//这里过滤出age大于13，小于等于33的文档</span></span><br><span class="line">            ”lte“: 33 //可以使用多个条件进行过滤</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>多标签匹配</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /test01/_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;match&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;tags&quot;</span>: <span class="string">&quot;测试 吃瓜&quot;</span> <span class="comment">//多关键词通过空格分隔</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>高亮查询：将查询结果高亮</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GET /test01/_search</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;query&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;match&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;lan5th&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;highlight&quot;</span>: &#123; <span class="comment">//如果未配置自定义高亮，查询结果自动添加&lt;em&gt;标签，显示高亮</span></span><br><span class="line">    <span class="attr">&quot;pre_tags&quot;</span>: <span class="string">&quot;&lt;p class=&#x27;key&#x27; style=&#x27;color:red&#x27;&gt;&quot;</span>, <span class="comment">//添加前缀</span></span><br><span class="line">    <span class="attr">&quot;post_tags&quot;</span>: <span class="string">&quot;&lt;/p&gt;&quot;</span>, <span class="comment">//添加后缀，通过添加前后缀来自定义高亮</span></span><br><span class="line">    <span class="attr">&quot;fields&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查询方法：</p>
+<ul>
+<li>match：查询条件通过分词器解析</li>
+<li>term：通过倒排索引查询，查询条件不被分词</li>
+</ul>
+<p>数据类型：</p>
+<ul>
+<li>text：查询结果可以被分词解析</li>
+<li>key-word：查询结果不能被分词解析</li>
+</ul>
+<h1 id="ES集成SpringBoot"><a href="#ES集成SpringBoot" class="headerlink" title="ES集成SpringBoot"></a>ES集成SpringBoot</h1><p>SpringBoot支持两种交互技术：</p>
+<ul>
+<li>Jest(默认不生效，需要导入工具包)</li>
+<li>SpringData Elasticsearch</li>
+</ul>
+<h2 id="依赖与配置"><a href="#依赖与配置" class="headerlink" title="依赖与配置"></a>依赖与配置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--ES相关启动器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-elasticsearch<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--转换json字符串依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.76<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一定要保证导入的依赖与ES版本一致，如果不一致需要自定义ES依赖版本</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">elasticsearch.version</span>&gt;</span>7.14.1<span class="tag">&lt;/<span class="name">elasticsearch.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>编写配置类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ElasticSearchConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestHighLevelClient <span class="title">restHighLevelClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        RestHighLevelClient client = <span class="keyword">new</span> RestHighLevelClient(</span><br><span class="line">                RestClient.builder(</span><br><span class="line">                        <span class="keyword">new</span> HttpHost(<span class="string">&quot;47.113.225.244&quot;</span>, <span class="number">9200</span>, <span class="string">&quot;http&quot;</span>)</span><br><span class="line">                )</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> client;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="索引api"><a href="#索引api" class="headerlink" title="索引api"></a>索引api</h2><p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ElasticsearchApplicationTests</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RestHighLevelClient restHighLevelClient;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建索引</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testCreateIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//创建请求</span></span><br><span class="line">        CreateIndexRequest request = <span class="keyword">new</span> CreateIndexRequest(<span class="string">&quot;index01&quot;</span>);</span><br><span class="line">        <span class="comment">//客户端发起索引请求</span></span><br><span class="line">        CreateIndexResponse response = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(response.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查看索引是否存在</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testExistIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        GetIndexRequest request = <span class="keyword">new</span> GetIndexRequest(<span class="string">&quot;index01&quot;</span>);</span><br><span class="line">        <span class="keyword">boolean</span> exists = restHighLevelClient.indices().exists(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(exists);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除索引</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testDeleteIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        DeleteIndexRequest request = <span class="keyword">new</span> DeleteIndexRequest(<span class="string">&quot;index01&quot;</span>);</span><br><span class="line">        AcknowledgedResponse response = restHighLevelClient.indices().delete(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文档api"><a href="#文档api" class="headerlink" title="文档api"></a>文档api</h2><p>实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DocTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestHighLevelClient restHighLevelClient;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加文档</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testAddDoc</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        IndexRequest request = <span class="keyword">new</span> IndexRequest(<span class="string">&quot;index01&quot;</span>);</span><br><span class="line">        <span class="comment">//链式编程，设置过期时间，向请求中添加对象并转为json格式</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">&quot;lan5th&quot;</span>, <span class="number">3</span>);</span><br><span class="line">        <span class="comment">//也可以不设置id，这样ES服务器会为我们生成一个随机的ID，一般在大数据量时我们会选择自动生成</span></span><br><span class="line">        request.id(<span class="string">&quot;1&quot;</span>).timeout(TimeValue.timeValueSeconds(<span class="number">1</span>)).timeout(<span class="string">&quot;1s&quot;</span>)</span><br><span class="line">                .source(JSON.toJSONString(user), XContentType.JSON);</span><br><span class="line">        IndexResponse response = restHighLevelClient.index(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(response.toString());</span><br><span class="line">        System.out.println(response.status());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断文档是否存在</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testExistsDoc</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        GetRequest request = <span class="keyword">new</span> GetRequest(<span class="string">&quot;index01&quot;</span>, <span class="string">&quot;1&quot;</span>);</span><br><span class="line">        request.fetchSourceContext(<span class="keyword">new</span> FetchSourceContext(<span class="keyword">false</span>))</span><br><span class="line">                .storedFields(<span class="string">&quot;_none_&quot;</span>); <span class="comment">//不获取_source的上下文，加快解析速度</span></span><br><span class="line">        <span class="keyword">boolean</span> exists = restHighLevelClient.exists(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(exists);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取文档信息</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testGetDoc</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        GetRequest request = <span class="keyword">new</span> GetRequest(<span class="string">&quot;index01&quot;</span>, <span class="string">&quot;1&quot;</span>);</span><br><span class="line">        GetResponse response = restHighLevelClient.get(request, RequestOptions.DEFAULT);</span><br><span class="line">        String source = response.getSourceAsString();</span><br><span class="line">        System.out.println(response);<span class="comment">//输出详细信息</span></span><br><span class="line">        System.out.println(source);<span class="comment">//只输出文档内容</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//更新文档信息</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testUpdateDoc</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        UpdateRequest request = <span class="keyword">new</span> UpdateRequest(<span class="string">&quot;index01&quot;</span>, <span class="string">&quot;1&quot;</span>);</span><br><span class="line">        request.timeout(<span class="string">&quot;1s&quot;</span>);</span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">&quot;lanstanger&quot;</span>, <span class="number">18</span>);</span><br><span class="line">        request.doc(JSON.toJSONString(user),XContentType.JSON);</span><br><span class="line">        UpdateResponse response = restHighLevelClient.update(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(response.status());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除文档</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testDeleteDoc</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        DeleteRequest request = <span class="keyword">new</span> DeleteRequest(<span class="string">&quot;index01&quot;</span>, <span class="string">&quot;3&quot;</span>);</span><br><span class="line">        request.timeout(<span class="string">&quot;1s&quot;</span>);</span><br><span class="line">        DeleteResponse response = restHighLevelClient.delete(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(response.status());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//批量操作，不仅仅是插入</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testBulkDoc</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        BulkRequest request = <span class="keyword">new</span> BulkRequest();</span><br><span class="line">        request.timeout(<span class="string">&quot;1s&quot;</span>);</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;User&gt; userList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        userList.add(<span class="keyword">new</span> User(<span class="string">&quot;user2&quot;</span>, <span class="number">2</span>));</span><br><span class="line">        userList.add(<span class="keyword">new</span> User(<span class="string">&quot;user3&quot;</span>, <span class="number">3</span>));</span><br><span class="line">        userList.add(<span class="keyword">new</span> User(<span class="string">&quot;user4&quot;</span>, <span class="number">4</span>));</span><br><span class="line">        userList.add(<span class="keyword">new</span> User(<span class="string">&quot;user5&quot;</span>, <span class="number">5</span>));</span><br><span class="line">        userList.add(<span class="keyword">new</span> User(<span class="string">&quot;user6&quot;</span>, <span class="number">6</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//在for循环中我们可以发送任何想要的请求</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; userList.size(); i++) &#123;</span><br><span class="line">            <span class="comment">//这里为插入请求</span></span><br><span class="line">            request.add(<span class="keyword">new</span> IndexRequest(<span class="string">&quot;index01&quot;</span>).id(<span class="string">&quot;&quot;</span>+(i+<span class="number">2</span>))</span><br><span class="line">                    .source(JSON.toJSONString(userList.get(i)),XContentType.JSON));</span><br><span class="line">        &#125;</span><br><span class="line">        BulkResponse response = restHighLevelClient.bulk(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(response.hasFailures());<span class="comment">//是否失败</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//搜索</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testSearch</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        SearchRequest request = <span class="keyword">new</span> SearchRequest(<span class="string">&quot;index01&quot;</span>);</span><br><span class="line">        SearchSourceBuilder sourceBuilder = <span class="keyword">new</span> SearchSourceBuilder();</span><br><span class="line">        TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;lan5th&quot;</span>);</span><br><span class="line">        sourceBuilder.query(termQueryBuilder);</span><br><span class="line">        sourceBuilder.timeout(<span class="keyword">new</span> TimeValue(<span class="number">60</span>, TimeUnit.SECONDS));</span><br><span class="line">        request.source(sourceBuilder);</span><br><span class="line"></span><br><span class="line">        SearchResponse response = restHighLevelClient.search(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(JSON.toJSONString(response.getHits()));</span><br><span class="line">        System.out.println(<span class="string">&quot;=================================&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (SearchHit documentFields : response.getHits().getHits()) &#123;</span><br><span class="line">            System.out.println(documentFields.getSourceAsMap());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/27/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Nginx/" rel="prev" title="Nginx基础">
+      <i class="fa fa-chevron-left"></i> Nginx基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/06/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="设计模式">
+      设计模式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">基本概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">ES数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95"><span class="nav-number">1.3.</span> <span class="nav-text">倒排索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8BES"><span class="nav-number">2.</span> <span class="nav-text">开始ES</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85ES"><span class="nav-number">2.1.</span> <span class="nav-text">安装ES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85ES-header"><span class="nav-number">2.2.</span> <span class="nav-text">安装ES-header</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85kibana"><span class="nav-number">2.3.</span> <span class="nav-text">安装kibana</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IK%E5%88%86%E8%AF%8D%E5%99%A8"><span class="nav-number">2.4.</span> <span class="nav-text">IK分词器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">索引操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.2.</span> <span class="nav-text">查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES%E9%9B%86%E6%88%90SpringBoot"><span class="nav-number">4.</span> <span class="nav-text">ES集成SpringBoot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">依赖与配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95api"><span class="nav-number">4.2.</span> <span class="nav-text">索引api</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3api"><span class="nav-number">4.3.</span> <span class="nav-text">文档api</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lan5th"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lan5th</p>
+  <div class="site-description" itemprop="description">practise more</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lan5th" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lan5th" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/video/BV1Lt411R78H?p=1" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Lt411R78H?p&#x3D;1" rel="noopener" target="_blank">主题教程</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://lixint.github.io/" title="https:&#x2F;&#x2F;lixint.github.io&#x2F;" rel="noopener" target="_blank">教程博客</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lan5th</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">469k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:07</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
