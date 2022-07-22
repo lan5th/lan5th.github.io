@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lan5th.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="分布式-SpringCloudAlibaba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloudAlibaba">
+<meta property="og:url" content="http://lan5th.github.io/2022/07/22/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloudAlibaba/index.html">
+<meta property="og:site_name" content="Lzone">
+<meta property="og:description" content="分布式-SpringCloudAlibaba">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220721162536.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220721171806.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220721175345.png">
+<meta property="og:image" content="https://cdn.nlark.com/lark/0/2018/png/18862/1545296917881-26fabeb9-71fa-4f3e-8a7a-fc317d3389f4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220722212456.png">
+<meta property="article:published_time" content="2022-07-22T13:30:59.109Z">
+<meta property="article:modified_time" content="2022-07-22T13:36:25.589Z">
+<meta property="article:author" content="lan5th">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220721162536.png">
+
+<link rel="canonical" href="http://lan5th.github.io/2022/07/22/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloudAlibaba/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SpringCloudAlibaba | Lzone</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+  
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
+    <script src="/js/cursor/text.js"></script>
+  
+
+<link rel="alternate" href="/atom.xml" title="Lzone" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lzone</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">always be doing</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/lan5th" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://lan5th.github.io/2022/07/22/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloudAlibaba/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lan5th">
+      <meta itemprop="description" content="practise more">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lzone">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringCloudAlibaba
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-07-22 21:30:59 / 修改时间：21:36:25" itemprop="dateCreated datePublished" datetime="2022-07-22T21:30:59+08:00">2022-07-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+            <div class="post-description">分布式-SpringCloudAlibaba</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h1><h2 id="Nacos-作为服务注册中心"><a href="#Nacos-作为服务注册中心" class="headerlink" title="Nacos 作为服务注册中心"></a>Nacos 作为服务注册中心</h2><ul>
+<li><p>github下载Nacos并运行，Nacos默认以集群模式启动，需要手动指定单机版</p>
+<p><code>./startup.cmd -m standalone</code></p>
+</li>
+<li><p>访问<code>localhost:8848/nacos</code>访问控制台页面，默认的用户名和密码都是<code>nacos</code></p>
+</li>
+<li><p>需要注册的服务引入依赖（服务提供者和服务消费者）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="string">localhost:8848</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Nacos继承了Ribben，直接使用RestTemplate进行访问url即可具有负载均衡功能</p>
+<p>nacos控制台展示所有注册的服务即表示成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220721162536.png" alt="61H_X2`1OJHNPN`M_LTVNHY.png"></p>
+</li>
+</ul>
+<p>Nacos作为服务注册的中心可以满足AP和CP模型，可以进行切换，只需要发送特定的post请求进行修改</p>
+<p><code>ip:port/nacos/v1/ns/operator/switches?entry=serverMode&amp;value=CP</code></p>
+<h2 id="Nacos-作为服务配置中心"><a href="#Nacos-作为服务配置中心" class="headerlink" title="Nacos 作为服务配置中心"></a>Nacos 作为服务配置中心</h2><h3 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h3><ul>
+<li><p>依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件bootstrap.yml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">3377</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">    <span class="attr">active:</span> <span class="string">dev</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">nacos-config-client</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">discovery:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="string">localhost:8848</span>  <span class="comment">#Nacos服务注册中心地址</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="attr">server-addr:</span> <span class="string">localhost:8848</span>  <span class="comment">#Nacos作为配置中心地址</span></span><br><span class="line">        <span class="attr">file-extension:</span> <span class="string">yml</span> <span class="comment">#指定yaml格式的配置</span></span><br><span class="line">        <span class="attr">group:</span> <span class="string">DEV_GROUP</span> <span class="comment">#组名称，默认为DEFAULT_GROUP</span></span><br><span class="line">        <span class="attr">namespace:</span> <span class="string">7a901d46-e75e-4e6a-b186-5980cca4249b</span> <span class="comment">#命名空间namespace，默认会走public组</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置中心对应配置文件的dataId格式：</span></span><br><span class="line"><span class="comment"># $&#123;spring.application.name&#125;-$&#123;spring.profile.active&#125;.$&#123;spring.cloud.nacos.config.file-extension&#125;</span></span><br><span class="line"><span class="comment"># 这里对应的dataId为：nacos-config-client-dev.yml</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Nacos配置中心添加配置文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220721171806.png" alt="J~%5S3AH)$A}W6Z0L$YF0JB.png"></p>
+</li>
+<li><p>点击发布后，nacos会自动通知每个注册配置中心的微服务更新配置，不需要再手动发送请求更新</p>
+<p>需要更新代码中的属性则需要标注<code>@RefreshScope</code>在对应类上</p>
+</li>
+</ul>
+<h3 id="分类配置"><a href="#分类配置" class="headerlink" title="分类配置"></a>分类配置</h3><p>情景：分布式系统的多环境、多项目配置管理</p>
+<p>Nacos使用的是三层定位配置文件的规则，以便更方便的管理不同环境和不同项目</p>
+<p><strong>Nacos配置文件的定位顺序</strong></p>
+<ol>
+<li><p>NameSpace：新建namespace如图所示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220721175345.png" alt="N@MBJ9B{G9E$%LXN~~D7UPB.png"></p>
+<p>如果不指定id的话会自动生成id，如<code>acdd62bc-3159-452e-aab1-24c4657e8fde</code></p>
+</li>
+<li><p>GroupId</p>
+</li>
+<li><p>DataId</p>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="attr">group:</span> <span class="string">DEV_GROUP</span> <span class="comment">#组名称，默认为DEFAULT_GROUP</span></span><br><span class="line">        <span class="attr">namespace:</span> <span class="string">7a901d46-e75e-4e6a-b186-5980cca4249b</span> <span class="comment">#命名空间namespace的id，默认会走public组</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h1><h2 id="Sentinel流量控制"><a href="#Sentinel流量控制" class="headerlink" title="Sentinel流量控制"></a>Sentinel流量控制</h2><p>github下载sentinel的jar包，直接以springboot方式运行即可，默认的前端监控页面端口为8080</p>
+<p>![978UU_9`M%7$7VBZ$E~TL0T.png](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220722140056.png">https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220722140056.png</a>)</p>
+<ul>
+<li><p>阈值类型：</p>
+<ul>
+<li><p>按QPS：限制每秒请求数</p>
+</li>
+<li><p>按线程数：限制正在执行的线程数</p>
+</li>
+</ul>
+</li>
+<li><p>流控模式：</p>
+<ul>
+<li><p>直接：API达到限流条件时，直接限流</p>
+</li>
+<li><p>关联：当关联的资源达到阈值时，就限流自己</p>
+</li>
+<li><p>链路：只记录指定链路上的流量（指定资源从入口资源进来的流量，如果达到阈值，就进行限流）(API级别的针对来源)</p>
+</li>
+</ul>
+</li>
+<li><p>流控效果：</p>
+<ul>
+<li><p>快速失败：直接失败，抛异常</p>
+</li>
+<li><p>warmUp：根据coldFactor（冷加载因子，默认3）的值，从阈值/codeFacotor，经过预热时长，才达到设置的QPS阈值</p>
+</li>
+<li><p>排队等待：匀速排队，让请求以匀速的速度通过，阈值类型必须设置为QPS，否则无效</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Sentinel默认的拦截消息都是<code>Blocked by Sentinel (flow limiting)</code></p>
+<h2 id="Sentinel熔断降级"><a href="#Sentinel熔断降级" class="headerlink" title="Sentinel熔断降级"></a>Sentinel熔断降级</h2><ul>
+<li><p>降级策略：</p>
+<ul>
+<li><p>RT：平均响应时间，以ms为单位，当单位统计时长内请求书目大于设置的最小请求数(默认5个/s)并且RT大于所设阈值就会熔断</p>
+</li>
+<li><p>RT在高版本为慢调用比例，在RT的基础上根据设置的慢调用阈值计算出慢调用的比例，根据比例设置的阈值计算熔断</p>
+</li>
+<li><p>异常比例：异常的比例大于阈值会自动进行熔断，同时应该满足最小请求数的限制</p>
+</li>
+<li><p>异常数：当单位统计时长(默认1min)内的异常数目超过阈值之后</p>
+</li>
+</ul>
+</li>
+<li><p>热点key</p>
+<p>仅支持QPS模式，根据指定的参数索引（对应的是参数在方法名上指定的位置）来进行拦截</p>
+<ul>
+<li>参数例外项：可以对这个参数的某一个参数值单独进行限流配置，比如一些热点话题已经预热完毕时可以将限流阈值设置高一些</li>
+</ul>
+</li>
+<li><p>系统规则</p>
+<p>系统规则相当于整个系统外部的把关门禁，当拦截生效时整个服务都将不能正确响应</p>
+</li>
+</ul>
+<p><strong><code>@SentinelResource</code>注解的使用</strong></p>
+<p>@SentinelResource不支持private方法</p>
+<p>这里类似于Hystrix中的<code>HystrixCommand</code>注解，可以指定对应的限流处理方法注意与FallBack区分，指定的对应方法只能处理限流的响应，业务代码抛出的RuntimeException则不能处理</p>
+<ul>
+<li><p>blockHandler参数指定处理对应的限流、熔断等配置的响应的方法（只处理BlockException）</p>
+</li>
+<li><p>FallBack参数指定处理业务类异常的方法（RuntimeException）</p>
+</li>
+</ul>
+<blockquote>
+<p>注意：要使@SentinelResource注解生效，在Sentinel控制台指定限流策略时资源名必须设置成@SentinelResource设定的value值，设置资源名为url路径则只会响应默认的<code>Blocked by Sentinel (flow limiting)</code></p>
+</blockquote>
+<ul>
+<li><p>单独业务方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/testHotKey&quot;)</span></span><br><span class="line"><span class="meta">@SentinelResource(value = &quot;testHotKey&quot;, blockHandler = &quot;deal_testHotKet&quot;)</span> <span class="comment">//指定对应的限流处理方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testHotKey</span><span class="params">(<span class="meta">@RequestParam(value = &quot;p1&quot;,required = false)</span> String p1,</span></span></span><br><span class="line"><span class="function"><span class="params">                         <span class="meta">@RequestParam(value = &quot;p2&quot;,required = false)</span> String p2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;testHotKey-------&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里处理限流方法的参数必须在原方法的基础上添加一个BlockException参数</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">deal_testHotKet</span><span class="params">(String p1, String p2, BlockException e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;----限流响应----&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分离业务类处理</p>
+<p>限流处理类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不需要注入</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customerhandler</span> </span>&#123;</span><br><span class="line">    <span class="comment">//限流处理</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult <span class="title">handlerException</span><span class="params">(BlockException exception)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">444</span>,<span class="string">&quot;处理限流策略，global handlerException&quot;</span>,<span class="keyword">new</span> Payment(<span class="number">2020L</span>,<span class="string">&quot;serial003&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//业务类异常处理</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult <span class="title">handleFallback</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CommonResult(<span class="number">444</span>,<span class="string">&quot;处理业务异常，global handleFallback&quot;</span>,<span class="keyword">new</span> Payment(<span class="number">2020L</span>,<span class="string">&quot;serial003&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>业务类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/testA&quot;)</span></span><br><span class="line"><span class="meta">@SentinelResource(value = &quot;testA&quot;,</span></span><br><span class="line"><span class="meta">        blockHandlerClass = Customerhandler.class, //指定限流处理类</span></span><br><span class="line"><span class="meta">        blockHandler = &quot;handlerException&quot;， //指定限流处理方法名</span></span><br><span class="line"><span class="meta">        fallback = &quot;handleFallback&quot;)</span> <span class="comment">//指定业务异常处理方法名</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;testA-------&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>Sentinel持久化</strong></p>
+<ul>
+<li><p>默认情况下，当注册到Sentinel的服务关闭/重启后sentinel的持久化规则会自动清除</p>
+</li>
+<li><p>可以使用Nacos等配置中心方式来持久化配置，但是笔者感觉这种方式还是不太合理，需要自己手动编写json来保存到nacos，通过sentinel的控制页面设定的配置还是不能保存，等待后续版本优化吧。。。</p>
+</li>
+</ul>
+<h1 id="Seata"><a href="#Seata" class="headerlink" title="Seata"></a>Seata</h1><p><img src="https://cdn.nlark.com/lark/0/2018/png/18862/1545296917881-26fabeb9-71fa-4f3e-8a7a-fc317d3389f4.png"></p>
+<ul>
+<li><p>TC (Transaction Coordinator) - 事务协调者，一般是seata服务器</p>
+<p>维护全局和分支事务的状态，驱动全局事务提交或回滚。</p>
+</li>
+<li><p>TM (Transaction Manager) - 事务管理器，一般是上游标注<code>@GlobalTransactional</code>的服务</p>
+<p>定义全局事务的范围：开始全局事务、提交或回滚全局事务。</p>
+</li>
+<li><p>RM (Resource Manager) - 资源管理器，所有管理具体sql的事务机制</p>
+<p>管理分支事务处理的资源，与TC交谈以注册分支事务和报告分支事务的状态，并驱动分支事务提交或回滚。</p>
+</li>
+</ul>
+<h2 id="Seata安装部署"><a href="#Seata安装部署" class="headerlink" title="Seata安装部署"></a>Seata安装部署</h2><h3 id="SeataServer"><a href="#SeataServer" class="headerlink" title="SeataServer"></a>SeataServer</h3><ul>
+<li><p>修改配置文件file.conf，将存储方式改为db</p>
+<p>![%6H%ADN2OQU9(%`}8QR3CUR.png](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220722193103.png">https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220722193103.png</a>)</p>
+</li>
+<li><p>建库建表，建表sql在对应的readme文件里面有提示，执行即可</p>
+</li>
+<li><p>修改registry.conf，配置nacos为注册中心</p>
+<p>![VJLU0<code>A</code>4SJA5VT2O3XC<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220722193241.png">$N.png</a></p>
+</li>
+<li><p>每一个需要用到分布式事务的客户端数据库都需要单独建表（尽量从官网上取最新的sql）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`undo_log`</span></span><br><span class="line">(</span><br><span class="line">    <span class="string">`branch_id`</span>     <span class="built_in">BIGINT</span>       <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;branch transaction id&#x27;</span>,</span><br><span class="line">    <span class="string">`xid`</span>           <span class="built_in">VARCHAR</span>(<span class="number">128</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;global transaction id&#x27;</span>,</span><br><span class="line">    <span class="string">`context`</span>       <span class="built_in">VARCHAR</span>(<span class="number">128</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;undo_log context,such as serialization&#x27;</span>,</span><br><span class="line">    <span class="string">`rollback_info`</span> LONGBLOB     <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;rollback info&#x27;</span>,</span><br><span class="line">    <span class="string">`log_status`</span>    <span class="built_in">INT</span>(<span class="number">11</span>)      <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;0:normal status,1:defense status&#x27;</span>,</span><br><span class="line">    <span class="string">`log_created`</span>   DATETIME(<span class="number">6</span>)  <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;create datetime&#x27;</span>,</span><br><span class="line">    <span class="string">`log_modified`</span>  DATETIME(<span class="number">6</span>)  <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">&#x27;modify datetime&#x27;</span>,</span><br><span class="line">    <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> <span class="string">`ux_undo_log`</span> (<span class="string">`xid`</span>, <span class="string">`branch_id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span></span><br><span class="line">  AUTO_INCREMENT = <span class="number">1</span></span><br><span class="line">  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span> = utf8 <span class="keyword">COMMENT</span> =<span class="string">&#x27;AT transaction mode undo table&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="SeataClient"><a href="#SeataClient" class="headerlink" title="SeataClient"></a>SeataClient</h3><ul>
+<li><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.seata&lt;/groupId&gt;
+    &lt;artifactId&gt;seata-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;1.4.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-config&lt;/artifactId&gt;
+&lt;/dependency&gt;endency&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ 推荐使用Nacos配置SeataClient，具体配置方式请依照官方文档[Seata 快速开始](https:&#x2F;&#x2F;seata.io&#x2F;zh-cn&#x2F;docs&#x2F;user&#x2F;quickstart.html)</span><br><span class="line"></span><br><span class="line">+ 需要开启分布式事务的方法（一般是上游调用下游服务的业务方法）添加注解即可生效</span><br><span class="line">  </span><br><span class="line">  &#96;&#96;&#96;java</span><br><span class="line">  @GlobalTransactional(name &#x3D; &quot;transactionNameA&quot;, rollbackFor &#x3D; Exception.class)</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<h2 id="回滚原理"><a href="#回滚原理" class="headerlink" title="回滚原理"></a>回滚原理</h2><p><strong>一二阶段提交事务</strong></p>
+<ol>
+<li><p>一阶段：TM标志<code>@GlobalTransactional</code>开启分布式事务，各个RM执行sql逻辑，并向TC提交执行结果</p>
+<p>![9`8%F0C{XWQ(<del>9(O</del>CPLG6.png](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220722212759.png">https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220722212759.png</a>)</p>
+<p><strong>RM事务执行逻辑</strong></p>
+<ul>
+<li><p>执行之前，生成beforeImage，作为修改前数据的快照</p>
+</li>
+<li><p>执行sql逻辑</p>
+</li>
+<li><p>执行之后，生成afterImage，作为修改后数据的快照</p>
+</li>
+<li><p>生成行锁</p>
+</li>
+</ul>
+</li>
+<li><p>二阶段：TC根据汇总到的RM执行结果执行提交逻辑</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lan5th/pics/blog_images/20220722212456.png" alt="7}OJ}S~$ADXE~AF4@E{)3V.png"></p>
+<ul>
+<li><p>全部执行成功：通知所有RM删除beforeImage和afterImage，提交事务</p>
+</li>
+<li><p>有事务执行失败：通知所有RM执行补偿还原机制，根据beforeImage和AfterImage来还原数据</p>
+<ul>
+<li><p>如果afterImage和当前数据没有差异，则直接还原</p>
+</li>
+<li><p>如果修改和还原之间数据已经由其他sql进行了改变，则无法正常还原，等待运维人员操作。</p>
+</li>
+</ul>
+</li>
+<li><p>不论是否执行成功，最终都会删除afterImage、beforeImage和行锁</p>
+</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/11/%E5%BE%AE%E6%9C%8D%E5%8A%A1/SpringCloud/" rel="prev" title="SpringCloud">
+      <i class="fa fa-chevron-left"></i> SpringCloud
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos"><span class="nav-number">1.</span> <span class="nav-text">Nacos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos-%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.1.</span> <span class="nav-text">Nacos 作为服务注册中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos-%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">1.2.</span> <span class="nav-text">Nacos 作为服务配置中心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.1.</span> <span class="nav-text">基础配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sentinel"><span class="nav-number">2.</span> <span class="nav-text">Sentinel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentinel%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">2.1.</span> <span class="nav-text">Sentinel流量控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentinel%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7"><span class="nav-number">2.2.</span> <span class="nav-text">Sentinel熔断降级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Seata"><span class="nav-number">3.</span> <span class="nav-text">Seata</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Seata%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="nav-number">3.1.</span> <span class="nav-text">Seata安装部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SeataServer"><span class="nav-number">3.1.1.</span> <span class="nav-text">SeataServer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SeataClient"><span class="nav-number">3.1.2.</span> <span class="nav-text">SeataClient</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%BB%9A%E5%8E%9F%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">回滚原理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lan5th"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lan5th</p>
+  <div class="site-description" itemprop="description">practise more</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lan5th" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lan5th" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/video/BV1Lt411R78H?p=1" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Lt411R78H?p&#x3D;1" rel="noopener" target="_blank">主题教程</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://lixint.github.io/" title="https:&#x2F;&#x2F;lixint.github.io&#x2F;" rel="noopener" target="_blank">教程博客</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lan5th</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">530k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">8:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
